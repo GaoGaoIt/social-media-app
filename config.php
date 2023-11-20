@@ -1,14 +1,14 @@
 <?php
 
-$user = '#your database username';
+$user = 'root';
 
-$password = '#password';
+$password = '886488';
 
-$db = '#database_name';
+$db = 'EventsWave';
 
-$host = '#host_address';
+$host = 'localhost';
 
-$port = #port_number;
+$port = 3306;
 
 $conn = mysqli_connect($host, $user, $password, $db,$port) ;
 

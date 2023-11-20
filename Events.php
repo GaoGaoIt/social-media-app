@@ -325,6 +325,8 @@ if(!isset($_SESSION['id']))
 
             $result = $conn->query($SQL);
 
+            echo $result['Event_Date'];
+
             if ($result->num_rows > 0)
             {
                 while($row = $result->fetch_assoc())
@@ -393,7 +395,7 @@ if(!isset($_SESSION['id']))
 
                 <img src="<?php echo "assets/images/posts/". $Poster; ?>" class="card-img-top" alt="Event_Card" style="border-radius: 10px;">
 
-                <div class="card-body">
+                <!-- <div class="card-body">
 
                     <h6 class="card-title"><?php echo 'Date : '.date("M,Y,d", strtotime($Event_Date))?></h6>
 
@@ -402,7 +404,7 @@ if(!isset($_SESSION['id']))
                     <form>
                         <button class="fallow-btn" style="font-size: 12px;"><a href="Single-Event.php?post_id=<?php echo $Event_ID;?>">Read More</a></button>
                     </form>
-                </div>
+                </div> -->
 
             </div>
 

@@ -4,7 +4,7 @@ include('config.php');
 
 $user_id = $_SESSION['id'];
 
-$sql = "SELECT * FROM fallowing WHERE User_Id = $user_id;";
+$sql = "SELECT * FROM `Fallowing` WHERE User_Id = $user_id;";
 
 $stmt = $conn->prepare($sql);
 
