@@ -49,9 +49,9 @@ if(isset($_SESSION['id']))
             <div class="col-md-6 col-lg-5 d-none d-md-block">
 
               <img
-                      src="assets/images/login_request/main_img.jpg"
+                      src="assets/images/login_request/GIF-2.gif"
                       alt="login form"
-                      class="img-fluid" style="border-radius: 1rem 0 0 1rem;"
+                      class="img-fluid"  style="border-radius: 1rem 0 0 1rem;"
               />
 
             </div>
@@ -62,9 +62,9 @@ if(isset($_SESSION['id']))
 
                 <form method="post" action="login_action.php">
 
-                  <img src="assets/images/login_request/small_logo.png" height="40px" width="auto"> <br><br>
+                  <img src="assets/images/login_request/logo.png" height="200px" width="auto"> <br><br>
 
-                  <h5 class="fw-normal mb-3 pb-3" style="text-transform: uppercase; color: grey;"><b>Sign in with your sltc id</b></h5>
+                  <h5 class="fw-normal mb-3 pb-3" style="text-transform: uppercase; color: grey;"><b>Sign in with your student id</b></h5>
 
                   
                 <?php if(isset($_GET['error_message'])){ ?>
