@@ -9,7 +9,6 @@ if (!isset($_SESSION['id'])) {
 
     exit;
 }
-echo $_SESSION['usertype'];
 ?>
 
 <!DOCTYPE html>

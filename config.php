@@ -1,12 +1,12 @@
 <?php
 
-$user = 'sam';
+$user = 'root';
 
-$password = '886488Sam@';
+$password = '886488';
 
 $db = 'EventsWave';
 
-$host = '118.107.200.71';
+$host = 'localhost';
 
 $port = 3306;
 

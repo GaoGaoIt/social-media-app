@@ -72,11 +72,15 @@ if(isset($_POST['button']))
 
         $_SESSION['img_path'] = $image;
 
-        header("location: home.php");
+        if ($user_type == 0) {
+            header("location: ./admin/index.php");
+        } else {
+            header("location: home.php");
+        }
     }
     else{
 
-        echo 'faild';
+        echo 'failed';
 
         header('location: login.php?error_message=Email/Password Incorrect');
 
@@ -85,9 +89,9 @@ if(isset($_POST['button']))
 }
 else{
 
-    echo 'fails';
+    echo 'failed';
 
-    header('location: login.php?error_message=Some Error Happend');
+    header('location: login.php?error_message=Some Error Happened');
 
     exit;
 }
