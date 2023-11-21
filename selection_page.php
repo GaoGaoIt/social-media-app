@@ -21,7 +21,7 @@
 
 <body>
 <!-- Start your project here-->
-<section class="vh-100" style="background-image: url('assets/images/login_request/cover.png');">
+<section class="vh-100" style="background-image: url('assets/images/login_request/blue.png');">
   
 <div class="container py-5 h-100">
 
@@ -33,26 +33,28 @@
 
           <div class="row g-0">
 
-            <div class="col-md-6 col-lg-5 d-none d-md-block">
+            <div class="col-md-7 col-lg-6 d-none d-md-block">
 
-              <img src="assets/images/login_request/dancing.jpg" alt="login form"
-                      class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
+              <img 
+              src="assets/images/login_request/college.jpg" 
+              alt="login form"
+              class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 622px; width: auto;"/>
 
             </div>
 
-            <div class="col-md-4 col-lg-7 d-flex align-items-center">
+            <div class="col-md-5 col-lg-6 d-flex align-items-center">
               
               <div class="card-body p-4 p-lg-5 text-black">
 
-                <img src="assets/images/login_request/small_logo.png" height="40px" width="auto"><br><br>
+                <img src="assets/images/login_request/logo.png" height="120px" width="200px"><br><br>
 
-                  <h5 class="fw-normal mb-3 pb-3" style="color: grey;"><b>Wel Come To EventsWave</b></h5>
+                  <h5 class="fw-normal mb-3 pb-3" style="color: grey;"><b>Welcome To SynergyCollege</b></h5>
 
                   <div class="d-grid gap-2 col-12 mx-auto">
                     
                     <a href="login.php"><button class="btn btn-dark btn-lg btn-block btn-sm" type="button">Log In Section</button></a>
 
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLScCyIAQMMTg5kjGJvkZYtTR4E8qiUbtAIjK2ZcItzTOACV8dA/viewform?usp=sf_link">
+                    <a href="https://synergycollege.edu.my/registration.php">
                         <button class="btn btn-dark btn-lg btn-block btn-sm" type="button">
                             Register Your Club Here
                         </button>
@@ -61,9 +63,9 @@
                   </div>
 
                   <br><br><br>
-                  <a href="#!" class="small text-muted">Terms of use.</a>
+                  <a href="#!" class="small text-muted">Copyright © 2023.Synergy College.</a>
 
-                  <a href="#!" class="small text-muted">Privacy policy</a>
+                  <a href="#!" class="small text-muted"> All Rights Reserved.</a>
 
               </div>
             </div>
