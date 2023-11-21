@@ -17,12 +17,12 @@ if(!isset($_SESSION['id']))
 
 <html lang="en">
 
-<head id="head">
+<head>
     <meta charset="UTF-8">
 
-    <title>EventsWave</title>
-
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
+
+    <title>EventsWave</title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
 
@@ -42,14 +42,15 @@ if(!isset($_SESSION['id']))
 
     <link rel="stylesheet" href="assets/css/profile-card.css">
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" id="js_2"/>
-
-    <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet" id="js_1">
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+    <link rel="stylesheet" href="notifast/notifast.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/add-to-calendar-button@1/assets/css/atcb.min.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     <style>
         .post-source{
             
@@ -101,11 +102,13 @@ if(!isset($_SESSION['id']))
 
           <div class="nav-items">
 
+          <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>
+
               <i class="icon fas fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#search-model"></i>
 
               <a href="Events.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-flag fa-lg"></i></a>
 
-              <i class="icon fas fa-calendar-alt fa-lg"></i>
+                <a href="Event-Calander/index.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-calendar-alt fa-lg"></i></a>
 
               <div class="icon user-profile">
 

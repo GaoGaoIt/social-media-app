@@ -156,7 +156,7 @@ if (!isset($_SESSION['id'])) {
             <img src="assets/images/logo4.png" class="brand-img" id="logo-img" style="cursor: pointer">
             <div class="nav-items">
 
-                <!-- <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>-->
+                <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>
 
                 <i class="icon fas fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#search-model"></i>
 

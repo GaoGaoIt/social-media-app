@@ -110,11 +110,13 @@ if(!isset($_SESSION['id']))
 
         <div class="nav-items">
 
+        <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>
+
             <a href="logout.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-sign-out-alt fa-lg"></i></a>
 
             <a href="edit-profile.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-wrench fa-lg"></i></a>
 
-            <i class="icon fas fa-calendar-alt fa-lg"></i>
+            <a href="Event-Calander/index.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-calendar-alt fa-lg"></i></a>
 
         </div>
 
