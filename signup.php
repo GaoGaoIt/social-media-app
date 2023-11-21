@@ -21,7 +21,7 @@
 
 <body>
 
-  <section class="vh-100" style="background-image: url('assets/images/login_request/cover.png');">
+  <section class="vh-200" style="background-image: url('assets/images/login_request/blue.png');">
     
     <div class="container py-5 h-100">
 
@@ -35,7 +35,9 @@
 
               <div class="col-md-6 col-lg-5 d-none d-md-block">
                 
-                <img src="assets/images/login_request/signup_img.jpg"alt="login form"class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
+                <img src="assets/images/login_request/GIF-2.gif"
+                alt="login form"
+                class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 682px; width: auto;"/>
 
               </div>
 
@@ -47,7 +49,7 @@
 
                 <div class="d-flex justify-content-center">
 
-                    <img class="mb-4" src="assets/images/login_request/small_logo.png" alt="" height="45">
+                    <img class="mb-4" src="assets/images/login_request/logo.png" alt="" height="120px" width="200px">
 
                 </div>
 
@@ -111,7 +113,7 @@
 
                 </div>
 
-                <p class="mb-4 pb-lg-2" style="color: #19afd4;">Have an account? <a href="assets/pages/signup.php" style="color: #2696ca;">
+                <p class="" style="color: #19afd4;">Have an account? <a href="./login.php" style="color: #2696ca;">
 
                 SignIn</a></p>
 
