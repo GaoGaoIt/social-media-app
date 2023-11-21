@@ -153,7 +153,7 @@ if (!isset($_SESSION['id'])) {
 
         <div class="nav-wrapper">
 
-            <img src="assets/images/black_logo.png" class="brand-img" id="logo-img" style="cursor: pointer">
+            <img src="assets/images/logo4.png" class="brand-img" id="logo-img" style="cursor: pointer">
             <div class="nav-items">
 
                 <!-- <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>-->

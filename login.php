@@ -34,7 +34,7 @@ if(isset($_SESSION['id']))
 
 <body>
 <!-- Start your project here-->
-<section class="vh-100" style="background-image: url('assets/images/login_request/cover.png');">
+<section class="vh-100" style="background-image: url('assets/images/login_request/blue.png');">
   
 <div class="container py-5 h-100">
 
@@ -51,7 +51,8 @@ if(isset($_SESSION['id']))
               <img
                       src="assets/images/login_request/GIF-2.gif"
                       alt="login form"
-                      class="img-fluid"  style="border-radius: 1rem 0 0 1rem;"
+                      class="img-fluid"  style="border-radius: 1rem 0 0 1rem; height: 622px; width: auto;"
+                      
               />
 
             </div>
@@ -62,7 +63,7 @@ if(isset($_SESSION['id']))
 
                 <form method="post" action="login_action.php">
 
-                  <img src="assets/images/login_request/logo.png" height="200px" width="auto"> <br><br>
+                  <img src="assets/images/login_request/logo.png" height="120px" width="200px"> <br><br>
 
                   <h5 class="fw-normal mb-3 pb-3" style="text-transform: uppercase; color: grey;"><b>Sign in with your student id</b></h5>
 
@@ -75,7 +76,7 @@ if(isset($_SESSION['id']))
 
                   <div class="form-outline mb-4">
                     <input type="text" id="form2Example17" class="form-control form-control-lg" name="email" />
-                    <label class="form-label" for="form2Example17">Email address/User Name</label>
+                    <label class="form-label" for="form2Example17">Email address/Student ID</label>
                   </div>
 
                   <div class="form-outline mb-4">
@@ -89,11 +90,11 @@ if(isset($_SESSION['id']))
 
                   <a class="small text-muted" href="Reset-Password.php">Forgot password?</a>
 
-                  <p class="mb-5 pb-lg-2" style="color: #19afd4;">Don't have an account? <a href="create-account.php" style="color: #2696ca;">Register here</a></p>
+                  <p class="" style="color: #19afd4;">Don't have an account? <a href="create-account.php" style="color: #2696ca;">Register here</a></p>
 
-                  <a href="#!" class="small text-muted">Terms of use.</a>
+                  <a href="#!" class="small text-muted">Copyright © 2023.Synergy College.</a>
 
-                  <a href="#!" class="small text-muted">Privacy policy</a>
+                  <a href="#!" class="small text-muted"> All Rights Reserved.</a>
 
                 </form>
 

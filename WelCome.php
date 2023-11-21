@@ -21,7 +21,7 @@
 
 <body>
 
-  <section class="vh-100" style="background-image: url('assets/images/login_request/cover.png');">
+  <section class="vh-100" style="background-image: url('assets/images/login_request/blue.png');">
 
     <div class="container py-5 h-100">
 
@@ -33,26 +33,29 @@
 
             <div class="row g-0">
 
-              <div class="col-md-6 col-lg-5 d-none d-md-block">
+              <div class="col-md-7 col-lg-6 d-none d-md-block">
 
-                <img src="assets/images/login_request/Sider.jpg"alt="login form"class="img-fluid" style="border-radius: 1rem 0 0 1rem;"/>
+                <img 
+                src="assets/images/login_request/college.jpg"
+                alt="login form"
+                class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 622px; width: auto;"/>
 
               </div>
 
-              <div class="col-md-6 col-lg-7 d-flex align-items-center">
+              <div class="col-md-5 col-lg-6 d-flex align-items-center">
 
                 <div class="card-body p-4 p-lg-5 text-black">
 
                 <div class="d-flex justify-content-center">
 
-                    <img class="mb-4" src="assets/images/login_request/small_logo.png" alt="" height="45">
+                    <img class="mb-4" src="assets/images/login_request/logo.png" alt="" height="120px" width="200px">
 
                 </div>
 
                       <p class="fw-normal">
-Your account has been successfully created, and login information has been provided to your SLTC email address. Please update your
-                          password and user name before using your EventsWave account.
-Please adhere to our community standards and report any difficulties encountered while using our platform to <a href="eventswave@sltc.ac.lk">eventswave@sltc.ac.lk.</a>
+Your account has been successfully created, and login information has been provided to your email address. Please update your
+                          password and username before using your Synergy College account.
+Please adhere to our community standards and report any difficulties encountered while using our platform to <a href="https://synergycollege.edu.my/">https://synergycollege.edu.my/</a>
                       </p>
                 <div class="pt-1 mb-4 mt-2">
 

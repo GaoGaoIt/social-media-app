@@ -97,7 +97,7 @@ if(!isset($_SESSION['id']))
 
       <div class="nav-wrapper">
 
-          <img src="assets/images/black_logo.png" class="brand-img" id="logo-img">
+          <img src="assets/images/logo4.png" class="brand-img" id="logo-img">
 
           <div class="nav-items">
 

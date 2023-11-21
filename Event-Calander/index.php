@@ -309,7 +309,7 @@ if ($result->num_rows > 0)
             <div class="col">
                 <div class="eventCalendar">
                     <a href="../home.php">
-                        <img src="../assets/images/black_logo.png" width="20%" id="logo-img" style="cursor: pointer; height: 50%; margin-top: 10px; margin-left: 30px">
+                        <img src="../assets/images/logo4.png" width="20%" id="logo-img" style="cursor: pointer; height: 50%; margin-top: 10px; margin-left: 30px">
                     </a>
                 </div>
             </div>
