@@ -25,6 +25,10 @@ FROM pivot_content_data
 $result = mysqli_query($conn, $query);
 
 
+$postCount = postCount("posts");
+$eventCount = postCount("events");
+$short_video = postCount("videos");
+$studentCount = studentCount();
 
 
 
@@ -367,7 +371,7 @@ $result = mysqli_query($conn, $query);
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php echo $postCount ?></h3>
                   <p>New Posts</p>
                 </div>
                 <div class="icon">
@@ -380,7 +384,7 @@ $result = mysqli_query($conn, $query);
               <!-- small box -->
               <div class="small-box bg-info">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php echo $eventCount ?></h3>
                   <p>New Events</p>
                 </div>
                 <div class="icon">
@@ -393,7 +397,7 @@ $result = mysqli_query($conn, $query);
               <!-- small box -->
               <div class="small-box bg-success">
                 <div class="inner">
-                  <h3>150</h3>
+                  <h3><?php echo $short_video ?></h3>
                   <p>New Short Video</p>
                 </div>
                 <div class="icon">
@@ -406,7 +410,7 @@ $result = mysqli_query($conn, $query);
               <!-- small box -->
               <div class="small-box bg-warning">
                 <div class="inner">
-                  <h3>44</h3>
+                  <h3><?php echo $studentCount ?></h3>
 
                   <p>students Register Community</p>
                 </div>

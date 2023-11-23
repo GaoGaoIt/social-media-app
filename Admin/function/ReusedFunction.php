@@ -63,10 +63,92 @@ function  fetchUserId($username)
     mysqli_stmt_close($stmt);
 }
 
-// function performSearch($query)
-// {
-//     global $conn;  
+function postCount($typeName)
+{
+    global $conn;  // Assuming you have a global database connection object
 
-//     echo $conn;
+    $query = "SELECT COUNT(*) as count FROM pivot_content_data WHERE type = ?";
 
-// }
+
+    $stmt = mysqli_prepare($conn, $query);
+
+
+    if ($stmt) {
+
+
+        mysqli_stmt_bind_param($stmt, "s", $typeName);
+
+        mysqli_stmt_execute($stmt);
+
+
+        $result = mysqli_stmt_get_result($stmt);
+
+
+        if ($result) {
+
+            $count = mysqli_fetch_assoc($result)['count'];
+
+            mysqli_free_result($result);
+
+            mysqli_stmt_close($stmt);
+
+            return $count;
+        } else {
+
+            echo "Error: " . mysqli_error($conn);
+        }
+    } else {
+
+        echo "Error: " . mysqli_error($conn);
+    }
+
+    // Close the statement (in case of an error)
+    mysqli_stmt_close($stmt);
+
+    return null;
+};
+
+
+function studentCount()
+{
+    global $conn;  // Assuming you have a global database connection object
+
+    $query = "SELECT COUNT(*) as count FROM users where USER_TYPE  = 1" ;
+
+
+    $stmt = mysqli_prepare($conn, $query);
+
+
+    if ($stmt) {
+
+
+
+        mysqli_stmt_execute($stmt);
+
+
+        $result = mysqli_stmt_get_result($stmt);
+
+
+        if ($result) {
+
+            $count = mysqli_fetch_assoc($result)['count'];
+
+            mysqli_free_result($result);
+
+            mysqli_stmt_close($stmt);
+
+            return $count;
+        } else {
+
+            echo "Error: " . mysqli_error($conn);
+        }
+    } else {
+
+        echo "Error: " . mysqli_error($conn);
+    }
+
+    // Close the statement (in case of an error)
+    mysqli_stmt_close($stmt);
+
+    return null;
+}
