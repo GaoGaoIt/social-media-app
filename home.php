@@ -148,44 +148,9 @@ if (!isset($_SESSION['id'])) {
 <body>
 
     <!-- Nav Bar Design -->
-
-    <nav class="navbar">
-
-        <div class="nav-wrapper">
-
-            <img src="assets/images/logo4.png" class="brand-img" id="logo-img" style="cursor: pointer">
-            <div class="nav-items">
-
-                <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>
-
-                <i class="icon fas fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#search-model"></i>
-
-                <a href="Events.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-flag fa-lg"></i></a>
-
-                <a href="shorts.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-video fa-lg"></i></a>
-
-                <?php
-
-                $function_out = strcmp($_SESSION['usertype'], '1');
-
-                if ($function_out != 0) {
-                    echo '<i class="icon fas fa-plus-square fa-lg" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>';
-                }
-                ?>
-
-                <a href="Event-Calander/index.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-calendar-alt fa-lg"></i></a>
-
-                <div class="icon user-profile">
-
-                    <a href="my_Profile.php"><i class="fas fa-user-circle fa-lg"></i></a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </nav>
+    <?php
+    require 'component/header.php'
+    ?>
 
 
 
@@ -240,7 +205,7 @@ if (!isset($_SESSION['id'])) {
                 include('get_dataById.php');
 
                 foreach ($posts as $post) {
-                    $data = get_UserData($post['User_ID']);
+                    $data = get_UserData($post['user_id']);
 
                     $profile_img = $data[2];
 
@@ -248,69 +213,110 @@ if (!isset($_SESSION['id'])) {
 
                 ?>
 
-                    <div class="post" id="post">
+                    <?php
+                    switch ($post['type']) {
+                        case 'posts':
+                            echo '<img src="assets/images/posts/' . $post['content_path_name'] . '" class="post-img">';
+                            echo '<div id="post_info_data">';
+                            echo '<div class="post-content">';
+                            echo '<div class="reactions-wrapper">';
+                            include('check_like_status.php');
+                            if ($reaction_status) {
+                                echo '<form>';
+                                echo '<input type="hidden" value="' . $post["content_id"] . '" name="post_ids" id="post_ids">';
+                                echo '<button style="background: none; border: none;" type="submit" name="reaction">';
+                                echo '<i style="color: #fb3958;" class="icon fas fa-heart fa-lg" onclick="return unlike(' . $post['content_id'] . ');"></i>';
+                                echo '</button>';
+                                echo '</form>';
+                            } else {
+                                echo '<form>';
+                                echo '<input type="hidden" value="' . $post['content_id'] . '" name="post_id" id="post_id">';
+                                echo '<button style="background: none; border: none;" type="submit" name="reaction">';
+                                echo '<i style="color: #22262A;" class="icon fas fa-heart fa-lg" onclick="return like(' . $post['content_id'] . ');"></i>';
+                                echo '</button>';
+                                echo '</form>';
+                            }
+                            echo '<a href="single-post.php?post_id=' . $post["content_id"] . '" style="color: #22262A;"><i class="icon fas fa-comment fa-lg"></i></a>';
+                            echo '</div>';
+                            echo '<p class="reactions" id="reactions_' . $post['content_id'] . '">' . $post['Likes'] . 'Reactions</p>';
+                            echo '<p class="description">';
+                            echo '<span><?php echo $profile_name; ?> Says:<br></span>';
+                            echo $post['Caption'];
+                            echo '</p>';
+                            echo '<p class="post-time">' . date("M, Y, d", strtotime($post['Date_upload'])) . '</p>';
+                            echo '<p class="post-time" style="color: #0b5ed7">' . $post['HashTags'] . '</p>';
+                            echo '</div>';
+                            echo '</div>';
+                            break;
 
-                        <div class="info">
+                        case 'events':
+                            echo '<img src="assets/images/posts/' . $post['content_path_name'] . '" class="post-img">';
+                            echo '<div id="post_info_data">';
+                            echo '<div class="post-content">';
+                            echo '<div class="reactions-wrapper">';
+                            include('check_like_status.php');
+                            if ($reaction_status) {
+                                echo '<form>';
+                                echo '<input type="hidden" value="' . $post["content_id"] . '" name="post_ids" id="post_ids">';
+                                echo '<button style="background: none; border: none;" type="submit" name="reaction">';
+                                echo '<i style="color: #fb3958;" class="icon fas fa-heart fa-lg" onclick="return unlike(' . $post['content_id'] . ');"></i>';
+                                echo '</button>';
+                                echo '</form>';
+                            } else {
+                                echo '<form>';
+                                echo '<input type="hidden" value="' . $post['content_id'] . '" name="post_id" id="post_id">';
+                                echo '<button style="background: none; border: none;" type="submit" name="reaction">';
+                                echo '<i style="color: #22262A;" class="icon fas fa-heart fa-lg" onclick="return like(' . $post['content_id'] . ');"></i>';
+                                echo '</button>';
+                                echo '</form>';
+                            }
+                            echo '<a href="single-post.php?post_id=' . $post["content_id"] . '" style="color: #22262A;"><i class="icon fas fa-comment fa-lg"></i></a>';
+                            echo '</div>';
+                            echo '<p class="reactions" id="reactions_' . $post['content_id'] . '">' . $post['Likes'] . 'Reactions</p>';
+                            echo '<p class="description">';
+                            echo '<span><?php echo $profile_name; ?> Says:<br></span>';
+                            echo $post['Caption'];
+                            echo '</p>';
+                            echo '<p class="post-time">' . date("M, Y, d", strtotime($post['Date_upload'])) . '</p>';
+                            echo '<p class="post-time" style="color: #0b5ed7">' . $post['HashTags'] . '</p>';
+                            echo '</div>';
+                            echo '</div>';
+                            break;
 
-                            <div class="user">
+                        case 'videos':
+                            echo '<video preload="none" poster="assets/videos/' . $post['thumnail_path_name'] . '" controls class="post-source">';
+                            echo '    <source src="assets/videos/' . $post['content_path_name'] . '" type="video/mp4">';
+                            echo '</video>';
 
-                                <div class="profile-pic"><img src="<?php echo "assets/images/profiles/" . $profile_img; ?>"></div>
+                            $element_id = rand(10, 1000000);
 
-                                <p class="username"><?php echo $profile_name; ?></p>
+                            echo '<div id="' . $element_id . '">';
+                            echo '    <div class="post-content">';
+                            echo '        <div class="reactions-wrapper" id="reaction">';
 
-                            </div>
+                            include('check_like_statusVid.php');
 
-                        </div>
+                            echo '            <form>';
+                            echo '                <input type="hidden" value="' . $post['content_id'] . '" name="post_id">';
+                            echo '                <button style="background: none; border: none;" type="submit" name="reaction">';
+                            echo '                    <i style="color: ' . ($reaction_status ? '#fb3958' : '#22262A') . ';" class="icon fas fa-heart" onclick="return ' . ($reaction_status ? 'unlike' : 'like') . '(' . $post['content_id'] . ');"></i>';
+                            echo '                </button>';
+                            echo '            </form>';
 
-                        <img src="<?php echo "assets/images/posts/" . $post['Img_Path']; ?>" class="post-img">
-
-                        <div id="post_info_data">
-
-                            <div class="post-content">
-
-                                <div class="reactions-wrapper">
-
-                                    <?php include('check_like_status.php'); ?>
-
-                                    <?php if ($reaction_status) { ?>
-
-                                        <form>
-                                            <input type="hidden" value="<?php echo $post['Post_ID']; ?>" name="post_ids" id="post_ids">
-                                            <button style="background: none; border: none;" type="submit" name="reaction">
-                                                <i style="color: #fb3958;" class="icon fas fa-heart fa-lg" onclick="return unlike(<?php echo $post['Post_ID']; ?>);"></i>
-                                            </button>
-                                        </form>
-
-                                    <?php } else { ?>
-
-                                        <form>
-                                            <input type="hidden" value="<?php echo $post['Post_ID']; ?>" name="post_id" id="post_id">
-                                            <button style="background: none; border: none;" type="submit" name="reaction">
-                                                <i style="color: #22262A;" class="icon fas fa-heart fa-lg" onclick="return like(<?php echo $post['Post_ID']; ?>);"></i>
-                                            </button>
-                                        </form>
-
-                                    <?php } ?>
-
-                                    <a href="single-post.php?post_id= <?php echo $post["Post_ID"]; ?>" style="color: #22262A;"><i class="icon fas fa-comment fa-lg"></i></a>
-
-                                </div>
-
-                                <p class="reactions" id="<?php echo 'reactions_' . $post['Post_ID']; ?>"><?php echo $post['Likes']; ?> Reactions</p>
-
-                                <p class="description">
-                                    <span><?php echo $profile_name; ?> Says :<br></span>
-
-                                    <?php echo $post['Caption']; ?>
-                                </p>
-
-                                <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_Upload'])); ?></p>
-
-                                <p class="post-time" style="color: #0b5ed7"><?php echo $post['HashTags']; ?></p>
-
-                            </div>
-                        </div>
-                    </div>
+                            echo '            <a href="Single-Video.php?post_id=' . $post["content_id"] . '" style="color: #22262A;"><i class="icon fas fa-comment"></i></a>';
+                            echo '        </div>';
+                            echo '        <p class="reactions">' . $post['Likes'] . ' Reactions</p>';
+                            echo '        <p class="description">';
+                            echo '            <span>' . $profile_name . ' Says :<br></span>';
+                            echo '            ' . $post['Caption'];
+                            echo '        </p>';
+                            echo '        <p class="post-time">' . date("M, Y, d", strtotime($post['Date_upload'])) . '</p>';
+                            echo '        <p class="post-time" style="color: #0b5ed7">' . $post['HashTags'] . '</p>';
+                            echo '    </div>';
+                            echo '</div>';
+                            break;
+                    }
+                    ?>
 
                 <?php } ?>
 

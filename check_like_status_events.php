@@ -4,7 +4,7 @@ include('config.php');
 
 $user_id = $_SESSION['id'];
 
-$post_id = $post['Event_ID'];
+$post_id = $post['content_id'];
 
 $sql = "SELECT * FROM likes_events WHERE User_ID = $user_id AND Event_ID = $post_id;";
 

@@ -4,7 +4,7 @@ include('config.php');
 
 $user_id = $_SESSION['id'];
 
-$post_id = $post['Video_ID'];
+$post_id = $post['content_id'];
 
 $sql = "SELECT * FROM likes_vid WHERE User_ID = $user_id AND Video_ID = $post_id;";
 
