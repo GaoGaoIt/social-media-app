@@ -112,32 +112,11 @@ if (!isset($_SESSION['id'])) {
 	<?php } ?>
 	<!-- Nav Bar Design -->
 
-	<nav class="navbar">
+	<!-- Nav Bar Design -->
+	<?php
+	require 'component/createPageHeader.php'
+	?>
 
-		<div class="nav-wrapper">
-
-			<img src="assets/images/logo4.png" class="brand-img" id="logo-img">
-
-			<div class="nav-items">
-
-        <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>
-
-            <i class="icon fas fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#search-model"></i>
-
-				<a href="shorts.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-video fa-lg"></i></a>
-
-                <a href="Event-Calander/index.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-calendar-alt fa-lg"></i></a>
-
-				<div class="icon user-profile">
-
-					<a href="my_Profile.php"><i class="fas fa-user-circle fa-lg"></i></a>
-
-				</div>
-			</div>
-
-		</div>
-
-	</nav>
 
 	<!-- Search Modal -->
 	<div class="modal fade" id="search-model" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -263,14 +242,14 @@ if (!isset($_SESSION['id'])) {
 					<ul class="pagination">
 
 						<li class="page-item <?php if ($page_no <= 1) {
-																		echo 'disabled';
-																	} ?>">
+													echo 'disabled';
+												} ?>">
 
 							<a class="page-link" href="<?php if ($page_no <= 1) {
-																						echo '#';
-																					} else {
-																						echo '?page_no=' . ($page_no - 1);
-																					} ?>">Previous</a>
+															echo '#';
+														} else {
+															echo '?page_no=' . ($page_no - 1);
+														} ?>">Previous</a>
 
 						</li>
 						<li class="page-item"><a class="page-link" href="?page_no=1">1</a></li>
@@ -287,14 +266,14 @@ if (!isset($_SESSION['id'])) {
 						<?php } ?>
 
 						<li class="page-item <?php if ($page_no >= $total_number_pages) {
-																		echo 'disabled';
-																	} ?>">
+													echo 'disabled';
+												} ?>">
 
 							<a class="page-link" href="<?php if ($page_no >= $total_number_pages) {
-																						echo "#";
-																					} else {
-																						echo "?page_no=" . ($page_no + 1);
-																					} ?>">Next</a>
+															echo "#";
+														} else {
+															echo "?page_no=" . ($page_no + 1);
+														} ?>">Next</a>
 
 						</li>
 					</ul>
