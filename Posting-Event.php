@@ -43,8 +43,8 @@ if(isset($_POST['posting']))
 
     $date = date("Y-m-d H:i:s");
 
-    $sql_query = "INSERT INTO events (User_ID, Likes, Event_Poster, Caption, Event_Time, Event_Date, Invite_Link, HashTags, Date_Upload) VALUES 
-    ($ID, $likes, '$file_complete','$caption', '$event_time','$event_date','$invite_link','$hashtags','$date')";
+    $sql_query = "INSERT INTO pivot_content_data (user_id, content_path_name, Caption, Event_Time, Event_Date, Invite_Link, HashTags, Date_upload, type) VALUES 
+    ($ID,  '$file_complete','$caption', '$event_time','$event_date','$invite_link','$hashtags','$date', 'events')";
 
     $stmt = $conn->prepare($sql_query);
 
@@ -52,7 +52,15 @@ if(isset($_POST['posting']))
     {
         move_uploaded_file($tempname, $folder);
 
-        header("location: Events.php?success_message=Post Successfully updated");
+        if(!$_SESSION['usertype'] == '0'){
+
+            header("location: Events.php?success_message=Post Successfully updated");
+        }
+        else{
+            header("location: admin/index.php?success_message=Events Successfully updated");
+        }
+
+
 
         exit;
     }

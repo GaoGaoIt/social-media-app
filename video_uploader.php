@@ -60,7 +60,7 @@ if(isset($_POST['posting']))
 
     $date = date("Y-m-d");
 
-    $sql_query = "INSERT INTO videos (User_ID, Likes, Video_Path, Caption, HashTags, Date_Upload, Thumbnail_Path)VALUES($ID, $likes, '$file_complete','$caption', '$hashtags', '$date', '$thumbnail_name_complete')";
+    $sql_query = "INSERT INTO pivot_content_data (user_id, content_path_name, Caption, HashTags, Date_upload, thumnail_path_name, type)VALUES($ID, '$file_complete','$caption', '$hashtags', '$date', '$thumbnail_name_complete','videos')";
 
     echo $sql_query;
 
@@ -72,7 +72,15 @@ if(isset($_POST['posting']))
 
         move_uploaded_file($thumb_temp_name, $second_file);
 
-        header("location: video_upload.php?success_message=Post Successfully updated");
+        if(!$_SESSION['usertype'] == '0'){
+
+            header("location: video_upload.php?success_message=Post Successfully updated");
+        }
+        else{
+            header("location: admin/index.php?success_message=Post Successfully updated");
+        }
+
+       
 
         exit;
     }

@@ -37,8 +37,8 @@ if(isset($_POST['posting']))
 
     $date = date("Y-m-d H:i:s");
 
-    $sql_query = "INSERT INTO Posts (User_ID, Likes, Img_Path, Caption, HashTags, Date_Upload) VALUES 
-    ($ID, $likes, '$file_complete','$caption', '$hashtags','$date')";
+    $sql_query = "INSERT INTO pivot_content_data (user_id,  content_path_name, Caption, HashTags, Date_upload , type) VALUES 
+    ($ID, '$file_complete','$caption', '$hashtags','$date', 'posts')";
 
     echo $sql_query;
 
@@ -48,7 +48,15 @@ if(isset($_POST['posting']))
     {
         move_uploaded_file($tempname, $folder);
 
-        header("location: post-uploader.php?success_message=Post Successfully updated");
+        if(!$_SESSION['usertype'] == '0'){
+
+            header("location: post-uploader.php?success_message=Post Successfully updated");
+        }
+        else{
+            header("location: admin/index.php?success_message=Post Successfully updated");
+        }
+
+
 
         update_Posts($ID);
 

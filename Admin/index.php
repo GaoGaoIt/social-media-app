@@ -278,7 +278,7 @@ $studentCount = studentCount();
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#fd" class="nav-link">
+                  <a href="../Event-Upload.php" class="nav-link">
                     <i class="nav-icon"></i>
                     <p>Create Events</p>
                   </a>
@@ -307,7 +307,7 @@ $studentCount = studentCount();
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="#" class="nav-link">
+                  <a href="../post-uploader.php" class="nav-link">
                     <i class="nav-icon"></i>
                     <p>Create Post</p>
                   </a>
@@ -316,6 +316,37 @@ $studentCount = studentCount();
                   <a href="#" class="nav-link">
                     <i class="nav-icon"></i>
                     <p>Student Post</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon"></i>
+                    <p>Management Post</p>
+                  </a>
+                </li>
+
+                <!-- logout page -->
+              </ul>
+            </li>
+            <li class="nav-item menu-open">
+              <a href="#" class="nav-link ">
+                <i class="fas fa-film"></i>
+                <p>
+                  Shorts Videos
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="video_upload.php" class="nav-link">
+                    <i class="nav-icon"></i>
+                    <p>Create Short Videos</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="#" class="nav-link">
+                    <i class="nav-icon"></i>
+                    <p>Student Videos</p>
                   </a>
                 </li>
                 <li class="nav-item">
