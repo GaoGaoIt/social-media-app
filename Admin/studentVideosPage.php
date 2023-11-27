@@ -20,15 +20,11 @@ if (!isset($_SESSION['id'])) {
 $query = "
 SELECT * 
 FROM pivot_content_data
-";
+WHERE type = 'videos' AND user_type = 1";
 
 $result = mysqli_query($conn, $query);
 
 
-$postCount = postCount("posts");
-$eventCount = postCount("events");
-$short_video = postCount("videos");
-$studentCount = studentCount();
 
 
 
@@ -241,7 +237,7 @@ $studentCount = studentCount();
         </div>
 
         <!-- Sidebar Menu -->
-      <?php require 'component/sideNav.php'; ?>
+        <?php require 'component/sideNav.php'; ?>
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
@@ -254,11 +250,11 @@ $studentCount = studentCount();
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Dashboard</h1>
+              <h1 class="m-0">Videos</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="index.php">Home</a></li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -269,65 +265,6 @@ $studentCount = studentCount();
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- Small boxes (Stat box) -->
-          <div class="row">
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3><?php echo $postCount ?></h3>
-                  <p>New Posts</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-newspaper"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-info">
-                <div class="inner">
-                  <h3><?php echo $eventCount ?></h3>
-                  <p>New Events</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-calendar"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-success">
-                <div class="inner">
-                  <h3><?php echo $short_video ?></h3>
-                  <p>New Short Video</p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-video"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-            <div class="col-lg-3 col-6">
-              <!-- small box -->
-              <div class="small-box bg-warning">
-                <div class="inner">
-                  <h3><?php echo $studentCount ?></h3>
-
-                  <p>students Register Community</p>
-                </div>
-                <div class="icon">
-                  <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-              </div>
-            </div>
-          </div>
-          <!-- /.row -->
-          <!-- Main row -->
-
           <!-- <section class="content">
             <div class="container-fluid">
               <h2 class="text-center display-4">Search</h2>
@@ -356,11 +293,13 @@ $studentCount = studentCount();
                   <div class="">
                     <div class="p-4">
 
-                    
                       <!-- <div class="row row-cols-2 row-cols-lg-4"> -->
 
 
                       <?php
+                      if (mysqli_num_rows($result) == 0) {
+                        echo '<span class="text-bold text-lg">No Posts found.</span>';
+                      }
                       if ($result) {
                         echo '<div class="row">'; // Bootstrap row
 

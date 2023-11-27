@@ -60,7 +60,9 @@ if(isset($_POST['posting']))
 
     $date = date("Y-m-d");
 
-    $sql_query = "INSERT INTO pivot_content_data (user_id, content_path_name, Caption, HashTags, Date_upload, thumnail_path_name, type)VALUES($ID, '$file_complete','$caption', '$hashtags', '$date', '$thumbnail_name_complete','videos')";
+    $usertype = $_SESSION['usertype'];
+
+    $sql_query = "INSERT INTO pivot_content_data (user_id, content_path_name, Caption, HashTags, Date_upload, thumnail_path_name, type, user_type)VALUES($ID, '$file_complete','$caption', '$hashtags', '$date', '$thumbnail_name_complete','videos', '$usertype')";
 
     echo $sql_query;
 

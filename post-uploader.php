@@ -71,7 +71,7 @@ if (!isset($_SESSION['id'])) {
 
         <div class="mb-5">
 
-          <form method="post" action="posting-img.php" enctype="multipart/form-data">
+        <form method="post" action="posting-img.php" enctype="multipart/form-data">
 
             <div class="form-group">
 

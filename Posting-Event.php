@@ -39,15 +39,17 @@ if(isset($_POST['posting']))
 
     $folder = "./assets/images/posts/" . $file_complete;
 
+    $usertype = $_SESSION['usertype'];
+
     $likes = 0;
 
     $date = date("Y-m-d H:i:s");
 
-    $sql_query = "INSERT INTO pivot_content_data (user_id, content_path_name, Caption, Event_Time, Event_Date, Invite_Link, HashTags, Date_upload, type) VALUES 
-    ($ID,  '$file_complete','$caption', '$event_time','$event_date','$invite_link','$hashtags','$date', 'events')";
+    $sql_query = "INSERT INTO pivot_content_data (user_id, content_path_name, Caption, Event_Time, Event_Date, Invite_Link, HashTags, Date_upload, type, user_type) VALUES 
+    ('$ID', '$file_complete', '$caption', '$event_time', '$event_date', '$invite_link', '$hashtags', '$date', 'events', '$usertype')";
 
     $stmt = $conn->prepare($sql_query);
-
+,
     if($stmt->execute())
     {
         move_uploaded_file($tempname, $folder);

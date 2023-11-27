@@ -36,9 +36,10 @@ if(isset($_POST['posting']))
     $likes = 0;
 
     $date = date("Y-m-d H:i:s");
+    $usertype = $_SESSION['usertype'];
 
-    $sql_query = "INSERT INTO pivot_content_data (user_id,  content_path_name, Caption, HashTags, Date_upload , type) VALUES 
-    ($ID, '$file_complete','$caption', '$hashtags','$date', 'posts')";
+    $sql_query = "INSERT INTO pivot_content_data (user_id,  content_path_name, Caption, HashTags, Date_upload , type, user_type) VALUES 
+    ($ID, '$file_complete','$caption', '$hashtags','$date', 'posts', $usertype)";
 
     echo $sql_query;
 
