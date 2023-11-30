@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="evenstsManagement.php" class="nav-link">
                         <i class="nav-icon"></i>
                         <p>Management Events</p>
                     </a>
@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="" class="nav-link">
+                    <a href="postsManagement.php" class="nav-link">
                         <i class="nav-icon"></i>
                         <p>Management Post</p>
                     </a>
@@ -107,9 +107,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="VideosManagement.php" class="nav-link">
                         <i class="nav-icon"></i>
-                        <p>Management Post</p>
+                        <p>Management videos</p>
                     </a>
                 </li>
 

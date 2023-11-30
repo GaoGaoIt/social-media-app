@@ -7,8 +7,15 @@ include('../config.php');
 include 'function/ReusedFunction.php';
 
 session_regenerate_id(true);
-checkUserIsAdmin();
-$result = fetchEventsData();
+
+// checkUserIsAdmin();
+$type = isset($_GET['type']) ? $_GET['type'] : null;
+$message = isset($_GET['message']) ? $_GET['message'] : null;
+alertToast($type, $message);
+
+
+$dataId = isset($_GET['data']) ? $_GET['data'] : null;
+$result = EditData($dataId);
 
 
 
@@ -44,6 +51,8 @@ $result = fetchEventsData();
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -234,9 +243,10 @@ $result = fetchEventsData();
       <!-- Content Header (Page header) -->
       <div class="content-header">
         <div class="container-fluid">
+
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Events</h1>
+              <h1 class="m-0">Edit Page</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -251,97 +261,162 @@ $result = fetchEventsData();
       <!-- Main content -->
       <section class="content">
         <div class="container-fluid">
-          <!-- <section class="content">
-            <div class="container-fluid">
-              <h2 class="text-center display-4">Search</h2>
+          <div class="row">
+            <div class="col-lg-12">
               <div class="row">
-                <div class="col-md-8 offset-md-2">
-                  <form action="" id="searchForm" >
-                    <div class="input-group">
-                      <input type="search" class="form-control form-control-lg" placeholder="Search Author Name">
-                      <div class="input-group-append">
-                        <button type="submit" class="btn btn-lg btn-default">
-                          <i class="fa fa-search"></i>
-                        </button>
+                <?php
+                if (mysqli_num_rows($result) == 0) {
+                  echo '<span class="text-bold text-lg">No Posts found.</span>';
+                } else {
+                  while ($row = $result->fetch_assoc()) {
+                ?>
+
+
+                    <div class=" col">
+                      <?php
+                      if ($row['type'] == 'posts' || $row['type'] == 'events') {
+                      ?>
+                        <!-- post or events -->
+                        <form method="post" action="globalAction.php" enctype="multipart/form-data">
+
+                          <div class="form-group">
+                            <label for="caption">What On Your Mind</label>
+                            <textarea type="text" class="form-control" id="caption" rows="4" placeholder="caption here" onchange="get_caption();" name="caption" maxlength="500"></textarea>
+                          </div><br>
+
+                          <div class="form-group">
+                            <label for="tag-id">Hash Tags</label>
+                            <input type="text" class="form-control" id="tag-id" aria-describedby="caption-area" placeholder="Hash Tags" onchange="get_hash();" name="hash-tags">
+                          </div><br>
+
+                          <div class="form-group">
+                            <label for="tag-id">Add Media (Image Files Only Accept)</label>
+                            <input class="form-control" type="file" id="formFile" onchange="preview()" name="image">
+                            <input type="hidden" name="dataId" value="<?php echo $dataId ?>">
+                            <input type="hidden" name="type" value="<?php echo $row['type']; ?>">
+                          </div>
+
+                          <br>
+
+                          <div class="form-group">
+                            <button type="submit" class="btn btn-primary" name="updateData">Submit</button>
+                            <button onclick="clearImage()" class="btn btn-primary">Clear Preview</button>
+                          </div>
+
+                        </form>
+
+                      <?php } else { ?>
+                        <!-- video -->
+                        <form action="globalAction.php" method="POST" enctype="multipart/form-data">
+
+                          <div class="form-group">
+                            <label for="caption">What On Your Mind : </label>
+                            <textarea type="text" class="form-control mt-2" id="caption" rows="4" placeholder="caption here" onchange="get_caption();" name="caption" maxlength="500"></textarea>
+                          </div><br>
+
+                          <div class="form-group">
+                            <label for="tag-id">Hash Tags : </label>
+                            <input type="text" class="form-control mt-2" id="tag-id" aria-describedby="caption-area" placeholder="Hash Tags" onchange="get_hash();" name="hash-tags" maxlength="50">
+                          </div><br>
+
+                          <div class="form-group" id="vid-group">
+                            <label for="tag-id">Add video : </label>
+                            <input id="max_id" type="hidden" name="MAX_FILE_SIZE" value="20971520" />
+                            <input class="form-control mt-2" type="file" id="file" name="file" onchange="upload_check()" accept="video/*">
+                          </div><br>
+
+                          <div class="form-group">
+                            <label for="tag-id">Add video Thumbnail : </label>
+                            <input class="form-control mt-2" type="file" id="file_thumb" name="thumbnail" accept="image/png, image/gif, image/jpeg">
+                          </div>
+                          <br>
+                          <input type="hidden" name="dataId" value="<?php echo $dataId ?>">
+                          <input type="hidden" name="type" value="<?php echo $row['type']; ?>">
+
+                          <div class="form-group">
+                            <input type="submit" class="btn btn-primary" name="updateData" value="Publish Video">
+                            <button onclick="clearImage()" class="btn btn-primary">Clear Preview</button>
+                          </div>
+
+                        </form>
+
+                      <?php } ?>
+
+                    </div>
+
+                    <div class="col mb-4">
+                      <!-- <?php
+                            if ($row['type'] == 'events') {
+                              $typeName = 'Events';
+                            } elseif ($row['type'] == 'posts') {
+                              $typeName = 'Post';
+                            } elseif ($row['type'] == 'videos') {
+                              $typeName = 'Video';
+                            }
+                            ?> -->
+
+                      <h1 class="profile-user-name" style="font-size: 2rem;font-weight: 300;">Preview <?php echo $typeName ?></h1><br>
+
+                      <div class="card p-4">
+
+                        <div class="d-flex justify-content-between">
+
+                          <div class="user">
+
+                            <!-- <div class="" style=""><img src="../assets/images/temp_profile.webp"></div> -->
+
+                            <p class="username">Preview <?php echo $typeName ?></p>
+
+                          </div>
+
+                          <i class="fas fa-ellipsis-v options"></i>
+
+                        </div>
+                        <?php
+                        $imagePath = $row['content_path_name'] ? "../assets/images/posts/{$row['content_path_name']}" : "../assets/images/no-photo.png";
+
+                        $videoPath  = "../assets/videos/{$row['content_path_name']}";
+                        ?>
+                        <?php
+                        if ($row['type'] == 'videos') {
+                          
+                          echo '<div class="ratio ratio-4x3">';
+                          echo '<iframe src="' . $videoPath . '" id="frame" title="YouTube video" allowfullscreen></iframe>';
+                          echo '</div>';
+                        } else {
+                          // If it's not a video, display the image
+                          echo '<img src="' . $imagePath . '" id="frame" class="post-img" style="max-height: 460px;">';
+                        }
+                        ?>
+                        <div class="mt-4">
+                          <p class="description" id="caption-data">
+
+                            <span>Caption : <br></span>
+
+                            <?php echo $row['Caption'] ?>
+
+                          </p>
+
+                          <p class="post-time" id="current-date"><?php echo $row['Date_upload'] ?></p>
+
+                          <p class="post-time" id="hash-tags" style="color: #3942e7;"><i><?php echo $row['HashTags']  ?></i></p>
+
+                        </div>
+
                       </div>
                     </div>
-                  </form>
-                </div>
+
+
+
+                <?php
+                  }
+                }
+                ?>
+
+
               </div>
             </div>
-          </section> -->
-
-          <section class="content mt-4">
-            <div class="container-fluid">
-
-              <div class="row">
-                <div class="col-lg-12">
-                  <div class="">
-                    <div class="p-4">
-
-                      <!-- <div class="row row-cols-2 row-cols-lg-4"> -->
-
-
-                      <?php
-                      if (mysqli_num_rows($result) == 0) {
-                        echo '<span class="text-bold text-lg">No Posts found.</span>';
-                      }
-                      if ($result) {
-                        echo '<div class="row">'; // Bootstrap row
-
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          echo '<div class="col-sm-6 col-lg-4 mb-4">'; // Bootstrap column
-
-                          echo '<div class="card">';
-
-                          switch ($row['type']) {
-                            case 'posts':
-                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-img-top img-thumbnail" alt="...">';
-                              break;
-
-                            case 'videos':
-                              echo '<video preload="none" poster="../assets/videos/' . $row['thumnail_path_name'] . '" controls class="card-img-top img-thumbnail">';
-                              echo '<source src="../assets/videos/' . $row['content_path_name'] . '" type="video/mp4">';
-                              echo '</video>';
-                              break;
-
-                            case 'events':
-                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-img-top img-thumbnail" alt="...">';
-                              echo '<div class="p-4 event-details">';
-                              echo '<p class="card-text">Event Will Be Held On: ' . $row['Event_Date'] . ' At: ' . $row['Event_Time'] . '</p>';
-                              echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary">Invite Link</button></a>';
-                              echo '</div>';
-                              break;
-                          }
-
-                          echo '<div class="card-body">';
-                          echo '<h5 class="card-text">' . $row['Caption'] . '</h5>';
-                          echo '<p class="card-text">Created By ' . fetchUserName($row['user_id']) . '</p>';
-                          echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary">suppand</button></a>';
-                          echo '</div>';
-
-                          echo '</div>';
-
-                          echo '</div>'; // Close Bootstrap column
-                        }
-
-                        echo '</div>'; // Close Bootstrap row
-                        mysqli_free_result($result);
-                      } else {
-                        echo "Error: " . mysqli_error($conn);
-                      }
-                      ?>
-
-
-
-
-
-
-                      <!-- </div> -->
-                    </div>
-          </section>
-
-
+          </div>
         </div>
       </section>
 
@@ -389,6 +464,8 @@ $result = fetchEventsData();
 
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
+
+  <script src="../assets/js/preview-helper.js"> </script>
 
 
 

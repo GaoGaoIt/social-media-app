@@ -7,8 +7,13 @@ include('../config.php');
 include 'function/ReusedFunction.php';
 
 session_regenerate_id(true);
+
 checkUserIsAdmin();
-$result = fetchEventsData();
+
+$type = isset($_GET['type']) ? $_GET['type'] : null;
+$message = isset($_GET['message']) ? $_GET['message'] : null;
+alertToast($type, $message);
+$result = fetchVideosData();
 
 
 
@@ -182,10 +187,10 @@ $result = fetchEventsData();
           </div>
         </li>
         <!-- <li class="nav-item">
-					<a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-						<i class="fas fa-th-large"></i>
-					</a>
-				</li> -->
+                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li> -->
       </ul>
     </nav>
     <!-- /.navbar -->
@@ -236,7 +241,7 @@ $result = fetchEventsData();
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0">Events</h1>
+              <h1 class="m-0">Student Posts Page</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -278,67 +283,119 @@ $result = fetchEventsData();
                 <div class="col-lg-12">
                   <div class="">
                     <div class="p-4">
+                      <!-- content -->
 
-                      <!-- <div class="row row-cols-2 row-cols-lg-4"> -->
+                      <section class="content">
+
+                        <div class="card">
+                          <div class="card-header">
+                            <h3 class="card-title">Videos Management</h3>
+
+                          </div>
+                          <div class="card-body p-0">
+                            <table class="table table-striped projects">
+                              <thead>
+                                <tr>
+                                  <th style="width: 1%">
+                                    # ID
+                                  </th>
+                                  <th style="width: 20%;">
+                                    Videos Caption
+                                  </th>
+                                  <th style="width: 15%;">
+                                    Videos Image
+                                  </th>
+                                  <th style="width: 15%;">
+                                    student HashTag
+                                  <th style="width: 10%;">
+                                    Students Avatar
+                                  </th>
+                                  <th style="width: 10%;" class="text-center">
+                                    Status
+                                  </th>
+                                  <th style="width: 20%">
+                                  </th>
+                                </tr>
+                              </thead>
+                              <tbody>
+
+                                <?php
+                                if (mysqli_num_rows($result) == 0) {
+                                  echo '<span class="text-bold text-lg">No Posts found.</span>';
+                                } else {
+                                  while ($row = $result->fetch_assoc()) {
+                                ?>
+                                    <tr>
+                                      <td>
+                                        <?php echo $row['content_id']; ?>
+                                      </td>
+                                      <td>
+                                        <a>
+                                          <?php echo $row['Caption']; ?> <!-- Assuming 'title' is the column name in your database -->
+                                        </a>
+                                        <br>
+                                        <small>
+                                          Created <?php echo $row['Date_upload']; ?> <!-- Assuming 'created_at' is the column name for the creation date -->
+                                        </small>
+                                      </td>
+                                      <td>
+
+                                        <a href="../assets/videos/<?php echo $row['content_path_name'] ?>"><button class="btn btn-info">Video link</button></a>
+                                      </td>
+                                      <td>
+                                        <span class="badge badge-success text-lg" style="padding: 10px;"><?php echo $row['HashTags'] ?></span>
+                                      </td>
+                                      <td>
+                                        <img alt="Avatar" class="table-avatar" <?php echo 'src="../assets/images/profiles/' . fetchUserAvatar($row['user_id']) . '""' ?> style="width: 60px;  height: 60px;">
+                                      </td>
 
 
-                      <?php
-                      if (mysqli_num_rows($result) == 0) {
-                        echo '<span class="text-bold text-lg">No Posts found.</span>';
-                      }
-                      if ($result) {
-                        echo '<div class="row">'; // Bootstrap row
+                                      <!-- Add similar code for other columns based on your database structure -->
+                                      <td class="project-state">
+                                        <?php
+                                        if ($row['status'] == 'PUBLISH') {
+                                          echo '<span class="badge badge-success p-3">' . $row['status'] . '</span>';
+                                        } else {
+                                          echo '<span class="badge badge-danger p-3">' . $row['status'] . '</span>';
+                                        }
+                                        ?>
+                                      </td>
+                                      <td class="project-actions text-right fd">
 
-                        while ($row = mysqli_fetch_assoc($result)) {
-                          echo '<div class="col-sm-6 col-lg-4 mb-4">'; // Bootstrap column
+                                        <a class="btn btn-info btn-sm" href="globalAction.php?EditData=<?php echo $row['content_id']; ?>">
+                                          <i class="fas fa-pencil-alt"></i>
+                                          Edit
+                                        </a>
+                                        <?php
+                                        if ($row['is_deleted'] == 1) {
+                                          echo '<a class="btn btn-danger btn-sm" href="globalAction.php?delateData=' . $row['content_id'] . '">
+                                                                                        <i class="fas fa-trash"></i> Retore
+                                                                                    </a>';
+                                        } else {
+                                          echo '<a class="btn btn-danger btn-sm" href="globalAction.php?delateData=' . $row['content_id'] . '">
+                                                                                        <i class="fas fa-trash"></i> Block
+                                                                                    </a>';
+                                        }
+                                        ?>
+                                      </td>
+                                    </tr>
+                                <?php
+                                  }
+                                }
+                                ?>
 
-                          echo '<div class="card">';
+                              </tbody>
+                            </table>
+                          </div>
 
-                          switch ($row['type']) {
-                            case 'posts':
-                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-img-top img-thumbnail" alt="...">';
-                              break;
+                        </div>
 
-                            case 'videos':
-                              echo '<video preload="none" poster="../assets/videos/' . $row['thumnail_path_name'] . '" controls class="card-img-top img-thumbnail">';
-                              echo '<source src="../assets/videos/' . $row['content_path_name'] . '" type="video/mp4">';
-                              echo '</video>';
-                              break;
+                      </section>
 
-                            case 'events':
-                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-img-top img-thumbnail" alt="...">';
-                              echo '<div class="p-4 event-details">';
-                              echo '<p class="card-text">Event Will Be Held On: ' . $row['Event_Date'] . ' At: ' . $row['Event_Time'] . '</p>';
-                              echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary">Invite Link</button></a>';
-                              echo '</div>';
-                              break;
-                          }
-
-                          echo '<div class="card-body">';
-                          echo '<h5 class="card-text">' . $row['Caption'] . '</h5>';
-                          echo '<p class="card-text">Created By ' . fetchUserName($row['user_id']) . '</p>';
-                          echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary">suppand</button></a>';
-                          echo '</div>';
-
-                          echo '</div>';
-
-                          echo '</div>'; // Close Bootstrap column
-                        }
-
-                        echo '</div>'; // Close Bootstrap row
-                        mysqli_free_result($result);
-                      } else {
-                        echo "Error: " . mysqli_error($conn);
-                      }
-                      ?>
-
-
-
-
-
-
-                      <!-- </div> -->
                     </div>
+                  </div>
+                </div>
+              </div>
           </section>
 
 

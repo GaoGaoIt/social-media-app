@@ -8,23 +8,11 @@ include 'function/ReusedFunction.php';
 
 session_regenerate_id(true);
 
-if (!isset($_SESSION['id'])) {
-  header('location: login.php');
-  exit;
-} elseif ($_SESSION['usertype'] == '1') {
-  header('location: ../home.php');
-  exit;
-}
+checkUserIsAdmin();
 
 
-
-$query = "
-SELECT * 
-FROM pivot_content_data
-WHERE type = 'posts' AND user_type = 1";
-
-
-$result = mysqli_query($conn, $query);
+// alertToast($type, $message);
+$result = fetchPostsData();
 
 
 

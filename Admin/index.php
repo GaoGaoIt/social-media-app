@@ -2,33 +2,19 @@
 
 
 
-require '../init.php';
-include('../config.php');
+include '../init.php';
 include 'function/ReusedFunction.php';
 
 session_regenerate_id(true);
 
-if (!isset($_SESSION['id'])) {
-  header('location: login.php');
-  exit;
-} elseif ($_SESSION['usertype'] == '1') {
-  header('location: ../home.php');
-  exit;
-}
-
-
-$query = "
-SELECT * 
-FROM pivot_content_data
-";
-
-$result = mysqli_query($conn, $query);
-
-
+checkUserIsAdmin();
+$result = fetchAllData();
 $postCount = postCount("posts");
 $eventCount = postCount("events");
 $short_video = postCount("videos");
 $studentCount = studentCount();
+
+
 
 
 
@@ -62,6 +48,11 @@ $studentCount = studentCount();
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- summernote -->
   <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">
+
+  <!-- sweetAlert -->
+  <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.css">
+
+
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
@@ -241,7 +232,7 @@ $studentCount = studentCount();
         </div>
 
         <!-- Sidebar Menu -->
-      <?php require 'component/sideNav.php'; ?>
+        <?php require 'component/sideNav.php'; ?>
         <!-- /.sidebar-menu -->
       </div>
       <!-- /.sidebar -->
@@ -356,7 +347,7 @@ $studentCount = studentCount();
                   <div class="">
                     <div class="p-4">
 
-                    
+
                       <!-- <div class="row row-cols-2 row-cols-lg-4"> -->
 
 
@@ -460,7 +451,8 @@ $studentCount = studentCount();
   <script src="plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App -->
   <script src="dist/js/adminlte.js"></script>
-  <!-- AdminLTE for demo purposes -->
+  <!-- sweetAlert-->
+
 
   <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
   <script src="dist/js/pages/dashboard.js"></script>
