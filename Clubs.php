@@ -2,7 +2,7 @@
 
 include('get_following.php');?>
 
-    <div class="status-wrapper">
+    <div class="status-wrapper" >
 
     <?php foreach($Clubs as $person){?>
 

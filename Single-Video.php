@@ -117,7 +117,7 @@ session_regenerate_id(true);
 
     <?php
     require 'component/createPageHeader.php'
-   
+
     ?>
 
     <!-- New Section -->
@@ -130,11 +130,22 @@ session_regenerate_id(true);
 
         $post_identification = $_GET['post_id'];
 
-        $stmt = $conn->prepare("SELECT * FROM videos WHERE Video_ID = $post_identification;");
+        $stmt = $conn->prepare("SELECT * FROM pivot_content_data WHERE content_id = $post_identification;");
 
         $stmt->execute();
 
         $post_array = $stmt->get_result();
+
+        // $post_identification = $_GET['post_id'];
+
+        // $stmt = $conn->prepare("SELECT * FROM pivot_content_data WHERE content_id = ?");
+        // $stmt->bind_param("i", $post_identification);
+        // $stmt->execute();
+
+        // $result = $stmt->get_result();
+        // $post_array = $result->fetch_assoc();
+
+        // $stmt->close();
     } else {
         header('location: shorts.php');
 
@@ -194,7 +205,7 @@ session_regenerate_id(true);
                 include('get_dataById.php');
 
                 foreach ($post_array as $post) {
-                    $data = get_UserData($post['User_ID']);
+                    $data = get_UserData($post['user_id']);
 
                     $profile_img = $data[2];
 
@@ -215,8 +226,10 @@ session_regenerate_id(true);
                             <?php
 
                             $id = $_SESSION['id'];
+                            // echo $id ;
+                            // exit();
 
-                            if ($post['User_ID'] == $id) { ?>
+                            if ($post['user_id'] == $id) { ?>
 
                                 <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
 
@@ -224,8 +237,8 @@ session_regenerate_id(true);
 
                         </div>
 
-                        <video id="my-video" class="video-js vjs-theme-sea post-source" controls preload="none" data-setup="{}" poster="<?php echo 'assets/videos/' . $post['Thumbnail_Path']; ?>">
-                            <source src="<?php echo 'assets/videos/' . $post['Video_Path']; ?>" type="video/mp4" />
+                        <video id="my-video" class="video-js vjs-theme-sea post-source" controls preload="none" data-setup="{}" poster="<?php echo 'assets/videos/' . $post['thumnail_path_name']; ?>">
+                            <source src="<?php echo 'assets/videos/' . $post['content_path_name']; ?>" type="video/mp4" />
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a
                                 web browser that
@@ -245,7 +258,7 @@ session_regenerate_id(true);
                                     <?php if ($reaction_status) { ?>
 
                                         <form">
-                                            <input type="hidden" value="<?php echo $post['Video_ID']; ?>" name="post_id" id="post_ids">
+                                            <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_ids">
                                             <button style="background: none; border: none;" type="submit" name="reaction">
                                                 <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike();"></i>
                                             </button>
@@ -254,7 +267,7 @@ session_regenerate_id(true);
                                         <?php } else { ?>
 
                                             <form>
-                                                <input type="hidden" value="<?php echo $post['Video_ID']; ?>" name="post_id" id="post_id">
+                                                <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_id">
                                                 <button style="background: none; border: none;" type="submit" name="reaction">
                                                     <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like();"></i>
                                                 </button>
@@ -273,7 +286,7 @@ session_regenerate_id(true);
                                     <?php echo $post['Caption']; ?>
                                 </p>
 
-                                <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_Upload'])); ?></p>
+                                <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_upload'])); ?></p>
 
                                 <p class="post-time" style="color: #0b5ed7"><?php echo $post['HashTags']; ?></p>
 
@@ -299,7 +312,7 @@ session_regenerate_id(true);
 
                                         <input type="text" class="comment-box" placeholder="Your Opinion" name="comment" id="comment">
 
-                                        <input type="hidden" name="post_id" value="<?php echo $post['Video_ID'] ?>" id="post_identity">
+                                        <input type="hidden" name="post_id" value="<?php echo $post['content_id'] ?>" id="post_identity">
 
                                         <button class="comment-button" type="submit" name="submit">
                                             <i class="fa-regular fa-paper-plane fa-lg" onclick="return comment();"></i>
@@ -607,6 +620,8 @@ session_regenerate_id(true);
         const post_id = document.getElementById('post_identity').value;
 
         const comment = document.getElementById('comment').value;
+
+        console.log(comment);
 
         $.ajax({
             type: "post",

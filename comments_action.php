@@ -8,6 +8,15 @@ $post_id = isset($_POST['post_id']) ? $_POST['post_id'] : '';
 
 $comment = isset($_POST['comment']) ? $_POST['comment'] : '';
 
+$test  = [ 
+    'postID' => $post_id,
+    'comment' => $comment
+];
+
+echo $post_id;
+
+
+
 $user_id = $_SESSION['id'];
 
 $date = date("Y-m-d H:i:s");

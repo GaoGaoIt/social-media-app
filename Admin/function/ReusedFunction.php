@@ -216,8 +216,6 @@ function studentCount()
 
     return null;
 };
-
-
 function fetchPostsData()
 {
     global $conn;

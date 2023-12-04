@@ -29,7 +29,7 @@ session_regenerate_id(true);
 
     <link rel="stylesheet" href="assets/css/responsive.css">
 
-    <link rel="stylesheet" href="assets/css/Comment.css">
+    <!-- <link rel="stylesheet" href="assets/css/Comment.css"> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -111,7 +111,7 @@ session_regenerate_id(true);
 
         $post_identification = $_GET['post_id'];
 
-        $stmt = $conn->prepare("SELECT * FROM Posts WHERE Post_ID = $post_identification;");
+        $stmt = $conn->prepare("SELECT * FROM pivot_content_data WHERE content_id = $post_identification;");
 
         $stmt->execute();
 
@@ -171,7 +171,7 @@ session_regenerate_id(true);
                 include('get_dataById.php');
 
                 foreach ($post_array as $post) {
-                    $data = get_UserData($post['User_ID']);
+                    $data = get_UserData($post['user_id']);
 
                     $profile_img = $data[2];
 
@@ -193,7 +193,7 @@ session_regenerate_id(true);
 
                             $id = $_SESSION['id'];
 
-                            if ($post['User_ID'] == $id) { ?>
+                            if ($post['user_id'] == $id) { ?>
 
                                 <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
 
@@ -201,7 +201,7 @@ session_regenerate_id(true);
 
                         </div>
 
-                        <img src="<?php echo "assets/images/posts/" . $post['Img_Path']; ?>" class="post-img">
+                        <img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" class="post-img">
 
                         <div id="data-contents">
 
@@ -223,7 +223,7 @@ session_regenerate_id(true);
                                     <?php } else { ?>
 
                                         <form>
-                                            <input type="hidden" value="<?php echo $post['Post_ID']; ?>" name="post_id" id="post_id">
+                                            <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_id">
                                             <button style="background: none; border: none;" type="submit" name="reaction">
                                                 <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like();" id="like"></i>
                                             </button>
@@ -244,7 +244,7 @@ session_regenerate_id(true);
                                     <?php echo $post['Caption']; ?>
                                 </p>
 
-                                <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_Upload'])); ?></p>
+                                <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_upload'])); ?></p>
 
                                 <p class="post-time" style="color: #0b5ed7"><?php echo $post['HashTags']; ?></p>
 
@@ -272,9 +272,9 @@ session_regenerate_id(true);
 
                                         <input type="text" class="comment-box" placeholder="Your Opinion" name="comment" id="comment">
 
-                                        <input type="hidden" name="post_id" value="<?php echo $post['Post_ID'] ?>" id="post_identity">
+                                        <input type="hidden" name="post_id" value="<?php echo $post['content_id'] ?>" id="post_identity">
 
-                                        <button class="comment-button" type="submit" name="submit"><i class="fa-regular fa-paper-plane fa-lg" onclick="return comment();"></i></button>
+                                        <button class="comment-button" type="button" name="submit" onclick="return comment1()"><i class="fa-regular fa-paper-plane fa-lg"></i></button>
 
                                     </form>
 
@@ -369,36 +369,7 @@ session_regenerate_id(true);
                     </div>
 
                     <!--Pagination bar-->
-                    <!-- <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
 
-                        <ul class="pagination">
-
-                            <li class="page-item <?php if ($page_no <= 1) {
-                                                        echo 'disabled';
-                                                    } ?>">
-
-                                <a class="page-link" href="<?php if ($page_no <= 1) {
-                                                                echo '#';
-                                                            } else {
-                                                                echo 'single-post.php?post_id=' . $post_identification . '&page_no=' . ($page_no - 1);
-                                                            } ?>">
-                                    << /a>
-
-                            </li>
-
-                            <li class="page-item <?php if ($page_no >= $total_number_pages) {
-                                                        echo 'disabled';
-                                                    } ?>">
-
-                                <a class="page-link" href="<?php if ($page_no >= $total_number_pages) {
-                                                                echo "#";
-                                                            } else {
-                                                                echo 'single-post.php?post_id=' . $post_identification . '&page_no=' . ($page_no + 1);
-                                                            } ?>">></a>
-
-                            </li>
-                        </ul>
-                    </nav> -->
 
                 </div>
 
@@ -571,18 +542,19 @@ session_regenerate_id(true);
         return false;
     }
 
-    function comment() {
+    function comment1() {
 
         const post_id = document.getElementById('post_identity').value;
 
         const comment = document.getElementById('comment').value;
+
+        console.log(post_id);
 
         $.ajax({
             type: "post",
             url: "comments_action.php",
             data: {
                 'post_id': post_id,
-
                 'comment': comment,
             },
             cache: false,

@@ -154,7 +154,7 @@ if (!isset($_SESSION['id'])) {
 
 
 
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 
         <div class="modal-dialog">
 
@@ -179,7 +179,7 @@ if (!isset($_SESSION['id'])) {
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <!-- New Section -->
 
@@ -216,6 +216,7 @@ if (!isset($_SESSION['id'])) {
                     <?php
                     switch ($post['type']) {
                         case 'posts':
+                            echo '<div class="card mt-4 rounded border">';
                             echo '<img src="assets/images/posts/' . $post['content_path_name'] . '" class="post-img">';
                             echo '<div id="post_info_data">';
                             echo '<div class="post-content">';
@@ -245,11 +246,13 @@ if (!isset($_SESSION['id'])) {
                             echo '</p>';
                             echo '<p class="post-time">' . date("M, Y, d", strtotime($post['Date_upload'])) . '</p>';
                             echo '<p class="post-time" style="color: #0b5ed7">' . $post['HashTags'] . '</p>';
+                            echo '</div>';
                             echo '</div>';
                             echo '</div>';
                             break;
 
                         case 'events':
+                            echo '<div class="card mt-4 rounded border ">';
                             echo '<img src="assets/images/posts/' . $post['content_path_name'] . '" class="post-img">';
                             echo '<div id="post_info_data">';
                             echo '<div class="post-content">';
@@ -281,11 +284,13 @@ if (!isset($_SESSION['id'])) {
                             echo '<p class="post-time" style="color: #0b5ed7">' . $post['HashTags'] . '</p>';
                             echo '</div>';
                             echo '</div>';
+                            echo '</div>';
                             break;
 
                         case 'videos':
-                            echo '<video preload="none" poster="assets/videos/' . $post['thumnail_path_name'] . '" controls class="post-source">';
-                            echo '    <source src="assets/videos/' . $post['content_path_name'] . '" type="video/mp4">';
+                            echo '<div class="card mt-4 rounded border ">';
+                            echo '<video preload="none" poster="assets/videos/' . $post['thumnail_path_name'] . '" controls class="post-source mh-30">';
+                            echo '    <source src="assets/videos/' . $post['content_path_name'] . '" type="video/mp4" class="">';
                             echo '</video>';
 
                             $element_id = rand(10, 1000000);
@@ -313,6 +318,7 @@ if (!isset($_SESSION['id'])) {
                             echo '        <p class="post-time">' . date("M, Y, d", strtotime($post['Date_upload'])) . '</p>';
                             echo '        <p class="post-time" style="color: #0b5ed7">' . $post['HashTags'] . '</p>';
                             echo '    </div>';
+                            echo '</div>';
                             echo '</div>';
                             break;
                     }
@@ -456,9 +462,9 @@ if (!isset($_SESSION['id'])) {
 
                 <?php } ?>
 
-                <!-- <?php
+                <?php
 
-                        $SQL = "SELECT * FROM events ORDER BY Event_ID DESC LIMIT 1;";
+                        $SQL = "SELECT * FROM pivot_content_data WHERE type = 'events' AND status = 'PUBLISH' ORDER BY content_id DESC LIMIT 1;";
 
                         $result = $conn->query($SQL);
 
@@ -468,14 +474,14 @@ if (!isset($_SESSION['id'])) {
 
                                 $Event_Date = $row["Event_Date"];
 
-                                $Event_ID = $row["Event_ID"];
+                                $Event_ID = $row["content_id"];
 
-                                $Poster = $row["Event_Poster"];
+                                $Poster = $row["content_path_name"];
                             }
                         }
                         $conn->close();
 
-                        ?> -->
+                        ?> 
                 <p class="suggesting">Upcoming Events</p>
 
                 <div class="card" style="width: 90%; border-radius: 10px; background: #F5F5F5; border: 1px solid #fdfdfd;">
