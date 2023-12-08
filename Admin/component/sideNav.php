@@ -8,7 +8,7 @@
                 </p>
             </a>
         </li>
-        <li class="nav-item menu-open">
+        <li class="nav-item menu-close">
             <a href="#" class="nav-link ">
                 <i class="nav-icon  fas fa-user-alt"></i>
                 <p>
@@ -25,7 +25,24 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item menu-open">
+        <li class="nav-item menu-close">
+            <a href="#" class="nav-link ">
+                <i class="nav-icon  fas fa-user-alt"></i>
+                <p>
+                    Reported post
+                    <i class="right fas fa-angle-left"></i>
+                </p>
+            </a>
+            <ul class="nav nav-treeview">
+                <li class="nav-item">
+                    <a href="reported_post.php" class="nav-link">
+                        <i class="nav-icon"></i>
+                        <p>Reported post</p>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li class="nav-item menu-close">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-calendar"></i>
                 <p>
@@ -54,7 +71,7 @@
                 </li>
             </ul>
         </li>
-        <li class="nav-item menu-open">
+        <li class="nav-item menu-close">
             <a href="#" class="nav-link ">
                 <i class="nav-icon fas fa-pager"></i>
                 <p>
@@ -85,7 +102,7 @@
                 <!-- logout page -->
             </ul>
         </li>
-        <li class="nav-item menu-open">
+        <li class="nav-item menu-close">
             <a href="#" class="nav-link ">
                 <i class="fas fa-film"></i>
                 <p>
