@@ -5,7 +5,6 @@ require 'init.php';
 session_regenerate_id(true);
 
 ?>
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -13,11 +12,13 @@ session_regenerate_id(true);
 <head>
     <meta charset="UTF-8">
 
-    <title>Eventswave</title>
+    <title>EventsWave</title>
 
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
+
+    <title>Document</title>
 
     <link rel="stylesheet" href="assets/css/style.css">
 
@@ -29,7 +30,7 @@ session_regenerate_id(true);
 
     <link rel="stylesheet" href="assets/css/responsive.css">
 
-    <!-- <link rel="stylesheet" href="assets/css/Comment.css"> -->
+    <link rel="stylesheet" href="assets/css/Comment.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -41,7 +42,23 @@ session_regenerate_id(true);
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
+    <link href="https://vjs.zencdn.net/7.20.3/video-js.css" rel="stylesheet" />
+
+    <link href="https://unpkg.com/@videojs/themes@1/dist/sea/index.css" rel="stylesheet">
+
     <style>
+        .post-source {
+
+            width: 100%;
+
+            height: 500px;
+
+            object-fit: cover;
+
+            border-radius: 10px;
+
+        }
+
         .style-wrapper {
 
             width: 90%;
@@ -66,10 +83,10 @@ session_regenerate_id(true);
         }
     </style>
 
+
 </head>
 
 <body>
-
 
     <?php if (isset($_GET['error_message'])) { ?>
 
@@ -97,8 +114,10 @@ session_regenerate_id(true);
 
 
     <!-- Nav Bar Design -->
+
     <?php
-    require 'component/createPageHeader.php';
+    require 'component/createPageHeader.php'
+
     ?>
 
     <!-- New Section -->
@@ -117,49 +136,17 @@ session_regenerate_id(true);
 
         $post_array = $stmt->get_result();
     } else {
-        header('location: home.php');
+        header('location: shorts.php');
 
         exit;
     }
 
-    if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-        $page_no = $_GET['page_no'];
-    } else {
-        $page_no = 1;
-    }
-
-    // $sql = "SELECT COUNT(*) as total_comments FROM comments WHERE POST_ID = $post_identification";
-
-    // $stmt = $conn->prepare($sql);
-
-    // $stmt->execute();
-
-    // $total_comments = 0;
-
-    // $stmt->bind_result($total_comments);
-
-    // $stmt->store_result();
-
-    // $stmt->fetch();
-
-    // $total_comments_per_page = 20;
-
-    // $offest = ($page_no - 1) * $total_comments_per_page;
-
-    // that php ceil function return rounded numbers
-
-    // $total_number_pages = ceil($total_comments / $total_comments_per_page);
-
-    // $stmt = $conn->prepare("SELECT * FROM comments WHERE POST_ID = $post_identification ORDER BY COMMENT_ID DESC LIMIT $offest, $total_comments_per_page;");
-
-    // $stmt->execute();
-
-    // $comments = $stmt->get_result();
     ?>
 
     <section class="main">
 
         <div class="wrapper">
+
             <!-- Design for left column -->
 
             <div class="left-col">
@@ -176,7 +163,7 @@ session_regenerate_id(true);
 
                     $profile_name = $data[0]; ?>
 
-                    <div class="post" id="post-id">
+                    <div class="post">
 
                         <div class="info">
 
@@ -191,6 +178,8 @@ session_regenerate_id(true);
                             <?php
 
                             $id = $_SESSION['id'];
+                            // echo $id ;
+                            // exit();
 
                             if ($post['user_id'] == $id) { ?>
 
@@ -199,43 +188,52 @@ session_regenerate_id(true);
                             <?php } ?>
 
                         </div>
+                        <?php if ($post['type'] == 'videos') { ?>
+                            <video id="my-video" class="video-js vjs-theme-sea post-source" controls preload="none" data-setup="{}" poster="<?php echo 'assets/videos/' . $post['thumnail_path_name']; ?>">
+                                <source src="<?php echo 'assets/videos/' . $post['content_path_name']; ?>" type="video/mp4" />
+                                <p class="vjs-no-js">
+                                    To view this video please enable JavaScript, and consider upgrading to a
+                                    web browser that
+                                    <a href="https://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                                </p>
+                            </video>
+                        <?php } else { ?>
+                            <img src="<?php echo 'assets/images/posts/' . $post['content_path_name']; ?>" alt="Image" class="post-image">
+                        <?php } ?>
 
-                        <img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" class="post-img">
 
-                        <div id="data-contents">
+                        <div id="post_info">
+                            <div class="post-content">
 
-                            <div class="post-content" id="post-content">
+                                <div class="reactions-wrapper">
 
-                                <div class="reactions-wrapper" id="reaction-wrapper">
+                                    <?php
 
-                                    <?php include('check_like_status.php'); ?>
+                                    include('check_like_statusVid.php'); ?>
 
                                     <?php if ($reaction_status) { ?>
 
-                                        <form>
-                                            <input type="hidden" value="<?php echo $post['Post_ID']; ?>" name="post_ids" id="post_ids">
+                                        <form">
+                                            <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_ids">
                                             <button style="background: none; border: none;" type="submit" name="reaction">
-                                                <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike();" id="unlike"></i>
+                                                <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike();"></i>
                                             </button>
-                                        </form>
+                                            </form>
 
-                                    <?php } else { ?>
+                                        <?php } else { ?>
 
-                                        <form>
-                                            <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_id">
-                                            <input type="hidden" value="<?php echo $post['type']; ?>" name="type" id="type">
-                                            <button style="background: none; border: none;" type="submit" name="reaction">
-                                                <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like();" id="like"></i>
-                                            </button>
-                                        </form>
+                                            <form>
+                                                <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_id">
+                                                <button style="background: none; border: none;" type="submit" name="reaction">
+                                                    <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like();"></i>
+                                                </button>
+                                            </form>
 
-                                    <?php } ?>
+                                        <?php } ?>
 
                                 </div>
 
-                                <input type="hidden" value="<?php echo $post['Likes']; ?>" id="reaction-counter">
-
-                                <p class="reactions" id="reaction-id"><?php echo $post['Likes']; ?> Reactions</p>
+                                <p class="reactions"><?php echo $post['Likes']; ?> Reactions</p>
 
                                 <p class="description">
 
@@ -249,9 +247,7 @@ session_regenerate_id(true);
                                 <p class="post-time" style="color: #0b5ed7"><?php echo $post['HashTags']; ?></p>
 
                             </div>
-
                         </div>
-
                     </div>
 
                 <?php } ?>
@@ -268,14 +264,16 @@ session_regenerate_id(true);
 
                                     <img src="<?php echo 'assets/images/profiles/' . $_SESSION['img_path'] ?>" class="icon" style="width: 45px; height: 45px;">
 
-                                    <form class="comments-section" id="comments-section">
+                                    <form class="comments-section">
 
                                         <input type="text" class="comment-box" placeholder="Your Opinion" name="comment" id="comment">
 
                                         <input type="hidden" name="post_id" value="<?php echo $post['content_id'] ?>" id="post_identity">
-                                        <input type="hidden" name="type" value="<?php echo $post['type'] ?>" id="type">
+                                        <input type="hidden" name="post_id" value="<?php echo $post['type'] ?>" id="type">
 
-                                        <button class="comment-button" type="button" name="submit" onclick="return report()"><i class="fa-regular fa-paper-plane fa-lg"></i></button>
+                                        <button class="comment-button" type="submit" name="submit">
+                                            <i class="fa-regular fa-paper-plane fa-lg" onclick="return report();"></i>
+                                        </button>
 
                                     </form>
 
@@ -285,15 +283,16 @@ session_regenerate_id(true);
 
                         </div>
 
-                    </div><br>
+                    </div>
+                    <br>
                 </div>
             </div>
+
             <!-- Design for right column -->
 
             <div class="right-col">
 
                 <!-- structure for profile card section-->
-
                 <div class="style-wrapper mt-2" style="background: #F5F5F5;">
 
                     <div class="suggestion_card">
@@ -314,13 +313,16 @@ session_regenerate_id(true);
                     </div>
 
                 </div>
+
             </div>
 
-
         </div>
+
     </section>
 
 </body>
+
+<script src="https://vjs.zencdn.net/7.20.3/video.min.js"></script>
 
 <script src="notifast/notifast.min.js"></script>
 
@@ -333,13 +335,13 @@ session_regenerate_id(true);
 
         $.ajax({
             type: "post",
-            url: "like.php",
+            url: "like_vid.php",
             data: {
                 'post_id': post_id,
             },
             cache: false,
             success: function(html) {
-                $("#data-contents").load(window.location.href + " #data-contents");
+                $("#post_info").load(window.location.href + " #post_info");
             }
         });
         return false;
@@ -351,13 +353,13 @@ session_regenerate_id(true);
 
         $.ajax({
             type: "post",
-            url: "unlike.php",
+            url: "unlike_vid.php",
             data: {
                 'post_id': post_ids,
             },
             cache: false,
             success: function(html) {
-                $("#data-contents").load(window.location.href + " #data-contents");
+                $("#post_info").load(window.location.href + " #post_info");
             }
         });
         return false;
@@ -370,7 +372,7 @@ session_regenerate_id(true);
         const comment = document.getElementById('comment').value;
         const type = document.getElementById('type').value;
 
-        console.log(post_id);
+        console.log(comment);
 
         $.ajax({
             type: "post",
@@ -378,7 +380,7 @@ session_regenerate_id(true);
             data: {
                 'post_id': post_id,
                 'comment': comment,
-                'type': type
+                'type': type,
             },
             cache: false,
             success: function(html) {
@@ -413,11 +415,10 @@ session_regenerate_id(true);
 <script>
     $(document).ready(function() {
         setInterval(function() {
-            $("#here").load(window.location.href + " #here");
+            $("#comments").load(window.location.href + " #comments");
         }, 10000);
     });
 </script>
-
 
 <script type="text/javascript">
     document.getElementById("logo-img").onclick = function() {

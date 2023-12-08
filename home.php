@@ -259,7 +259,7 @@ if (!isset($_SESSION['id'])) {
                             echo '<div class="post-content">';
                             echo '<div class="d-flex align-items-center">';
                             include('check_like_status.php');
-                            echo '<button class="btn btn-danger">Report</button>';
+                            echo '<a href="reports.php?contentId=' . $post["content_id"] . '"><button class="btn btn-danger">Report</button></a>';
                             if ($reaction_status) {
                                 echo '<form>';
                                 echo '<input type="hidden" value="' . $post["content_id"] . '" name="post_ids" id="post_ids">';
@@ -304,7 +304,7 @@ if (!isset($_SESSION['id'])) {
                             include('check_like_statusVid.php');
 
 
-                            echo '<button class="btn btn-danger">Report</button>';
+                            echo '<a href="reports.php?contentId=' . $post["content_id"] . '"><button class="btn btn-danger">Report</button></a>';
                             echo '            <form class="d-flex justify-content-between">';
 
                             echo '                <input type="hidden" value="' . $post['content_id'] . '" name="post_id">';
