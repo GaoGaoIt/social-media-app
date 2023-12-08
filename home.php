@@ -220,8 +220,9 @@ if (!isset($_SESSION['id'])) {
                             echo '<img src="assets/images/posts/' . $post['content_path_name'] . '" class="post-img">';
                             echo '<div id="post_info_data">';
                             echo '<div class="post-content">';
-                            echo '<div class="reactions-wrapper">';
+                            echo '<div class="d-flex d-flex align-items-center">';
                             include('check_like_status.php');
+                            echo '<a href="reports.php?contentId=' . $post["content_id"] . '"><button class="btn btn-danger">Report</button></a>';
                             if ($reaction_status) {
                                 echo '<form>';
                                 echo '<input type="hidden" value="' . $post["content_id"] . '" name="post_ids" id="post_ids">';
@@ -256,8 +257,9 @@ if (!isset($_SESSION['id'])) {
                             echo '<img src="assets/images/posts/' . $post['content_path_name'] . '" class="post-img">';
                             echo '<div id="post_info_data">';
                             echo '<div class="post-content">';
-                            echo '<div class="reactions-wrapper">';
+                            echo '<div class="d-flex align-items-center">';
                             include('check_like_status.php');
+                            echo '<button class="btn btn-danger">Report</button>';
                             if ($reaction_status) {
                                 echo '<form>';
                                 echo '<input type="hidden" value="' . $post["content_id"] . '" name="post_ids" id="post_ids">';
@@ -297,17 +299,19 @@ if (!isset($_SESSION['id'])) {
 
                             echo '<div id="' . $element_id . '">';
                             echo '    <div class="post-content">';
-                            echo '        <div class="reactions-wrapper" id="reaction">';
+                            echo '        <div class="d-flex align-items-center " id="reaction">';
 
                             include('check_like_statusVid.php');
 
-                            echo '            <form>';
+
+                            echo '<button class="btn btn-danger">Report</button>';
+                            echo '            <form class="d-flex justify-content-between">';
+
                             echo '                <input type="hidden" value="' . $post['content_id'] . '" name="post_id">';
                             echo '                <button style="background: none; border: none;" type="submit" name="reaction">';
-                            echo '                    <i style="color: ' . ($reaction_status ? '#fb3958' : '#22262A') . ';" class="icon fas fa-heart" onclick="return ' . ($reaction_status ? 'unlike' : 'like') . '(' . $post['content_id'] . ');"></i>';
+                            echo '                    <i style="color: ' . ($reaction_status ? '#fb3958' : '#22262A') . ';" class="icon fas fa-heart text-lg" onclick="return ' .                               ($reaction_status ? 'unlike' : 'like') . '(' . $post['content_id'] . ');"></i>';
                             echo '                </button>';
                             echo '            </form>';
-
                             echo '            <a href="Single-Video.php?post_id=' . $post["content_id"] . '" style="color: #22262A;"><i class="icon fas fa-comment"></i></a>';
                             echo '        </div>';
                             echo '        <p class="reactions">' . $post['Likes'] . ' Reactions</p>';
@@ -464,24 +468,24 @@ if (!isset($_SESSION['id'])) {
 
                 <?php
 
-                        $SQL = "SELECT * FROM pivot_content_data WHERE type = 'events' AND status = 'PUBLISH' ORDER BY content_id DESC LIMIT 1;";
+                $SQL = "SELECT * FROM pivot_content_data WHERE type = 'events' AND status = 'PUBLISH' ORDER BY content_id DESC LIMIT 1;";
 
-                        $result = $conn->query($SQL);
+                $result = $conn->query($SQL);
 
-                        if ($result->num_rows > 0) {
-                            while ($row = $result->fetch_assoc()) {
-                                $Event_Caption = $row["Caption"];
+                if ($result->num_rows > 0) {
+                    while ($row = $result->fetch_assoc()) {
+                        $Event_Caption = $row["Caption"];
 
-                                $Event_Date = $row["Event_Date"];
+                        $Event_Date = $row["Event_Date"];
 
-                                $Event_ID = $row["content_id"];
+                        $Event_ID = $row["content_id"];
 
-                                $Poster = $row["content_path_name"];
-                            }
-                        }
-                        $conn->close();
+                        $Poster = $row["content_path_name"];
+                    }
+                }
+                $conn->close();
 
-                        ?> 
+                ?>
                 <p class="suggesting">Upcoming Events</p>
 
                 <div class="card" style="width: 90%; border-radius: 10px; background: #F5F5F5; border: 1px solid #fdfdfd;">

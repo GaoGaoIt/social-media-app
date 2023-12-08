@@ -26,7 +26,8 @@ $numberofSpecialEvents=0;       $specialEvent_1=array("","","","","","");
                         
 // selecting events for today---------------------------------------------------------------------------------------
 
-$sql = "SELECT * FROM events WHERE DATE(Event_Date) = '$todayIs'";
+$sql = "SELECT * FROM pivot_content_data WHERE DATE(Event_Date) = '$todayIs' AND type = 'events'";
+
 
 $result = $conn->query($sql);
 
