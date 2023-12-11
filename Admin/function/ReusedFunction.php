@@ -416,7 +416,7 @@ function UpdateData($ID, $file_complete, $caption, $hashtags, $tempFileName, $ty
 
 
         $basePath = ($type == "videos") ? "../assets/videos/" : "../assets/images/posts/";
-        
+
 
 
         // Set the folder path
@@ -438,7 +438,7 @@ function UpdateData($ID, $file_complete, $caption, $hashtags, $tempFileName, $ty
             session_start();
 
 
-            
+
             $redirectUrl = ($_SESSION['usertype'] != '0') ? "../post-uploader.php" : "index.php";
             header("location: $redirectUrl?type=true&message=Post Successfully updated");
 
@@ -456,4 +456,131 @@ function UpdateData($ID, $file_complete, $caption, $hashtags, $tempFileName, $ty
         header("location: ../post-uploader.php?error_message=Error Occurred, try again - ERROR #008");
         exit;
     }
+}
+
+function fetchAllReportData()
+{
+    global $conn;
+
+    $query = "SELECT * 
+            FROM reports";
+
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+
+        mysqli_stmt_close($stmt);
+
+        return $result;
+    } else {
+        echo "Error: " . mysqli_error($conn);
+        return null; // Return null in case of an error
+    }
+}
+
+function findPostIDImage($id)
+{
+    global $conn;
+
+    $query = "SELECT content_path_name FROM pivot_content_data WHERE content_id = ?";
+
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($row = mysqli_fetch_assoc($result)) {
+            // Assuming content_path_name is the column you want to return
+            return $row['content_path_name'];
+        } else {
+            // Return a default value or handle the case when no result is found
+            return "default_image_path.jpg";
+        }
+    } else {
+        echo "Error: " . mysqli_error($conn);
+        return null; // Return null in case of an error
+    }
+}
+
+function  checkContentStatus($id)
+{
+    global $conn;
+
+    $query = "SELECT status FROM pivot_content_data WHERE content_id = ?";
+
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        mysqli_stmt_bind_param($stmt, "i", $id);
+        mysqli_stmt_execute($stmt);
+
+        $result = mysqli_stmt_get_result($stmt);
+
+        if ($row = mysqli_fetch_assoc($result)) {
+            // Assuming content_path_name is the column you want to return
+            return $row['status'];
+        }
+    } else {
+        echo "Error: " . mysqli_error($conn);
+        return null; // Return null in case of an error
+    }
+}
+
+
+
+function generateStudentID($intake_date, $ic)
+{
+
+    $last4Digits = substr($ic, -4);
+
+
+    $last2DigitsOfYear = date('Y', strtotime($intake_date));
+
+
+    $randomNumber = mt_rand(1000, 9999);
+
+
+    $studentID = 'STU' . '-' . $last2DigitsOfYear . '-' . $last4Digits;
+
+    return $studentID;
+}
+
+function createStudentProfile($name, $course, $teacherId, $studentIc, $gender, $intake_Date)
+{
+    global $conn;
+
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO students (studentsID, name, course, teacherID, studentIC, gender, intake_Date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+
+    $stmt = $conn->prepare($sql);
+
+    $studentId = generateStudentID($intake_Date, $studentIc);
+
+
+    $stmt->bind_param("ssssiss", $studentId, $name, $course, $teacherId, $studentIc, $gender, $intake_Date);
+
+
+    $stmt->execute();
+
+
+    if ($stmt->error) {
+        echo "Error: " . $stmt->error;
+    } else {
+        echo "Student profile created successfully!";
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
 }

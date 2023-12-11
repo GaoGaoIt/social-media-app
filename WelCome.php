@@ -36,7 +36,7 @@
               <div class="col-md-7 col-lg-6 d-none d-md-block">
 
                 <img 
-                src="assets/images/login_request/college.jpg"
+                src="assets/images/login_request/GIF-2.gif"
                 alt="login form"
                 class="img-fluid" style="border-radius: 1rem 0 0 1rem; height: 622px; width: auto;"/>
 
