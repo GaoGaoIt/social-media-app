@@ -1,20 +1,16 @@
 <?php
 
-$user = 'root';
+$db_host = "localhost";
+$db_user = "root";
+$db_password = "";
+$db_name = "student_social_media";
 
-$password = '886488';
+// 创建数据库连接
+$conn = new mysqli($db_host, $db_user, $db_password, $db_name);
 
-$db = 'EventsWave';
-
-$host = 'localhost';
-
-$port = 3306;
-
-$conn = mysqli_connect($host, $user, $password, $db,$port) ;
-
-if (!$conn)
-{
-echo "Failed to connect to MySQL: " . mysqli_connect_error();
+// 检查连接是否成功
+if ($conn->connect_error) {
+    die('Database connection failed: ' . $conn->connect_error);
 }
 
-?>
+// 其他代码继续执行...
