@@ -20,6 +20,30 @@ if(!isset($_SESSION['id']))
     <title>EventsWave</title>
 
     <meta charset="utf-8">
+    
+    <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <link rel="stylesheet" href="assets/css/section.css">
+
+    <link rel="stylesheet" href="assets/css/posting.css">
+
+    <link rel="stylesheet" href="assets/css/responsive.css">
+
+    <link rel="stylesheet" href="assets/css/right_col.css">
+
+    <link rel="stylesheet" href="assets/css/profile-page.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -60,14 +84,29 @@ if(!isset($_SESSION['id']))
             border-radius: 10px;
 
         }
+        .title{
+            padding-left: 10px;
+        }
+        .gallery-items-likes{
+            color: lightskyblue;
+        }
+        .discover-container{
+            background-color: lightgrey;
+        }
+        .gallery-items{
+            height: 100px;
+            width: 100px;
+        }
 
     </style>
 
 </head>
 
 <body>
-
-<div class="container">
+    <?php
+    require 'component/header.php'
+    ?>
+<!-- <div class="container">
 
     <nav class="navbar">
 
@@ -85,7 +124,7 @@ if(!isset($_SESSION['id']))
 
             </div>
 
-        </div>
+        </div> -->
 
         <?php
 
@@ -105,11 +144,11 @@ if(!isset($_SESSION['id']))
 
     </nav>
     <br><br><br>
+        
+    <h3 class="title">All Posts<small></small></h3><br>
 
-    <h3>All Posts<small></small></h3><br>
 
-
-    <ul class="nav nav-pills nav-justified">
+    <ul class="nav nav-pills">
 
         <li class="active"><a data-toggle="pill" href="#home"><i class="icon fas fa-vote-yea fa-lg"></i>Posts</a></li>
 
@@ -132,7 +171,7 @@ if(!isset($_SESSION['id']))
                         <?php foreach ($posts as $post) { ?>
                             <div class="gallery-items">
 
-                                <img src="<?php echo "assets/images/posts/" . $post['Img_Path']; ?>" alt="post"
+                                <img src="<?php echo "assets/images/posts/post_1.jpg" . $post['Img_Path']; ?>" alt="post"
                                      class="gallery-img">
 
                                 <div class="gallery-item-info">
@@ -148,7 +187,7 @@ if(!isset($_SESSION['id']))
 
                                         <li class="gallery-items-likes"><span class="hide-gallery-elements">Opinions</span>
 
-                                            <a href="single-post.php?post_id=<?php echo $post['Post_ID'];?>" style="color: white" target="_blank"><i class="icon fas fa-comment"></i></a>
+                                            <a href="single-post.php?post_id=<?php echo $post['Post_ID'];?>" style="color: lightskyblue" target="_blank"><i class="icon fas fa-comment"></i></a>
 
                                         </li>
                                     </ul>

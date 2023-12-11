@@ -49,7 +49,7 @@ if(isset($_POST['posting']))
     ('$ID', '$file_complete', '$caption', '$event_time', '$event_date', '$invite_link', '$hashtags', '$date', 'events', '$usertype')";
 
     $stmt = $conn->prepare($sql_query);
-,
+    
     if($stmt->execute())
     {
         move_uploaded_file($tempname, $folder);

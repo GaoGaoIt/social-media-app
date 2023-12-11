@@ -76,7 +76,7 @@ if (!isset($_SESSION['id'])) {
 
                         <div class="form-group">
 
-                            <h1 class="profile-user-name" style="font-size: 2rem;font-weight: 300;">New Post</h1>
+                            <h1 class="profile-user-name" style="font-size: 2rem;font-weight: 300;">New Event</h1>
 
                         </div><br>
 

@@ -19,3 +19,10 @@
     </div>
 
 </nav>
+
+<style>
+    .icon.user-profile i {
+    color: #007bff; 
+}
+
+</style>
