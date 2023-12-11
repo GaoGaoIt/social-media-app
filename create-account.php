@@ -70,15 +70,22 @@
 
                 <div class="form-outline mb-4">
                 
-                    <input type="mail" id="form2Example17" class="form-control form-control-lg" name="email" onchange="domain_nameValidator();"/>
+                    <input type="text" id="form2Example17" class="form-control form-control-lg" name="studentId" onchange="student_id_validator();"/>
                 
-                    <label class="form-label" for="form2Example17">Email address</label>
+                    <label class="form-label" for="form2Example17">Student ID</label>
+                
+                </div>
+                <div class="form-outline mb-4">
+                
+                    <input type="email" id="form2Example17" class="form-control form-control-lg" name="email" />
+                
+                    <label class="form-label" for="form2Example17">Email</label>
                 
                 </div>
 
                 <div class="pt-1 mb-4 mt-2">
 
-                    <button class="btn btn-dark btn-lg btn-block" type="submit" name="signup_btn">SIGNUP</button>
+                    <button class="btn btn-dark btn-lg btn-block" type="submit" name="signup_btn">Sign Up</button>
 
                 </div>
 

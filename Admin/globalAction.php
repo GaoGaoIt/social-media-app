@@ -100,3 +100,32 @@ if (isset($_POST['updateData'])) {
         
     }
 }
+
+
+if(isset($_POST['create'])){
+    $name = $_POST['name'];
+    $studentIc = $_POST['ic'];
+    $course = $_POST['course'];
+    $teacher = $_POST['teacher'];
+    $gender = $_POST['gender'];
+    $intake = $_POST['intake'];
+
+    // $testArray = [
+    //     'name' => $name,
+    //     'course' => $course,
+    //     'teacher' => $teacher,
+    //     'gender' => $gender,
+    //     'intake' => $intake
+    // ];
+
+    // print_r($testArray);
+
+    if(!createStudentProfile($name, $course , $teacher, $studentIc, $gender , $intake)){
+        header('Location: index.php?success&message=Successful%20Create%20student');
+
+    }
+    else 
+    {
+        header('location: createStudent.php?error');
+    }
+}

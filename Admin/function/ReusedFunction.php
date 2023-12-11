@@ -508,7 +508,8 @@ function findPostIDImage($id)
     }
 }
 
-function  checkContentStatus($id){
+function  checkContentStatus($id)
+{
     global $conn;
 
     $query = "SELECT status FROM pivot_content_data WHERE content_id = ?";
@@ -529,4 +530,57 @@ function  checkContentStatus($id){
         echo "Error: " . mysqli_error($conn);
         return null; // Return null in case of an error
     }
+}
+
+
+
+function generateStudentID($intake_date, $ic)
+{
+
+    $last4Digits = substr($ic, -4);
+
+
+    $last2DigitsOfYear = date('Y', strtotime($intake_date));
+
+
+    $randomNumber = mt_rand(1000, 9999);
+
+
+    $studentID = 'STU' . '-' . $last2DigitsOfYear . '-' . $last4Digits;
+
+    return $studentID;
+}
+
+function createStudentProfile($name, $course, $teacherId, $studentIc, $gender, $intake_Date)
+{
+    global $conn;
+
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "INSERT INTO students (studentsID, name, course, teacherID, studentIC, gender, intake_Date) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+
+    $stmt = $conn->prepare($sql);
+
+    $studentId = generateStudentID($intake_Date, $studentIc);
+
+
+    $stmt->bind_param("ssssiss", $studentId, $name, $course, $teacherId, $studentIc, $gender, $intake_Date);
+
+
+    $stmt->execute();
+
+
+    if ($stmt->error) {
+        echo "Error: " . $stmt->error;
+    } else {
+        echo "Student profile created successfully!";
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
 }

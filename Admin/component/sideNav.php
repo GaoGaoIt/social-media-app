@@ -18,7 +18,7 @@
             </a>
             <ul class="nav nav-treeview">
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="createStudent.php" class="nav-link">
                         <i class="nav-icon"></i>
                         <p>Create student</p>
                     </a>
