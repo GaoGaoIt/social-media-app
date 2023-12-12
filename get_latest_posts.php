@@ -15,16 +15,7 @@ $sql = "SELECT COUNT(*) as total_posts FROM pivot_content_data where status = 'P
 
 $stmt = $conn->prepare($sql);
 
-$stmt = $conn->prepare("SELECT * FROM pivot_content_data WHERE status = 'PUBLISH' ORDER BY content_id DESC LIMIT ?, ?;");
-
-if ($stmt === false) {
-    die('Error in SQL query: ' . $conn->error);
-}
-
-$stmt->bind_param("ii", $offest, $total_posts_per_page);
-
 $stmt->execute();
-
 
 $stmt->bind_result($total_posts);
 
