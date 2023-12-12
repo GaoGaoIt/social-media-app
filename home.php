@@ -152,38 +152,7 @@ if (!isset($_SESSION['id'])) {
     require 'component/header.php'
     ?>
 
-
-
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-
-        <div class="modal-dialog">
-
-            <div class="modal-content">
-
-                <div class="modal-header">
-
-                    <h3 class="profile-user-name modal-title" style="font-size: 2rem;font-weight: 200;">Publish Your Posts</h3>
-
-                </div>
-
-                <div class="model-body">
-
-                    <ul style="list-style: none; font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-size: 10px; text-decoration: none;">
-                        <li><button class="profile-button profile-settings-btn"><i class="icon fas fa-cog"></i></button><a href="edit-profile.php">Profile Edit<a></li>
-                        <li><button class="profile-button profile-settings-btn"><i class="icon fas fa-calendar-week"></i></i></button><a href="Event-Upload.php">Post About New Event</a></li>
-                        <li><button class="profile-button profile-settings-btn"><i class="icon fas fa-pen"></i></i></button><a href="post-uploader.php">Create New Post</a></li>
-                        <li><button class="profile-button profile-settings-btn"><i class="icon fas fa-video"></i></i></button><a href="video_upload.php">Publish New Short video</li>
-                        <li><button class="profile-button profile-settings-btn"><i class="icon fas fa-sign-out-alt"></i></i></button><a href="logout.php">Log Out</a></li>
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- New Section -->
-
-
+    
     <section class="main">
 
         <div class="wrapper">
