@@ -6,7 +6,7 @@
 
     <meta charset="UTF-8">
 
-    <title>EventsWave</title>
+    <title>College Community</title>
 
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
@@ -56,6 +56,7 @@ include("config.php");
 if(isset($_POST['target_id']))
 {
     $target_id = $_POST['target_id'];
+    
 
     $sql = "SELECT * FROM Users WHERE User_ID = $target_id;";
 
@@ -191,11 +192,11 @@ else
 
                 <div class="p-4 rounded shadow-sm bg-light">
 
-                    <p class="mb-3 font-italic"><i class="bi bi-envelope fa-lg m-lg-2"></i>Email : <?php echo " ".$array_user['email'] ?></p>
+                    <p class="mb-3 font-italic"><i class="bi bi-envelope fa-lg m-lg-2"></i>Email : <?php echo " ".$array_user['EMAIL'] ?></p>
 
-                    <p class="mb-3 font-italic"><i class="bi bi-box-arrow-up-right fa-lg m-lg-2"></i>FaceBook : <?php echo " ".$array_user['facebook'] ?></p>
+                    <p class="mb-3 font-italic"><i class="bi bi-box-arrow-up-right fa-lg m-lg-2"></i>FaceBook : <?php echo " ".$array_user['FACEBOOK'] ?></p>
 
-                    <p class="mb-3 font-italic"><i class="bi bi-whatsapp fa-lg m-lg-2"></i>WhatsApp : <?php echo " ".$array_user['whatsapp'] ?></p>
+                    <p class="mb-3 font-italic"><i class="bi bi-whatsapp fa-lg m-lg-2"></i>WhatsApp : <?php echo " ".$array_user['WHATSAPP'] ?></p>
 
                 </div>
         </div>
@@ -223,7 +224,7 @@ else
 
                         <div class="gallery-items">
 
-                            <img src="<?php echo "./assets/images/posts/".$post['Img_Path'];?>" alt="post" class="gallery-img">
+                            <img src="<?php echo "./assets/images/posts/".$post['content_path_name'];?>" alt="post" class="gallery-img">
 
                             <div class="gallery-item-info">
 
@@ -237,7 +238,7 @@ else
 
                                     <li class="gallery-items-likes"><span class="hide-gallery-elements">Opinions</span>
 
-                                        <a href="single-post.php?post_id=<?php echo $post['Post_ID'];?>" target="_blank" style="color: white"><i class="icon fas fa-comment"></i></a>
+                                        <a href="single-post.php?post_id=<?php echo $post['content_id'];?>" target="_blank" style="color: white"><i class="icon fas fa-comment"></i></a>
 
                                     </li>
 

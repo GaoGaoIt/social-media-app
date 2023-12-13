@@ -9,7 +9,6 @@ include('get_following.php');?>
             <form method="post" action="follower_acc.php" id="quick_access<?php echo $person['User_ID'];?>">
 
                 <div class="status-card">
-
                     <input type="hidden" value="<?php echo $person['User_ID']?>" name="target_id">
 
                     <div class="profile-pic" style="cursor: pointer;">

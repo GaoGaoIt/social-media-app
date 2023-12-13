@@ -32,7 +32,7 @@ function update_likes($post_id)
 {
     include("config.php");
 
-    $sql = "UPDATE posts SET Likes = Likes-1 WHERE Post_ID = $post_id;";
+    $sql = "UPDATE pivot_content_data SET Likes = Likes-1 WHERE content_id = $post_id;";
 
     $stmt = $conn->prepare($sql);
 

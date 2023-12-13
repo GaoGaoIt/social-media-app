@@ -2,8 +2,7 @@
 
 include 'Media-Provider.php';
 
-if(!isset($_SESSION['id']))
-{
+if (!isset($_SESSION['id'])) {
     header('location: login.php');
 
     exit;
@@ -17,27 +16,16 @@ if(!isset($_SESSION['id']))
 
 <head>
 
-    <title>EventsWave</title>
+    <title>College Community</title>
 
     <meta charset="utf-8">
-    
+
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" /> -->
 
-    <link rel="stylesheet" href="assets/css/style.css">
-
-    <link rel="stylesheet" href="assets/css/section.css">
-
-    <link rel="stylesheet" href="assets/css/posting.css">
-
-    <link rel="stylesheet" href="assets/css/responsive.css">
-
-    <link rel="stylesheet" href="assets/css/right_col.css">
-
-    <link rel="stylesheet" href="assets/css/profile-page.css">
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -53,14 +41,13 @@ if(!isset($_SESSION['id']))
 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-          integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
 
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link rel="stylesheet" href="assets/css/profile-page.css">
 
-    <link rel="stylesheet" href="assets/css/section.css">
+    <!-- <link rel="stylesheet" href="assets/css/section.css"> -->
 
     <link rel="stylesheet" href="assets/css/posting.css">
 
@@ -84,20 +71,27 @@ if(!isset($_SESSION['id']))
             border-radius: 10px;
 
         }
-        .title{
+
+        .title {
             padding-left: 10px;
         }
-        .gallery-items-likes{
+
+        .gallery-items-likes {
             color: lightskyblue;
         }
-        .discover-container{
+
+        .dicovery-container {
+            margin: 24px;
             background-color: lightgrey;
+            padding: 20px;
+            border-radius: 16px;
+            height: 100vh;
         }
-        .gallery-items{
+
+        .gallery-items {
             height: 100px;
             width: 100px;
         }
-
     </style>
 
 </head>
@@ -106,7 +100,7 @@ if(!isset($_SESSION['id']))
     <?php
     require 'component/header.php'
     ?>
-<!-- <div class="container">
+    <!-- <div class="container">
 
     <nav class="navbar">
 
@@ -126,25 +120,25 @@ if(!isset($_SESSION['id']))
 
         </div> -->
 
-        <?php
+    <?php
 
-        include('config.php');
+    include('config.php');
 
-        $id = $_SESSION['id'];
+    $id = $_SESSION['id'];
 
-        $SQL = "SELECT * FROM posts WHERE User_ID = $id;";
+    $SQL = "SELECT * FROM pivot_content_data WHERE user_id = $id;";
 
-        $stmt = $conn->prepare($SQL);
+    $stmt = $conn->prepare($SQL);
 
-        $stmt->execute();
+    $stmt->execute();
 
-        $posts = $stmt->get_result();
+    $posts = $stmt->get_result();
 
-        ?>
+    ?>
 
     </nav>
     <br><br><br>
-        
+
     <h3 class="title">All Posts<small></small></h3><br>
 
 
@@ -164,22 +158,20 @@ if(!isset($_SESSION['id']))
 
             <main>
 
-                <div class="discover-container">
+                <div class="dicovery-container">
 
                     <div class="gallery">
 
                         <?php foreach ($posts as $post) { ?>
                             <div class="gallery-items">
 
-                                <img src="<?php echo "assets/images/posts/post_1.jpg" . $post['Img_Path']; ?>" alt="post"
-                                     class="gallery-img">
+                                <img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" alt="post" class="gallery-img">
 
                                 <div class="gallery-item-info">
 
                                     <ul>
 
-                                        <li class="gallery-items-likes"><span
-                                                    class="hide-gallery-elements"><?php echo $post['Likes']; ?></span>
+                                        <li class="gallery-items-likes"><span class="hide-gallery-elements"><?php echo $post['Likes']; ?></span>
 
                                             <i class="icon fas fa-thumbs-up"></i>
 
@@ -187,7 +179,7 @@ if(!isset($_SESSION['id']))
 
                                         <li class="gallery-items-likes"><span class="hide-gallery-elements">Opinions</span>
 
-                                            <a href="single-post.php?post_id=<?php echo $post['Post_ID'];?>" style="color: lightskyblue" target="_blank"><i class="icon fas fa-comment"></i></a>
+                                            <a href="single-post.php?post_id=<?php echo $post['content_id']; ?>" style="color: lightskyblue" target="_blank"><i class="icon fas fa-comment"></i></a>
 
                                         </li>
                                     </ul>
@@ -215,7 +207,7 @@ if(!isset($_SESSION['id']))
 
                 $events = find_Events();
 
-                foreach($events as $event){?>
+                foreach ($events as $event) { ?>
 
                     <div class="result-section">
 
@@ -226,10 +218,9 @@ if(!isset($_SESSION['id']))
                             <div class="profile_card" style="margin-left: 20px;">
 
                                 <div>
-                                    <p class="username"
-                                       style="text-transform: capitalize; font-weight: bold;"><?php echo $event['Caption']; ?></p>
+                                    <p class="username" style="text-transform: capitalize; font-weight: bold;"><?php echo $event['Caption']; ?></p>
 
-                                    <p class="sub-text"><?php echo "Post Uploaded : ".$event['Date_Upload']; ?></p>
+                                    <p class="sub-text"><?php echo "Post Uploaded : " . $event['Date_upload']; ?></p>
                                 </div>
 
                             </div>
@@ -237,7 +228,7 @@ if(!isset($_SESSION['id']))
                             <div class="search-result-item-button">
 
                                 <button style="background: white none" class="btn btn-outline-primary">
-                                    <a style="font-weight: bold; text-decoration: none;" href="Single-Event.php?post_id=<?php echo $event['Event_ID']; ?>" target="_blank">
+                                    <a style="font-weight: bold; text-decoration: none;" href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>" target="_blank">
 
                                         View Event</a></button>
                             </div>
@@ -246,7 +237,7 @@ if(!isset($_SESSION['id']))
                         <br>
 
                     </div>
-                <?php }?>
+                <?php } ?>
 
             </ul>
         </div>
@@ -263,43 +254,37 @@ if(!isset($_SESSION['id']))
 
                 foreach ($shorts
 
-                as $video){
+                    as $video) {
                 ?>
 
-                <div class="result-section">
+                    <div class="result-section">
 
-                    <li class="list-group-item search-result-item">
+                        <li class="list-group-item search-result-item">
 
-                        <img src="assets/images/video.png" alt="profile-image">
+                            <img src="assets/images/video.png" alt="profile-image">
 
-                        <div class="profile_card" style="margin-left: 20px;">
+                            <div class="profile_card" style="margin-left: 20px;">
 
-                            <div>
-                                <p class="username"
+                                <div>
+                                    <p class="username" <?php $vid_data = "Single-Video.php?post_id= " . $video['content_id']; ?> <?php $new_string =  mb_strimwidth($video['Caption'], 0, 200, "....<br><a href='$vid_data'> Read More</a>"); ?> style="text-transform: capitalize; font-weight: bold; font-size: 13px;"><?php echo $new_string ?></p>
 
-                                    <?php $vid_data = "Single-Video.php?post_id= ".$video['Video_ID'];?>
-
-                                    <?php $new_string =  mb_strimwidth($video['Caption'], 0, 200, "....<br><a href='$vid_data'> Read More</a>");?>
-
-                                   style="text-transform: capitalize; font-weight: bold; font-size: 13px;"><?php echo $new_string ?></p>
+                                </div>
 
                             </div>
 
-                        </div>
+                            <div class="search-result-item-button">
 
-                        <div class="search-result-item-button">
+                                <button style="background: white none" class="btn btn-outline-primary">
+                                    <a style="text-decoration: none; font-weight: bold;" href="Single-Video.php?post_id=<?php echo $video['content_id']; ?>" target="_blank">
+                                        View Video
+                                    </a>
+                                </button>
+                            </div>
 
-                            <button style="background: white none" class="btn btn-outline-primary">
-                                <a style="text-decoration: none; font-weight: bold;" href="Single-Video.php?post_id=<?php echo $video['Video_ID']; ?>" target="_blank">
-                                    View Video
-                                </a>
-                            </button>
-                        </div>
+                        </li>
+                        <br>
 
-                    </li>
-                    <br>
-
-                </div>
+                    </div>
 
                 <?php } ?>
             </ul>
@@ -307,12 +292,12 @@ if(!isset($_SESSION['id']))
     </div>
 
 
-</div>
+    </div>
 
 </body>
 
 <script type="text/javascript">
-    document.getElementById("logo-img").onclick = function () {
+    document.getElementById("logo-img").onclick = function() {
         location.href = "home.php";
     };
 </script>

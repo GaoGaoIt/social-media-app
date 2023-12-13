@@ -21,7 +21,7 @@ function find_Events($search_input)
 {
     include "config.php";
 
-    $SQL = "SELECT * FROM events WHERE Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
+    $SQL = "SELECT * FROM pivot_content_data WHERE type = 'events' AND Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
 
     $stmt = $conn->prepare($SQL);
 
@@ -36,7 +36,7 @@ function find_Shorts($search_input)
 {
     include "config.php";
 
-    $SQL = "SELECT * FROM videos WHERE CAPTION LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
+    $SQL = "SELECT * FROM pivot_content_data WHERE type = 'videos' AND CAPTION LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
 
     $stmt = $conn->prepare($SQL);
 

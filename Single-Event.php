@@ -12,7 +12,7 @@ session_regenerate_id(true);
 <head>
     <meta charset="UTF-8">
 
-    <title>EventsWave</title>
+    <title>College Community</title>
 
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
@@ -347,7 +347,7 @@ session_regenerate_id(true);
                         </div>
                     </div>
 
-                    <p><strong>EventsWave Community Opinion</strong></p>
+                    <p><strong>College Community Community Opinion</strong></p>
 
                     <div id="comments">
                         <?php

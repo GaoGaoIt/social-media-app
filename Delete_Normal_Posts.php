@@ -23,7 +23,7 @@ function Drop_Post($post_id)
 {
     include 'config.php';
 
-    $SQL = "DELETE FROM posts WHERE Post_ID = $post_id";
+    $SQL = "DELETE FROM pivot_content_data WHERE content_id= $post_id";
 
     $stmt = $conn->prepare($SQL);
 

@@ -19,7 +19,7 @@ if (!isset($_SESSION['id'])) {
 
 	<link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
-	<title>EventsWave</title>
+	<title>College Community</title>
 
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
 
@@ -151,7 +151,7 @@ if (!isset($_SESSION['id'])) {
 				include('get_dataById.php');
 
 				foreach ($posts as $post) {
-					$data = get_UserData($post['User_ID']);
+					$data = get_UserData($post['user_id']);
 
 					$profile_img = $data[2];
 
@@ -173,7 +173,7 @@ if (!isset($_SESSION['id'])) {
 
 						</div>
 
-						<img src="<?php echo "assets/images/posts/" . $post['Event_Poster']; ?>" class="post-img">
+						<img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" class="post-img">
 
 						<div class="post-content">
 
@@ -186,32 +186,32 @@ if (!isset($_SESSION['id'])) {
 								<?php if ($reaction_status) { ?>
 
 									<form">
-										<input type="hidden" value="<?php echo $post['Event_ID']; ?>" name="post_id" id="post_ids">
+										<input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_ids">
 										<button style="background: none; border: none;" type="submit">
-											<i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike(<?php echo $post['Event_ID']; ?>)"></i>
+											<i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike(<?php echo $post['content_id']; ?>)"></i>
 										</button>
 										</form>
 
 									<?php } else { ?>
 
 										<form>
-											<input type="hidden" value="<?php echo $post['Event_ID']; ?>" name="post_id" id="post_id">
+											<input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_id">
 											<button style="background: none; border: none;" type="submit">
-												<i style="color: #22262A;" class="icon fas fa-heart" onclick="return like(<?php echo $post['Event_ID']; ?>)"></i>
+												<i style="color: #22262A;" class="icon fas fa-heart" onclick="return like(<?php echo $post['content_id']; ?>)"></i>
 											</button>
 										</form>
 
 									<?php } ?>
 
-									<a href="Single-Event.php?post_id=<?php echo $post["Event_ID"]; ?>" style="color: #22262A;"><i class="icon fas fa-comment"></i></a>
+									<a href="Single-Event.php?post_id=<?php echo $post["content_id"]; ?>" style="color: #22262A;"><i class="icon fas fa-comment"></i></a>
 
-									<i class="icon fas fa-calendar-alt" style="color: #22262A;" id="<?php echo 'button_' . $post["Event_ID"]; ?>" onclick="calender_function('<?php echo $profile_name . ' s Event'; ?>',
+									<i class="icon fas fa-calendar-alt" style="color: #22262A;" id="<?php echo 'button_' . $post["content_id"]; ?>" onclick="calender_function('<?php echo $profile_name . ' s Event'; ?>',
 
                                        '<?php echo $post['Invite_Link']; ?>',
 
                                        '<?php echo date("Y-m-d", strtotime($post['Event_Date'])); ?>',
 
-                                       '<?php echo 'button_' . $post["Event_ID"]; ?>')"></i>
+                                       '<?php echo 'button_' . $post["content_id"]; ?>')"></i>
 
 							</div>
 
@@ -227,7 +227,7 @@ if (!isset($_SESSION['id'])) {
 
 							<p class="description"><span>Invite Link : <a href="<?php echo $post['Invite_Link']; ?>"><?php echo $post['Invite_Link']; ?></a></span></p>
 
-							<p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_Upload'])); ?></p>
+							<p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_upload'])); ?></p>
 
 							<p class="post-time" style="color: #0b5ed7"><?php echo $post['HashTags']; ?></p>
 
@@ -236,49 +236,6 @@ if (!isset($_SESSION['id'])) {
 					</div>
 
 				<?php } ?>
-
-				<nav aria-label="Page navigation example" class="mx-auto mt-3">
-
-					<ul class="pagination">
-
-						<li class="page-item <?php if ($page_no <= 1) {
-													echo 'disabled';
-												} ?>">
-
-							<a class="page-link" href="<?php if ($page_no <= 1) {
-															echo '#';
-														} else {
-															echo '?page_no=' . ($page_no - 1);
-														} ?>">Previous</a>
-
-						</li>
-						<li class="page-item"><a class="page-link" href="?page_no=1">1</a></li>
-
-						<li class="page-item"><a class="page-link" href="?page_no=2">2</a></li>
-
-						<li class="page-item"><a class="page-link" href="?page_no=3">3</a></li>
-						<?php if ($page_no >= 3) { ?>
-
-							<li class="page-item"><a class="page-link" href="#">...</a></li>
-
-							<li class="page-item"><a class="page-link" href="<?php echo "?page_no=" . $page_no; ?>"></a></li>
-
-						<?php } ?>
-
-						<li class="page-item <?php if ($page_no >= $total_number_pages) {
-													echo 'disabled';
-												} ?>">
-
-							<a class="page-link" href="<?php if ($page_no >= $total_number_pages) {
-															echo "#";
-														} else {
-															echo "?page_no=" . ($page_no + 1);
-														} ?>">Next</a>
-
-						</li>
-					</ul>
-				</nav>
-
 			</div>
 
 			<!-- Design for right column -->
@@ -309,11 +266,11 @@ if (!isset($_SESSION['id'])) {
 
 				<?php
 
-				$SQL = "SELECT * FROM events ORDER BY Event_ID DESC LIMIT 1;";
+				$SQL = "SELECT * FROM pivot_content_data where type = 'events' ORDER BY content_id DESC LIMIT 1;";
 
 				$result = $conn->query($SQL);
 
-				echo $result['Event_Date'];
+				// echo $result['Event_Date'];
 
 				if ($result->num_rows > 0) {
 					while ($row = $result->fetch_assoc()) {
@@ -321,9 +278,9 @@ if (!isset($_SESSION['id'])) {
 
 						$Event_Date = $row["Event_Date"];
 
-						$Event_ID = $row["Event_ID"];
+						$Event_ID = $row["content_id"];
 
-						$Poster = $row["Event_Poster"];
+						$Poster = $row["content_path_name"];
 					}
 				}
 				$conn->close();

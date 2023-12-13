@@ -12,7 +12,7 @@ session_regenerate_id(true);
 <head>
     <meta charset="UTF-8">
 
-    <title>EventsWave</title>
+    <title>College Community</title>
 
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
@@ -152,35 +152,8 @@ session_regenerate_id(true);
         exit;
     }
 
-    if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-        $page_no = $_GET['page_no'];
-    } else {
-        $page_no = 1;
-    }
 
-    $sql = "SELECT COUNT(*) as total_comments FROM comments_vid WHERE VIDEO_ID = $post_identification";
-
-    $stmt = $conn->prepare($sql);
-
-    $stmt->execute();
-
-    $total_comments = 0;
-
-    $stmt->bind_result($total_comments);
-
-    $stmt->store_result();
-
-    $stmt->fetch();
-
-    $total_comments_per_page = 20;
-
-    $offest = ($page_no - 1) * $total_comments_per_page;
-
-    // that php ceil function return rounded numbers
-
-    $total_number_pages = ceil($total_comments / $total_comments_per_page);
-
-    $Query = "SELECT * FROM comments_vid WHERE VIDEO_ID = $post_identification ORDER BY COMMENT_ID DESC LIMIT $offest, $total_comments_per_page;";
+    $Query = "SELECT * FROM comments_vid WHERE VIDEO_ID = $post_identification ORDER BY COMMENT_ID DESC ;";
 
     echo $Query;
 
@@ -362,7 +335,7 @@ session_regenerate_id(true);
                         </div>
                     </div>
 
-                    <p><strong>EventsWave Community Opinion</strong></p>
+                    <p><strong>College Community Community Opinion</strong></p>
 
                     <div id="comments">
                         <?php
@@ -409,38 +382,6 @@ session_regenerate_id(true);
                         <?php } ?>
 
                     </div>
-
-                    <!--Pagination bar-->
-                    <!-- <nav aria-label="Page navigation example" style="display: flex; justify-content: center;">
-
-                        <ul class="pagination">
-
-                            <li class="page-item <?php if ($page_no <= 1) {
-                                                        echo 'disabled';
-                                                    } ?>">
-
-                                <a class="page-link" href="<?php if ($page_no <= 1) {
-                                                                echo '#';
-                                                            } else {
-                                                                echo 'single-post.php?post_id=' . $post_identification . '&page_no=' . ($page_no - 1);
-                                                            } ?>">
-                                    << /a>
-
-                            </li>
-
-                            <li class="page-item <?php if ($page_no >= $total_number_pages) {
-                                                        echo 'disabled';
-                                                    } ?>">
-
-                                <a class="page-link" href="<?php if ($page_no >= $total_number_pages) {
-                                                                echo "#";
-                                                            } else {
-                                                                echo 'single-post.php?post_id=' . $post_identification . '&page_no=' . ($page_no + 1);
-                                                            } ?>">></a>
-
-                            </li>
-                        </ul>
-                    </nav> -->
 
                 </div>
 

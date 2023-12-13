@@ -4,7 +4,7 @@ include('config.php');
 
 $ID = $target_id;
 
-$sql = "SELECT * FROM Posts WHERE User_ID = $ID ORDER BY Post_ID DESC;";
+$sql = "SELECT * FROM pivot_content_data WHERE user_id = $ID ORDER BY content_id DESC;";
 
 //echo $sql;
 

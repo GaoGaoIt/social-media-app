@@ -13,7 +13,7 @@ session_regenerate_id(true);
 <head>
     <meta charset="UTF-8">
 
-    <title>Eventswave</title>
+    <title>College Community</title>
 
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
@@ -193,9 +193,10 @@ session_regenerate_id(true);
 
                             $id = $_SESSION['id'];
 
+
                             if ($post['user_id'] == $id) { ?>
 
-                                <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#postOptionsModal"></i>
 
                             <?php } ?>
 
@@ -214,7 +215,7 @@ session_regenerate_id(true);
                                     <?php if ($reaction_status) { ?>
 
                                         <form>
-                                            <input type="hidden" value="<?php echo $post['Post_ID']; ?>" name="post_ids" id="post_ids">
+                                            <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_ids" id="post_ids">
                                             <button style="background: none; border: none;" type="submit" name="reaction">
                                                 <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike();" id="unlike"></i>
                                             </button>
@@ -287,7 +288,7 @@ session_regenerate_id(true);
                     </div><br>
 
                     <!-- Modal For Post Options-->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="postOptionsModal" tabindex="-1" aria-labelledby="postOptionsLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -295,16 +296,16 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-body">
 
-                                    <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Post</a><br><br>
+                                    <i class="fa-solid fa-pen-to-square"  data-bs-whatever="@mdo"><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal2">Edit Post</a></i><br><br>
 
-                                    <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_model" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Post</a>
+                                    <i class="fa-solid fa-trash"  data-bs-whatever="@mdo"> <a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#delete_model">Delete Post</a></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Model For Opinion Options -->
-                    <div class="modal fade" id="Comment-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="commentOptionsModal" tabindex="-10" aria-labelledby="commentOptionsLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -312,15 +313,17 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-body">
 
-                                    <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit-comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
+                                    <i class="fa-solid fa-pen-to-square"><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#edit-comment">Edit Comment</a></i><br><br>
 
-                                    <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Opinion</a>
+
+
+                                    <i class="fa-solid fa-trash"><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#delete_comment">Delete Opinion</a></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <p><strong>EventsWave Community Opinion</strong></p>
+                    <p><strong>College Community Community Opinion</strong></p>
 
                     <div id="here">
                         <?php
@@ -354,7 +357,7 @@ session_regenerate_id(true);
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"></i>
+                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#commentOptionsModal"></i>
 
                                         <?php } ?>
 
@@ -375,7 +378,7 @@ session_regenerate_id(true);
 
 
 
-                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal2" tabindex="1" aria-labelledby="editPostLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -393,7 +396,7 @@ session_regenerate_id(true);
                                         <textarea class="form-control" id="message-text" maxlength="500" name="caption"><?php echo $post['Caption']; ?></textarea>
                                     </div>
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Post_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
                                     <button type="submit" class="btn btn-outline-primary" name="edit">Edit Post</button>
                                 </form>
                             </div>
@@ -401,7 +404,7 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal fade" id="delete_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="delete_model" tabindex="1" aria-labelledby="deletePostLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -412,7 +415,7 @@ session_regenerate_id(true);
                                 </p>
 
                                 <form action="Delete_Normal_Posts.php" method="post">
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Post_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="drop">Drop Post</button>
                                 </form>
@@ -421,7 +424,7 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal fade" id="edit-comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="edit-comment" tabindex="1" aria-labelledby="editCommentLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -433,7 +436,7 @@ session_regenerate_id(true);
 
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Post_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="edit-comment">Edit Your Opinion</button>
                                 </form>
@@ -442,7 +445,7 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal fade" id="delete_comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="delete_comment" tabindex="1" aria-labelledby="deleteCommentLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -454,7 +457,7 @@ session_regenerate_id(true);
 
                                 <form action="Delete_Normal_Comment.php" method="post">
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Post_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
 
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
 
@@ -500,6 +503,10 @@ session_regenerate_id(true);
     </section>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
 <script src="notifast/notifast.min.js"></script>
 

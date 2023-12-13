@@ -89,7 +89,7 @@ $nextday=date("Y-m-d", strtotime('+1 day'));
 $nextYear=date("Y-m-d", strtotime('+1 year'));
 
 
-$sql = "SELECT * FROM events WHERE Event_Date BETWEEN '$nextday' AND '$nextYear'";
+$sql = "SELECT * FROM pivot_content_data WHERE Event_Date BETWEEN '$nextday' AND '$nextYear'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) 
@@ -100,7 +100,7 @@ if ($result->num_rows > 0)
 
         if($numberofEventsNextday==1)
         {
-            $nextdayEvent_1[0] = $row["Event_ID"];            
+            $nextdayEvent_1[0] = $row["content_id"];            
             $nextdayEvent_1[1] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Caption"]);
             //$nextdayEvent_1[2] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Event_Poster"]);
             $nextdayEvent_1[3] = $row["Event_Date"];
@@ -111,7 +111,7 @@ if ($result->num_rows > 0)
 
         if($numberofEventsNextday==2)
         {
-            $nextdayEvent_2[0] = $row["Event_ID"];            
+            $nextdayEvent_2[0] = $row["content_id"];            
             $nextdayEvent_2[1] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Caption"]);
             //$nextdayEvent_2[2] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Event_Poster"]) ;
             $nextdayEvent_2[3] = $row["Event_Date"];
@@ -122,7 +122,7 @@ if ($result->num_rows > 0)
 
         if($numberofEventsNextday==3)
         {
-            $nextdayEvent_3[0] = $row["Event_ID"];            
+            $nextdayEvent_3[0] = $row["content_id"];            
             $nextdayEvent_3[1] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Caption"]);
             //$nextdayEvent_3[2] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Event_Poster"]);
             $nextdayEvent_3[3] = $row["Event_Date"];
@@ -133,7 +133,7 @@ if ($result->num_rows > 0)
 
         if($numberofEventsNextday==4)
         {
-            $nextdayEvent_4[0] = $row["Event_ID"];            
+            $nextdayEvent_4[0] = $row["content_id"];            
             $nextdayEvent_4[1] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Caption"]);
             //$nextdayEvent_4[2] = str_replace( array( "\n", "\r" ), array( " ", " " ),$row["Event_Poster"]);
             $nextdayEvent_4[3] = $row["Event_Date"];
@@ -455,7 +455,7 @@ if ($result->num_rows > 0)
             <div class="col-md">
                 <div class="specialEvents">
                     <div class="text-center">
-                        <img class="specialEventsImage" src="images/dec1.jpg"  alt="Italian Trulia"" width="100%" height="auto">
+                        <img class="specialEventsImage" src="../assets/images/login_request/logo2.png"  alt="Italian Trulia"" width="60%" height="auto">
                     </div>
                     <br>
                     <div class="text-center">

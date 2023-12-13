@@ -12,7 +12,7 @@ session_regenerate_id(true);
 <head>
     <meta charset="UTF-8">
 
-    <title>EventsWave</title>
+    <title>College Community</title>
 
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
@@ -51,7 +51,7 @@ session_regenerate_id(true);
 
             width: 100%;
 
-            height: 500px;
+            height: px;
 
             object-fit: cover;
 
@@ -78,6 +78,16 @@ session_regenerate_id(true);
             align-items: center;
 
             overflow: hidden;
+
+            border-radius: 10px;
+        }
+
+        .post-image {
+            width: 100%;
+
+            height: px;
+
+            object-fit: cover;
 
             border-radius: 10px;
         }
@@ -175,17 +185,6 @@ session_regenerate_id(true);
 
                             </div>
 
-                            <?php
-
-                            $id = $_SESSION['id'];
-                            // echo $id ;
-                            // exit();
-
-                            if ($post['user_id'] == $id) { ?>
-
-                                <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
-
-                            <?php } ?>
 
                         </div>
                         <?php if ($post['type'] == 'videos') { ?>

@@ -233,7 +233,7 @@ function mailer($sending_address, $password, $user_name, $full_name)
 
     $mail->From = "samchan952@gmail.com";
 
-    $mail->FromName = "Synergy College";
+    $mail->FromName = "Synergy Community";
 
     $mail->addAddress($sending_address, $full_name);
 

@@ -18,7 +18,7 @@ if (!isset($_SESSION['id'])) {
 <head>
     <meta charset="UTF-8">
 
-    <title>EventsWave</title>
+    <title>College Community</title>
 
     <link rel="icon" href="assets/images/event_accepted_50px.png" type="image/icon type">
 
@@ -152,7 +152,7 @@ if (!isset($_SESSION['id'])) {
     require 'component/header.php'
     ?>
 
-    
+
     <section class="main">
 
         <div class="wrapper">
@@ -270,7 +270,7 @@ if (!isset($_SESSION['id'])) {
                             echo '    <div class="post-content">';
                             echo '        <div class="d-flex align-items-center " id="reaction">';
 
-                            include('check_like_statusVid.php');
+                            include('check_like_status.php');
 
 
                             echo '<a href="reports.php?contentId=' . $post["content_id"] . '"><button class="btn btn-danger">Report</button></a>';
@@ -316,48 +316,7 @@ if (!isset($_SESSION['id'])) {
                     </div>
                 </div>
 
-                <!--Pagination bar-->
-                <nav aria-label="Page navigation example" class="mx-auto mt-3">
 
-                    <ul class="pagination">
-
-                        <li class="page-item <?php if ($page_no <= 1) {
-                                                    echo 'disabled';
-                                                } ?>">
-
-                            <a class="page-link" href="<?php if ($page_no <= 1) {
-                                                            echo '#';
-                                                        } else {
-                                                            echo '?page_no=' . ($page_no - 1);
-                                                        } ?>">Previous</a>
-
-                        </li>
-                        <li class="page-item"><a class="page-link" href="?page_no=1">1</a></li>
-
-                        <li class="page-item"><a class="page-link" href="?page_no=2">2</a></li>
-
-                        <li class="page-item"><a class="page-link" href="?page_no=3">3</a></li>
-                        <?php if ($page_no >= 3) { ?>
-
-                            <li class="page-item"><a class="page-link" href="#">...</a></li>
-
-                            <li class="page-item"><a class="page-link" href="<?php echo "?page_no=" . $page_no; ?>"></a></li>
-
-                        <?php } ?>
-
-                        <li class="page-item <?php if ($page_no >= $total_number_pages) {
-                                                    echo 'disabled';
-                                                } ?>">
-
-                            <a class="page-link" href="<?php if ($page_no >= $total_number_pages) {
-                                                            echo "#";
-                                                        } else {
-                                                            echo "?page_no=" . ($page_no + 1);
-                                                        } ?>">Next</a>
-
-                        </li>
-                    </ul>
-                </nav>
 
             </div>
 
@@ -436,45 +395,51 @@ if (!isset($_SESSION['id'])) {
                 <?php } ?>
 
                 <?php
+                $currentDate = date('Y-m-d');
 
-                $SQL = "SELECT * FROM pivot_content_data WHERE type = 'events' AND status = 'PUBLISH' ORDER BY content_id DESC LIMIT 1;";
+                $SQL = "SELECT * 
+        FROM pivot_content_data 
+        WHERE type = 'events' 
+        AND status = 'PUBLISH' 
+        AND Event_Date >= '$currentDate'
+        ORDER BY Event_Date ASC 
+        LIMIT 1;";
 
                 $result = $conn->query($SQL);
 
                 if ($result->num_rows > 0) {
                     while ($row = $result->fetch_assoc()) {
                         $Event_Caption = $row["Caption"];
-
                         $Event_Date = $row["Event_Date"];
-
                         $Event_ID = $row["content_id"];
-
                         $Poster = $row["content_path_name"];
-                    }
-                }
-                $conn->close();
-
                 ?>
-                <p class="suggesting">Upcoming Events</p>
+                        <p class="suggesting">Upcoming Events</p>
 
-                <div class="card" style="width: 90%; border-radius: 10px; background: #F5F5F5; border: 1px solid #fdfdfd;">
+                        <div class="card" style="width: 90%; border-radius: 10px; background: #F5F5F5; border: 1px solid #fdfdfd;">
 
-                    <img src="<?php echo "assets/images/posts/" . $Poster; ?>" class="card-img-top" alt="Event_Card" style="border-radius: 10px;">
+                            <img src="<?php echo "assets/images/posts/" . $Poster; ?>" class="card-img-top" alt="Event_Card" style="border-radius: 10px;">
 
-                    <div class="card-body">
+                            <div class="card-body">
 
-                        <h6 class="card-title"><?php echo 'Date : ' . date("M,Y,d", strtotime($Event_Date)) ?></h6>
+                                <h6 class="card-title"><?php echo 'Date : ' . date("M,Y,d", strtotime($Event_Date)) ?></h6>
 
-                        <p class="card-text"><?php echo $Event_Caption ?></p>
+                                <p class="card-text"><?php echo $Event_Caption ?></p>
 
-                        <form>
-                            <button class="fallow-btn"><a href="Single-Event.php?post_id=<?php echo $Event_ID; ?>" style="font-size: 12px;">Read More</a></button>
-                        </form>
-                    </div>
+                                <form>
+                                    <button class="fallow-btn"><a href="Single-Event.php?post_id=<?php echo $Event_ID; ?>" style="font-size: 12px;">Read More</a></button>
+                                </form>
+                            </div>
 
-                </div>
+                        </div>
+                <?php
+                    }
+                } else {
+                    echo "<p class='suggesting'>No Upcoming Events</p>";
+                }
 
-            </div>
+                $conn->close();
+                ?>
 
     </section>
 

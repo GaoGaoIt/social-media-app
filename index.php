@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iK+eaW/m6O2/jxADL4M6Bqj9nv0DzPk5d+2uUZ5PqFfEAsv5C84N2Ubx" crossorigin="anonymous">
-  <title>EventsWave Email</title>
+  <title>College Community Email</title>
   <style type="text/css">
     body {
       background-color: #6c757d;
