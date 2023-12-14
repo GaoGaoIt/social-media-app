@@ -8,7 +8,7 @@ if (isset($_POST['change-password']))
 {
     $user_id = $_SESSION['id'];
 
-    $current_password = get_CurrentPassword($user_id);
+    $current_password_hash = get_CurrentPassword($user_id);
 
     $data_By_User = $_POST['old-password'];
 
@@ -16,18 +16,17 @@ if (isset($_POST['change-password']))
 
     $retype_password = $_POST['retype-password'];
 
-    $function_output = strcmp($current_password, md5($data_By_User));
+    $function_output = password_verify($data_By_User, $current_password_hash);
 
     $function_output_2 = strcmp($new_password, $retype_password);
 
-    $function_output_3 = strcmp($current_password, md5($new_password));
+    $function_output_3 = password_verify($new_password, $current_password_hash);
 
-    if($function_output == 0)
+    if($function_output)
     {
-        if($function_output_3 == 0)
+        if($function_output_3)
         {
-            header('location: edit-profile.php?error_message=You Can"t Use Old Password as your new password');
-
+            header('location: edit-profile.php?error_message=You Can\'t Use Old Password as your new password');
             exit();
         }
         else
@@ -39,7 +38,6 @@ if (isset($_POST['change-password']))
             else
             {
                 header('location: edit-profile.php?error_message=Retype Correctly New Password');
-
                 exit();
             }
         }
@@ -47,32 +45,25 @@ if (isset($_POST['change-password']))
     else
     {
         header('location: edit-profile.php?error_message=Old Password You Entered Incorrect');
-
         exit();
     }
-
 }
 
 function Update_Password($new_password, $user_id)
 {
     include 'config.php';
 
-    $secure_password = md5($new_password);
+    $secure_password = password_hash($new_password, PASSWORD_DEFAULT);
 
     $SQL = "UPDATE users SET PASSWORD_S = '$secure_password' WHERE User_ID = $user_id;";
 
     $stmt = $conn->prepare($SQL);
 
     if ($stmt->execute()) {
-
         header('location: edit-profile.php?success_message=Password Change Successfully');
-
         exit;
-
     } else {
-
         header('location: edit-profile.php?error_message=Problem With Password Change Process');
-
         exit();
     }
 
@@ -91,13 +82,13 @@ function get_CurrentPassword($User_ID)
     {
         while($row = $result->fetch_assoc())
         {
-            $password = $row["PASSWORD_S"];
+            $current_password_hash = $row["PASSWORD_S"];
 
-            return $password;
+            return $current_password_hash;
         }
-    }else
+    } else
     {
-        return 0;
+        return false; // Return false instead of 0 for clarity
     }
 
     $conn->close();
