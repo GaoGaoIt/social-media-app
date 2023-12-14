@@ -1,7 +1,7 @@
 
 <?php
 
-require 'init.php';
+// require 'init.php';
 
 session_regenerate_id(true);
 
@@ -38,7 +38,7 @@ if(isset($_POST['submit']))
 
     if($user_name != $_SESSION['username'])
     {
-        $sql_query = "SELECT USER_NAME FROM Users WHERE USER_NAME = '$user_name';";
+        $sql_query = "SELECT USER_NAME FROM users WHERE USER_NAME = '$user_name';";
 
 
 
