@@ -73,7 +73,13 @@ if (isset($_POST['signup_btn'])) {
 
             exit;
         } else {
-            $encrypted_password = md5($password);
+            $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
+            // echo $encrypted_password;
+            // echo '<br>';
+            // echo ' 364a5330969e96933cec7c9e29fdcfd3';
+            // echo '<br>';
+            // echo $password;
+            // exit;
 
             $insert_query = "INSERT INTO users (FULL_NAME,USER_NAME,USER_TYPE,PASSWORD_S,EMAIL,IMAGE,FACEBOOK,WHATSAPP,BIO,FALLOWERS,FALLOWING,POSTS, studentId) VALUES
 
@@ -118,8 +124,8 @@ if (isset($_POST['signup_btn'])) {
 
                 $_SESSION['temp_password'] = $password;
 
-                header("location: WelCome.php");
                 mailer($email_address, $password, $user_name, $full_name);
+                header("location: WelCome.php");
                 
 
             } else {
