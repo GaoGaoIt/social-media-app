@@ -36,7 +36,7 @@ function find_Shorts($search_input)
 {
     include "config.php";
 
-    $SQL = "SELECT * FROM pivot_content_data WHERE type = 'videos' AND CAPTION LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
+    $SQL = "SELECT * FROM pivot_content_data WHERE type = 'videos' and  CAPTION LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
 
     $stmt = $conn->prepare($SQL);
 

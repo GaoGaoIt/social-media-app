@@ -228,7 +228,10 @@ if (!isset($_SESSION['id'])) {
                             echo '<div class="post-content">';
                             echo '<div class="d-flex align-items-center">';
                             include('check_like_status.php');
+                            echo '<div class="d-flex gap-2">';
+                            echo '<a href="' . $post["Invite_Link"] . '"><button class="btn btn-info">Invitation Link</button></a>';
                             echo '<a href="reports.php?contentId=' . $post["content_id"] . '"><button class="btn btn-danger">Report</button></a>';
+                            echo '</div>';
                             if ($reaction_status) {
                                 echo '<form>';
                                 echo '<input type="hidden" value="' . $post["content_id"] . '" name="post_ids" id="post_ids">';

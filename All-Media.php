@@ -126,13 +126,26 @@ if (!isset($_SESSION['id'])) {
 
     $id = $_SESSION['id'];
 
-    $SQL = "SELECT * FROM pivot_content_data WHERE user_id = $id;";
-
-    $stmt = $conn->prepare($SQL);
-
-    $stmt->execute();
-
-    $posts = $stmt->get_result();
+    // Fetch posts
+    $postSQL = "SELECT * FROM pivot_content_data WHERE type = 'posts' AND user_id = ?;";
+    $stmtPost = $conn->prepare($postSQL);
+    $stmtPost->bind_param("i", $id);
+    $stmtPost->execute();
+    $posts = $stmtPost->get_result();
+    
+    // Fetch events
+    $eventSQL = "SELECT * FROM pivot_content_data WHERE type = 'events' AND user_id = ?;";
+    $stmtEvent = $conn->prepare($eventSQL);
+    $stmtEvent->bind_param("i", $id);
+    $stmtEvent->execute();
+    $events = $stmtEvent->get_result();
+    
+    // Fetch videos
+    $videoSQL = "SELECT * FROM pivot_content_data WHERE type = 'videos' AND user_id = ?;";
+    $stmtVideo = $conn->prepare($videoSQL);
+    $stmtVideo->bind_param("i", $id);
+    $stmtVideo->execute();
+    $shorts = $stmtVideo->get_result();
 
     ?>
 
@@ -205,7 +218,7 @@ if (!isset($_SESSION['id'])) {
 
                 <?php
 
-                $events = find_Events();
+                // $events = find_Events();
 
                 foreach ($events as $event) { ?>
 
@@ -250,7 +263,7 @@ if (!isset($_SESSION['id'])) {
 
                 <?php
 
-                $shorts = find_Shorts();
+                // $shorts = find_Shorts();
 
                 foreach ($shorts
 

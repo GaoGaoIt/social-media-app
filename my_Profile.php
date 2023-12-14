@@ -225,7 +225,7 @@
 
                                 <div class="gallery-items">
 
-                                    <img src="<?php echo "./assets/images/posts/" . $post['Img_Path']; ?>" alt="post" class="gallery-img">
+                                    <img src="<?php echo "./assets/images/posts/" . $post['content_path_name']; ?>" alt="post" class="gallery-img">
 
                                     <div class="gallery-item-info">
 
@@ -239,7 +239,7 @@
 
                                             <li class="gallery-items-likes"><span class="hide-gallery-elements">Opinions</span>
 
-                                                <a href="single-post.php?post_id=<?php echo $post['Post_ID']; ?>" style="color: white" target="_blank"><i class="icon fas fa-comment"></i></a>
+                                                <a href="single-post.php?post_id=<?php echo $post['content_id']; ?>" style="color: white" target="_blank"><i class="icon fas fa-comment"></i></a>
 
                                             </li>
 
@@ -261,37 +261,7 @@
 
     </div>
 
-    <!-- Model For Show Followers -->
 
-    <nav aria-label="Page navigation example" style="display:flex; justify-content: center">
-        <ul class="pagination">
-            <li class="page-item <?php if ($page_no <= 1) {
-                                        echo 'disabled';
-                                    } ?>">
-                <a class="page-link" href="<?php if ($page_no <= 1) {
-                                                echo '#';
-                                            } else {
-                                                echo '?page_no=' . ($page_no - 1);
-                                            } ?>">Previous</a>
-            </li>
-            <li class="page-item"><a class="page-link" href="?page_no=1">1</a></li>
-            <li class="page-item"><a class="page-link" href="?page_no=2">2</a></li>
-            <li class="page-item"><a class="page-link" href="?page_no=3">3</a></li>
-            <?php if ($page_no >= 3) { ?>
-                <li class="page-item"><a class="page-link" href="#">...</a></li>
-                <li class="page-item"><a class="page-link" href="<?php echo "?page_no=" . $page_no; ?>"></a></li>
-            <?php } ?>
-            <li class="page-item <?php if ($page_no >= $total_no_of_pages) {
-                                        echo 'disabled';
-                                    } ?>">
-                <a class="page-link" href="<?php if ($page_no >= $total_no_of_pages) {
-                                                echo "#";
-                                            } else {
-                                                echo "?page_no=" . ($page_no + 1);
-                                            } ?>">Next</a>
-            </li>
-        </ul>
-    </nav>
 
 </body>
 
