@@ -73,7 +73,7 @@ if(isset($_POST['button']))
         $_SESSION['img_path'] = $image;
 
         if ($user_type == 0) {
-            header("location: ./admin/index.php");
+            header("location: ./Admin/index.php");
         } else {
             header("location: home.php");
         }
