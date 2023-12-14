@@ -54,7 +54,7 @@ if(isset($_POST['posting']))
             header("location: post-uploader.php?success_message=Post Successfully updated");
         }
         else{
-            header("location: admin/index.php?success_message=Post Successfully updated");
+            header("location: Admin/index.php?success_message=Post Successfully updated");
         }
 
 

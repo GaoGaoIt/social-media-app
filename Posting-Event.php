@@ -59,7 +59,7 @@ if(isset($_POST['posting']))
             header("location: Events.php?success_message=Post Successfully updated");
         }
         else{
-            header("location: admin/index.php?success_message=Events Successfully updated");
+            header("location: Admin/index.php?success_message=Events Successfully updated");
         }
 
 
