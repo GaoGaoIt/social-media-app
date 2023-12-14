@@ -4,7 +4,7 @@ include("config.php");
 
 $user_id = $_SESSION['id'];
 
-$sql_query = "SELECT Other_user_id FROM `Fallowing` WHERE User_Id = $user_id;";
+$sql_query = "SELECT Other_user_id FROM `fallowing` WHERE User_Id = $user_id;";
 
 $stmt =  $conn->prepare($sql_query);
 
@@ -29,7 +29,7 @@ if(empty($ids))
 
 $fallowing_id = join(",",$ids);
 
-$sql_query_two = "SELECT * FROM Users WHERE User_Id NOT IN($fallowing_id) ORDER BY RAND() LIMIT 4;";
+$sql_query_two = "SELECT * FROM users WHERE User_Id NOT IN($fallowing_id) ORDER BY RAND() LIMIT 4;";
 
 $stmt = $conn->prepare($sql_query_two);
 

@@ -44,7 +44,7 @@ function fetchUserName($userId)
 {
     global $conn;
 
-    $query = "SELECT USER_NAME FROM Users WHERE User_ID = ?";
+    $query = "SELECT USER_NAME FROM users WHERE User_ID = ?";
 
     $stmt = mysqli_prepare($conn, $query);
 
@@ -74,7 +74,7 @@ function fetchUserAvatar($userId)
 {
     global $conn;
 
-    $query = "SELECT IMAGE FROM Users WHERE User_ID = ?";
+    $query = "SELECT IMAGE FROM users WHERE User_ID = ?";
 
     $stmt = mysqli_prepare($conn, $query);
 
@@ -101,7 +101,7 @@ function  fetchUserId($username)
 {
     global $conn;
 
-    $query = "SELECT User_ID FROM Users WHERE User_Name = ?";
+    $query = "SELECT User_ID FROM users WHERE User_Name = ?";
 
     $stmt = mysqli_prepare($conn, $query);
 
