@@ -8,10 +8,10 @@ if (isset($_POST['button'])) {
     $userInput = $_POST['email'];
     $passwordInput = $_POST['password'];
 
-    $sql_query = "SELECT User_ID, FULL_NAME, USER_NAME, USER_TYPE, EMAIL, IMAGE, FACEBOOK, WHATSAPP, BIO, FALLOWERS, FALLOWING, POSTS, PASSWORD_S FROM users WHERE (USER_NAME = ? OR EMAIL = ?);";
+    $sql_query = "SELECT User_ID, FULL_NAME, USER_NAME, USER_TYPE, EMAIL, IMAGE, FACEBOOK, WHATSAPP, BIO, FALLOWERS, FALLOWING, POSTS, PASSWORD_S FROM users WHERE (USER_NAME = ? OR EMAIL = ? or studentId = ?);";
 
     $stmt = $conn->prepare($sql_query);
-    $stmt->bind_param("ss", $userInput, $userInput);
+    $stmt->bind_param("sss", $userInput, $userInput, $userInput);
 
     $stmt->execute();
 
