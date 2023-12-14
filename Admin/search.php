@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $result = mysqli_query($conn, $query);
 
 
-    mysqli_free_result($result);
+    return $result;
 } else {
     echo "Error: " . mysqli_error($conn);
 }

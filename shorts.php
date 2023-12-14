@@ -154,7 +154,7 @@ if(!isset($_SESSION['id']))
 
                 foreach($posts as $post)
                 {
-                    $data = get_UserData($post['User_ID']);
+                    $data = get_UserData($post['user_id']);
 
                     $profile_img = $data[2];
 
@@ -177,8 +177,8 @@ if(!isset($_SESSION['id']))
                         </div>
 
 
-                        <video preload="none" poster="<?php echo 'assets/videos/'. $post['Thumbnail_Path']; ?>" controls class="post-source">
-                            <source src="<?php echo 'assets/videos/'.$post['Video_Path'];?>" type="video/mp4" type="video/mp4">
+                        <video preload="none" poster="<?php echo 'assets/videos/'. $post['thumnail_path_name']; ?>" controls class="post-source">
+                            <source src="<?php echo 'assets/videos/'.$post['content_path_name'];?>" type="video/mp4" type="video/mp4">
                         </video>
 
 
@@ -197,24 +197,24 @@ if(!isset($_SESSION['id']))
                                     <?php if($reaction_status){?>
 
                                         <form>
-                                            <input type="hidden" value="<?php echo $post['Video_ID'];?>" name="post_id">
+                                            <input type="hidden" value="<?php echo $post['content_id'];?>" name="post_id">
                                             <button style="background: none; border: none;" type="submit" name="reaction">
-                                                <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike(<?php echo $post['Video_ID'];?>);"></i>
+                                                <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike(<?php echo $post['content_id'];?>);"></i>
                                             </button>
                                         </form>
 
                                     <?php } else{?>
 
                                         <form>
-                                            <input type="hidden" value="<?php echo $post['Video_ID'];?>" name="post_id">
+                                            <input type="hidden" value="<?php echo $post['content_id'];?>" name="post_id">
                                             <button style="background: none; border: none;" type="submit" name="reaction">
-                                                <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like(<?php echo $post['Video_ID'];?>);"></i>
+                                                <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like(<?php echo $post['content_id'];?>);"></i>
                                             </button>
                                         </form>
 
                                     <?php }?>
 
-                                    <a href="Single-Video.php?post_id=<?php echo $post["Video_ID"];?>" style="color: #22262A;"><i class="icon fas fa-comment"></i></a>
+                                    <a href="Single-Video.php?post_id=<?php echo $post["content_id"];?>" style="color: #22262A;"><i class="icon fas fa-comment"></i></a>
 
                                 </div>
 
@@ -226,7 +226,7 @@ if(!isset($_SESSION['id']))
                                     <?php echo $post['Caption'];?>
                                 </p>
 
-                                <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_Upload']));?></p>
+                                <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_upload']));?></p>
 
                                 <p class="post-time" style="color: #0b5ed7"><?php echo $post['HashTags'];?></p>
 
@@ -237,37 +237,6 @@ if(!isset($_SESSION['id']))
 
                 <?php } ?>
 
-
-            <!--Pagination bar-->
-            <nav aria-label="Page navigation example" class="mx-auto mt-3">
-
-                <ul class="pagination">
-
-                    <li class="page-item <?php if($page_no<=1){echo 'disabled';}?>">
-
-                        <a class="page-link" href="<?php if($page_no<=1){echo'#';}else{ echo '?page_no='. ($page_no-1); }?>">Previous</a>
-
-                    </li>
-                    <li class="page-item"><a class="page-link" href="?page_no=1">1</a></li>
-
-                    <li class="page-item"><a class="page-link" href="?page_no=2">2</a></li>
-
-                    <li class="page-item"><a class="page-link" href="?page_no=3">3</a></li>
-                    <?php if($page_no >= 3){?>
-
-                        <li class="page-item"><a class="page-link" href="#">...</a></li>
-
-                        <li class="page-item"><a class="page-link" href="<?php echo "?page_no=". $page_no;?>"></a></li>
-
-                    <?php } ?>
-
-                    <li class="page-item <?php if($page_no>= $total_number_pages){echo 'disabled';}?>">
-
-                        <a class="page-link" href="<?php if($page_no>=$total_number_pages){echo "#";}else{ echo "?page_no=".($page_no+1);}?>">Next</a>
-
-                    </li>
-                </ul>
-            </nav>
         </div>
 
         <!-- Design for right column -->

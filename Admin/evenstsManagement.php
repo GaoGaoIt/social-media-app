@@ -360,12 +360,25 @@ $result = fetchEventsData();
 																				?>
 																			</td>
 																			<td class="project-actions text-right fd">
+																				<?php
+																				if($row['type'] == 'events'){
+																					echo '<a class="btn btn-info btn-sm" href="globalAction.php?specialContent=' . $row['content_id'] . '">
+																						<i class="fas fa-trash"></i> Make Special
+																					</a>';
+																				}
+																				else{
+																					echo '<a class="btn btn-warning btn-sm" href="globalAction.php?specialContent=' . $row['content_id'] . '">
+																						<i class="fas fa-trash"></i> Make Normal Events
+																					</a>';
+																				}
+																				?>
 
 																				<a class="btn btn-info btn-sm" href="globalAction.php?EditData=<?php echo $row['content_id']; ?>">
 																					<i class="fas fa-pencil-alt"></i>
 																					Edit
 																				</a>
 																				<?php
+																				
 																				if ($row['is_deleted'] == 1) {
 																					echo '<a class="btn btn-danger btn-sm" href="globalAction.php?delateData=' . $row['content_id'] . '">
 																						<i class="fas fa-trash"></i> Retore

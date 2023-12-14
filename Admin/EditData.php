@@ -352,6 +352,8 @@ $result = EditData($dataId);
                               $typeName = 'Post';
                             } elseif ($row['type'] == 'videos') {
                               $typeName = 'Video';
+                            }elseif($row['type'] == 'special'){
+                              $typeName = 'Events';
                             }
                             ?> -->
 

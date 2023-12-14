@@ -9,11 +9,13 @@ include 'function/ReusedFunction.php';
 session_regenerate_id(true);
 
 checkUserIsAdmin();
-
 $type = isset($_GET['type']) ? $_GET['type'] : null;
 $message = isset($_GET['message']) ? $_GET['message'] : null;
 alertToast($type, $message);
-$result = fetchAllReportData();
+
+
+$dataId = isset($_GET['stuID']) ? $_GET['stuID'] : null;
+$result = findStudent($dataId);
 
 
 
@@ -187,10 +189,10 @@ $result = fetchAllReportData();
                     </div>
                 </li>
                 <!-- <li class="nav-item">
-                    <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                        <i class="fas fa-th-large"></i>
-                    </a>
-                </li> -->
+					<a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
+						<i class="fas fa-th-large"></i>
+					</a>
+				</li> -->
             </ul>
         </nav>
         <!-- /.navbar -->
@@ -241,7 +243,7 @@ $result = fetchAllReportData();
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <h1 class="m-0">Student Posts Page</h1>
+                            <h1 class="m-0">Update Student Information</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -262,123 +264,72 @@ $result = fetchAllReportData();
                                 <div class="col-lg-12">
                                     <div class="">
                                         <div class="p-4">
-                                            <!-- content -->
+                                            <form action="globalAction.php" method="post">
+                                                <?php foreach ($result as $info) { ?>
 
-                                            <section class="content">
 
-                                                <div class="card">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title">Reports Management</h3>
-
+                                                    <div class="form-group row mb-4">
+                                                        <label for="name" class="col-sm-2 col-form-label">Name</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="<?php echo $info['name'] ?>">
+                                                        </div>
                                                     </div>
-                                                    <div class="card-body p-0">
-                                                        <table class="table">
-                                                            <thead>
-                                                                <tr>
-                                                                    <th style="width: 1%">
-                                                                        # ID
-                                                                    </th>
-                                                                    <th style="width: 20%;">
-                                                                        Videos IMage Link
-                                                                    </th>
-                                                                    <th style="width: 15%;">
-                                                                        Reported By
-                                                                    </th>
-                                                                    <th style="width: 15%;">
-                                                                        student profile
-                                                                    <th style="width: 10%;">
-                                                                        Report Message
-                                                                    </th>
-                                                                    <th style="width: 10%;" class="text-center">
-                                                                        Status
-                                                                    </th>
-                                                                    <th style="width: 20%">
-                                                                    </th>
-                                                                </tr>
-                                                            </thead>
-                                                            <tbody>
-
-                                                                <?php
-                                                                if (mysqli_num_rows($result) == 0) {
-                                                                    echo '<span class="text-bold text-lg pl-4">No Reports found.</span>';
-                                                                } else {
-                                                                    while ($row = $result->fetch_assoc()) {
-                                                                ?>
-                                                                        <tr>
-                                                                            <td>
-                                                                                <?php echo $row['id']; ?>
-                                                                            </td>
-                                                                            <td>
-                                                                                <?php if ($row['type'] == 'videos') : ?>
-                                                                                    <a href="../assets/images/videos/<?php echo findPostIDImage($row['POST_ID']); ?>">
-                                                                                        <button class="btn btn-info">Video link</button>
-                                                                                    </a>
-                                                                                <?php elseif($row['type'] == 'posts') : ?>
-                                                                                    <a href="../assets/images/posts/<?php echo findPostIDImage($row['POST_ID']); ?>">
-                                                                                        <button class="btn btn-info">Image link</button>
-                                                                                    </a>
-                                                                                <?php elseif($row['type'] == 'events') : ?>
-                                                                                    <a href="../assets/images/posts/<?php echo findPostIDImage($row['POST_ID']); ?>">
-                                                                                        <button class="btn btn-info">Image link</button>
-                                                                                    </a>
-                                                                                <?php endif; ?>
-
-                                                                            </td>
-                                                                            <td>
-
-                                                                                <span><?php echo fetchUserName($row['USER_ID']) ?></span>
-                                                                            </td>
-                                                                            <td>
-                                                                                <img alt="Avatar" class="table-avatar" <?php echo 'src="../assets/images/profiles/' . fetchUserAvatar($row['USER_ID']) . '""' ?> style="width: 60px;  height: 60px;">
-                                                                            </td>
-                                                                            <td>
-                                                                                <span class="" style="padding: 10px;"><?php echo $row['message'] ?></span>
-                                                                            </td>
-
-
-
-                                                                            <!-- Add similar code for other columns based on your database structure -->
-                                                                            <td class="project-state">
-                                                                                <?php
-                                                                                if (checkContentStatus($row['POST_ID']) == 'PUBLISH') {
-                                                                                    echo '<span class="badge badge-success p-3">' . checkContentStatus($row['POST_ID']) . '</span>';
-                                                                                } else {
-                                                                                    echo '<span class="badge badge-danger p-3">' . checkContentStatus($row['POST_ID']) . '</span>';
-                                                                                }
-                                                                                ?>
-                                                                            </td>
-                                                                            <td class="project-actions text-right fd">
-
-                                                                                <?php
-                                                                                if ($row['is_deleted'] == 1) {
-                                                                                    echo '<a class="btn btn-danger btn-sm" href="globalAction.php?delateData=' . $row['POST_ID'] . '">
-                                                                                        <i class="fas fa-trash"></i> Retore
-                                                                                    </a>';
-                                                                                } else {
-                                                                                    echo '<a class="btn btn-danger btn-sm" href="globalAction.php?delateData=' . $row['POST_ID'] . '">
-                                                                                        <i class="fas fa-trash"></i> Block
-                                                                                    </a>';
-                                                                                }
-                                                                                ?>
-                                                                            </td>
-                                                                        </tr>
-                                                                <?php
-                                                                    }
-                                                                }
-                                                                ?>
-
-                                                            </tbody>
-                                                        </table>
+                                                    <div class="form-group row mb-4">
+                                                        <label for="IC" class="col-sm-2 col-form-label">Student IC</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="Student IC" name="ic" placeholder="Student IC" value="<?php echo $info['studentIC'] ?>">
+                                                        </div>
                                                     </div>
 
-                                                </div>
+                                                    <div class="form-group row mb-4">
+                                                        <label for="course" class="col-sm-2 col-form-label">Course</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="course" name="course" placeholder="Course" value="<?php echo $info['course'] ?>">
+                                                        </div>
+                                                    </div>
 
-                                            </section>
+                                                    <div class="form-group row mb-4">
+                                                        <label for="teacher" class="col-sm-2 col-form-label">Teacher</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="text" class="form-control" id="teacher" name="teacher" placeholder="Teacher" value="<?php echo $info['teacherID'] ?>">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-4">
+                                                        <label for="gender" class="col-sm-2 col-form-label">Gender</label>
+                                                        <div class="col-sm-10">
+                                                            <select class="form-control" id="gender" name="gender">
+                                                                <option value="male" <?php echo ($info['gender'] == 'male') ? 'selected' : ''; ?>>Male</option>
+                                                                <option value="female" <?php echo ($info['gender'] == 'female') ? 'selected' : ''; ?>>Female</option>
+                                                            </select>
+
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group row mb-4">
+                                                        <label for="intake" class="col-sm-2 col-form-label">Intake Date</label>
+                                                        <div class="col-sm-10">
+                                                            <input type="date" class="form-control" id="intake" name="intake" placeholder="Intake Date" value="<?php echo $info['intake_Date'] ?>">
+                                                        </div>
+                                                    </div>
+                                                    <input type="hidden" name="stuID" value="<?php echo $info['id'] ?>">
+
+                                                    <div class="form-group row">
+                                                        <div class="col-sm-10 offset-sm-2">
+                                                            <button type="submit" class="btn btn-primary" name="update">Update Student Information</button>
+                                                        </div>
+                                                    </div>
+
+                                                <?php } ?>
+
+                                            </form>
+
 
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
                     </section>
 
 
@@ -386,6 +337,17 @@ $result = fetchAllReportData();
             </section>
 
         </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2023-2024 <a href="#">Sam & Jing Yee</a>.</strong>
+            All rights reserved.
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
     </div>
     <!-- ./wrapper -->
 

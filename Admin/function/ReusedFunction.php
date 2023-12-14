@@ -23,8 +23,7 @@ function fetchAllData()
 {
     global $conn;
 
-    $query = "SELECT * 
-            FROM pivot_content_data";
+    $query = "SELECT * FROM pivot_content_data ORDER BY Date_upload DESC";
 
     $stmt = mysqli_prepare($conn, $query);
 
@@ -245,7 +244,7 @@ function fetchEventsData()
 
     $query = "SELECT * 
             FROM pivot_content_data
-            WHERE type = 'events' AND user_type = 1";
+            WHERE type = 'events' OR type = 'special' AND user_type = 1";
 
     $stmt = mysqli_prepare($conn, $query);
 
@@ -463,7 +462,10 @@ function fetchAllReportData()
     global $conn;
 
     $query = "SELECT * 
-            FROM reports";
+            FROM reports where status = 'PUBLISH'";
+
+
+
 
     $stmt = mysqli_prepare($conn, $query);
 
@@ -508,7 +510,7 @@ function findPostIDImage($id)
     }
 }
 
-function  checkContentStatus($id)
+function checkContentStatus($id)
 {
     global $conn;
 
@@ -516,21 +518,40 @@ function  checkContentStatus($id)
 
     $stmt = mysqli_prepare($conn, $query);
 
-    if ($stmt) {
-        mysqli_stmt_bind_param($stmt, "i", $id);
-        mysqli_stmt_execute($stmt);
-
-        $result = mysqli_stmt_get_result($stmt);
-
-        if ($row = mysqli_fetch_assoc($result)) {
-            // Assuming content_path_name is the column you want to return
-            return $row['status'];
-        }
-    } else {
+    if (!$stmt) {
         echo "Error: " . mysqli_error($conn);
         return null; // Return null in case of an error
     }
+
+    mysqli_stmt_bind_param($stmt, "i", $id);
+    mysqli_stmt_execute($stmt);
+
+    $result = mysqli_stmt_get_result($stmt);
+
+    if ($row = mysqli_fetch_assoc($result)) {
+        $newStatus = $row['status'];
+
+        // Update the status in the 'reports' table
+        $update_query = "UPDATE reports SET status = ? WHERE POST_ID = ?";
+        $update_stmt = mysqli_prepare($conn, $update_query);
+
+        if ($update_stmt) {
+            mysqli_stmt_bind_param($update_stmt, "si", $newStatus, $id);
+            mysqli_stmt_execute($update_stmt);
+            mysqli_stmt_close($update_stmt);
+        } else {
+            echo "Error updating status in 'reports' table: " . mysqli_error($conn);
+        }
+
+        mysqli_stmt_close($stmt);
+
+        return $newStatus;
+    } else {
+        mysqli_stmt_close($stmt);
+        return null; // Return null if no result is found
+    }
 }
+
 
 
 
@@ -583,4 +604,169 @@ function createStudentProfile($name, $course, $teacherId, $studentIc, $gender, $
     // Close the statement and connection
     $stmt->close();
     $conn->close();
+}
+
+function updateStudentProfile($name, $course, $teacherId, $studentIc, $gender, $intake_Date, $id)
+{
+    global $conn;
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $sql = "UPDATE students SET studentsID = ?, name = ?, course = ?, teacherID = ?, studentIC = ?, gender = ?, intake_Date = ? where id = $id";
+
+    $stmt = $conn->prepare($sql);
+
+    $studentId = generateStudentID($intake_Date, $studentIc);
+
+    $stmt->bind_param("ssssiss", $studentId, $name, $course, $teacherId, $studentIc, $gender, $intake_Date);
+
+    $stmt->execute();
+
+    if ($stmt->error) {
+        echo "Error: " . $stmt->error;
+    } else {
+        echo "Student profile updated successfully!";
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
+}
+
+
+
+function fetchAllStudent()
+{
+    global $conn;
+
+    $query = "SELECT * FROM students";
+
+    // Prepare the SQL statement
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        // Execute the prepared statement
+        mysqli_stmt_execute($stmt);
+
+        // Get the result set from the prepared statement
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Close the prepared statement
+        mysqli_stmt_close($stmt);
+
+        return $result;
+    } else {
+        // If there's an error with the prepared statement, handle it here
+        echo "Error: " . mysqli_error($conn);
+        return null; // Return null in case of an error
+    }
+}
+function findStudent($name)
+{
+    global $conn;
+
+    $query = "SELECT * FROM students where name = '$name'";
+    // Prepare the SQL statement
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        // Execute the prepared statement
+        mysqli_stmt_execute($stmt);
+
+        // Get the result set from the prepared statement
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Close the prepared statement
+        mysqli_stmt_close($stmt);
+
+        return $result;
+    } else {
+        // If there's an error with the prepared statement, handle it here
+        echo "Error: " . mysqli_error($conn);
+        return null; // Return null in case of an error
+    }
+}
+
+function findStudentUsers($name)
+{
+    global $conn;
+
+    // Use a placeholder in the query for the LIKE comparison
+    $query = "SELECT * FROM students WHERE name LIKE CONCAT('%', ?, '%')";
+
+    // Prepare the SQL statement
+    $stmt = mysqli_prepare($conn, $query);
+
+    if ($stmt) {
+        // Bind the parameter
+        mysqli_stmt_bind_param($stmt, "s", $name);
+
+        // Execute the prepared statement
+        mysqli_stmt_execute($stmt);
+
+        // Get the result set from the prepared statement
+        $result = mysqli_stmt_get_result($stmt);
+
+        // Close the prepared statement
+        mysqli_stmt_close($stmt);
+
+        return $result;
+    } else {
+        // If there's an error with the prepared statement, handle it here
+        echo "Error: " . mysqli_error($conn);
+        return null; // Return null in case of an error
+    }
+}
+
+
+function updateEventType($id)
+{
+    global $conn;
+    $checkQuery = "SELECT type  FROM pivot_content_data WHERE content_id = ?";
+    $checkStmt = mysqli_prepare($conn, $checkQuery);
+
+    if ($checkStmt) {
+        mysqli_stmt_bind_param($checkStmt, "i", $id);
+        mysqli_stmt_execute($checkStmt);
+        mysqli_stmt_store_result($checkStmt);
+        mysqli_stmt_bind_result($checkStmt, $status);
+
+        if (mysqli_stmt_fetch($checkStmt)) {
+
+
+
+            $newStatus = $status == 'events' ? 'special' : 'events';
+
+            $updateQuery = "UPDATE pivot_content_data SET type = ? WHERE content_id = ?";
+            $updateStmt = mysqli_prepare($conn, $updateQuery);
+
+            if ($updateStmt) {
+                mysqli_stmt_bind_param($updateStmt, "si", $newStatus, $id);
+                $success = mysqli_stmt_execute($updateStmt);
+
+                if ($success) {
+                    mysqli_stmt_close($updateStmt);
+                    mysqli_stmt_free_result($checkStmt);
+                    mysqli_stmt_close($checkStmt);
+
+                    alertToast(true, 'Updating Successfully');
+                } else {
+                    $error = "Error updating record: " . mysqli_stmt_error($updateStmt);
+                    mysqli_stmt_close($updateStmt);
+                    return $error;
+                }
+            } else {
+                $error = "Error preparing update statement: " . mysqli_error($conn);
+                return $error;
+            }
+        } else {
+            echo "No record found for the given ID.";
+            alertToast(false, "Record not found for the given ID.");
+        }
+    } else {
+        $error = "Error checking record: " . mysqli_error($conn);
+        return $error;
+    }
 }

@@ -52,6 +52,16 @@ $studentCount = studentCount();
   <!-- sweetAlert -->
   <link rel="stylesheet" href="plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.css">
 
+  <style>
+    .card-media {
+      width: 100%;
+      height: 300px;
+      /* Set a fixed height for all elements with this class */
+      object-fit: cover;
+      /* Optional: Maintain aspect ratio and cover the container */
+    }
+  </style>
+
 
 </head>
 
@@ -254,41 +264,50 @@ $studentCount = studentCount();
 
                         while ($row = mysqli_fetch_assoc($result)) {
                           echo '<div class="col-sm-6 col-lg-4 mb-4">'; // Bootstrap column
-
-                          echo '<div class="card">';
+                          echo '<div class="card" style="width: 100%; height:600px; display: flex; flex-direction: column;">';
 
                           switch ($row['type']) {
                             case 'posts':
-                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-img-top img-thumbnail" alt="...">';
+                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-media card-img-top img-thumbnail" alt="...">';
                               break;
 
                             case 'videos':
-                              echo '<video preload="none" poster="../assets/videos/' . $row['thumnail_path_name'] . '" controls class="card-img-top img-thumbnail">';
+                              echo '<video preload="none" poster="../assets/videos/' . $row['thumnail_path_name'] . '" controls class="card-media card-img-top img-thumbnail">';
                               echo '<source src="../assets/videos/' . $row['content_path_name'] . '" type="video/mp4">';
                               echo '</video>';
                               break;
 
                             case 'events':
-                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-img-top img-thumbnail" alt="...">';
+                              echo '<img src="../assets/images/posts/' . $row['content_path_name'] . '" class="card-media card-img-top img-thumbnail" alt="...">';
                               echo '<div class="p-4 event-details">';
-                              echo '<p class="card-text">Event Will Be Held On: ' . $row['Event_Date'] . ' At: ' . $row['Event_Time'] . '</p>';
-                              echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary">Invite Link</button></a>';
+                              echo '<p class="card-text">Event Start On: ' . $row['Event_Date'] . ' At: ' . $row['Event_Time'] . '</p>';
+                              echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary w-50">Invite Link</button></a>';
                               echo '</div>';
                               break;
                           }
 
-                          echo '<div class="card-body">';
+                          echo '<div class="card-body" style="flex-grow: 1;">'; // Set flex-grow to 1 for the body to grow and fill the remaining space
                           echo '<h5 class="card-text">' . $row['Caption'] . '</h5>';
                           echo '<p class="card-text">Created By ' . fetchUserName($row['user_id']) . '</p>';
-                          echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary">suppand</button></a>';
-                          echo '</div>';
+
+                         
 
                           echo '</div>';
-
-                          echo '</div>'; // Close Bootstrap column
+                          echo '<div class="p-4">';
+                          if ($row['is_deleted'] == 1) {
+                            echo '<a class="btn btn-success mt-auto w-100" href="globalAction.php?delateData=' . $row['content_id'] . '">
+                                  <i class="fas fa-trash"></i> Restore
+                              </a>';
+                          } else {
+                            echo '<a class="btn btn-danger mt-auto w-100" href="globalAction.php?delateData=' . $row['content_id'] . '">
+                                  <i class="fas fa-trash"></i> Block
+                              </a>';
+                          }
+                          echo '</div>';
+                          echo '</div>';
+                          echo '</div>';
                         }
-
-                        echo '</div>'; // Close Bootstrap row
+                        echo '</div>';
                         mysqli_free_result($result);
                       } else {
                         echo "Error: " . mysqli_error($conn);
