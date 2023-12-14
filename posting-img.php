@@ -51,7 +51,7 @@ if(isset($_POST['posting']))
 
         if(!$_SESSION['usertype'] == '0'){
 
-            header("location: post-uploader.php?success_message=Post Successfully updated");
+            header("location: home.php?success_message=Post Successfully updated");
         }
         else{
             header("location: Admin/index.php?success_message=Post Successfully updated");
