@@ -74,7 +74,7 @@ if (isset($_POST['signup_btn'])) {
             exit;
         } else {
 
-            $sql_query = "SELECT studentsID FROM students WHERE studentId = $studentId;";
+            $sql_query = "SELECT studentsID FROM students WHERE studentsID = $studentId;";
 
             $stmt = $conn->prepare($sql_query);
 
