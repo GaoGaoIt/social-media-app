@@ -26,7 +26,8 @@ if (!isset($_SESSION['id'])) {
 
     <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" /> -->
 
-
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -98,27 +99,8 @@ if (!isset($_SESSION['id'])) {
 
 <body>
     <?php
-    require 'component/header.php'
+    require 'component/noSearchHeader.php'
     ?>
-    <!-- <div class="container">
-
-    <nav class="navbar">
-
-        <div class="nav-wrapper">
-
-            <img src="assets/images/black_logo.png" class="brand-img" id="logo-img">
-
-            <div class="nav-items">
-
-                <div class="icon user-profile">
-
-                    <a href="my_Profile.php" style="text-transform: none; color: #1c1f23;"><i class="fas fa-user-circle fa-lg"></i></a>
-
-                </div>
-
-            </div>
-
-        </div> -->
 
     <?php
 
@@ -303,9 +285,8 @@ if (!isset($_SESSION['id'])) {
             </ul>
         </div>
     </div>
+</div>
 
-
-    </div>
 
 </body>
 
