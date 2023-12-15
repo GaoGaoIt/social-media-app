@@ -14,9 +14,7 @@ if (isset($_POST['signup_btn'])) {
     $studentId = $_POST['studentId'];
 
     if ($student_validator = student_id_validator($studentId)) {
-        echo $student_validator;
-        exit;
-        if (!$student_validator) {
+        if ($student_validator) {
             if (!user_exists($studentId)) {
                 $password = randomPassword();
                 $result = create_user($email_address, $studentId, $password);
