@@ -122,7 +122,7 @@
                         <div class="gallery">
 
                             <?php foreach ($posts as $post) { ?>
-                            <div class="gallery-items pt-4">
+                            <div class="gallery-items " style="margin-top: 16px;">
 
                                 <img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" alt="post"
                                      class="gallery-img">
