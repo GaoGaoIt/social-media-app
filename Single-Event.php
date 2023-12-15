@@ -315,7 +315,7 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-body">
 
-                                    <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit-comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
+                                    <i class="fa-solid fa-pen-to-square options" data-bs-toggle="modal" data-bs-target="#edit-comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
 
                                     <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Opinion</a>
                                 </div>
@@ -362,7 +362,7 @@ session_regenerate_id(true);
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal" data-comment-id="<?php echo $comment['COMMENT_ID']; ?>"></i>
+                                            <i class="fas fa-ellipsis-v " data-bs-toggle="modal" data-bs-target="#Comment-Modal" data-comment-id="<?php echo $comment['COMMENT_ID']; ?>"></i>
 
                                         <?php } ?>
 
