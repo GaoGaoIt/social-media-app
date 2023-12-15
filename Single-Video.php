@@ -211,7 +211,7 @@ session_regenerate_id(true);
                         </div>
 
                         <video id="my-video" class="video-js vjs-theme-sea post-source" controls preload="none" data-setup="{}" poster="<?php echo 'assets/videos/' . $post['thumnail_path_name']; ?>">
-                            <source src="<?php echo 'assets/videos/' . $post['content_path_name']; ?>" type="video/mp4" />
+                            <source src="<?php echo 'assets/videos/' . $post['content_path_name']; ?>" />
                             <p class="vjs-no-js">
                                 To view this video please enable JavaScript, and consider upgrading to a
                                 web browser that
