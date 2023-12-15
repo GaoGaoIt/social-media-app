@@ -449,7 +449,7 @@ session_regenerate_id(true);
                                 <form method="post" action="Edit-Comment-Event.php">
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Your Opinion</label>
-                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $tagetComment; ?></textarea>
+                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"></textarea>
                                     </div>
 
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
