@@ -125,7 +125,7 @@ session_regenerate_id(true);
 
 
 
-    $stmt = $conn->prepare("SELECT * FROM comments WHERE POST_ID = $post_identification ORDER BY COMMENT_ID DESC ");
+    $stmt = $conn->prepare("SELECT * FROM comments_events WHERE Event_ID = $post_identification ORDER BY COMMENT_ID DESC ");
 
     $stmt->execute();
 
