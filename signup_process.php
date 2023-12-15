@@ -60,7 +60,7 @@ if (isset($_POST['signup_btn'])) {
     if (!$student_validator == '0') {
         // user availibility check in the system
 
-        $sql_query = "SELECT studentId FROM students WHERE studentsID = $studentId;";
+        $sql_query = "SELECT studentId FROM users WHERE studentId = $studentId;";
 
         $stmt = $conn->prepare($sql_query);
 
@@ -68,18 +68,22 @@ if (isset($_POST['signup_btn'])) {
 
         $stmt->store_result();
 
-        if ($stmt->num_rows() > 0 ) {
+        if ($stmt->num_rows() > 0) {
             header('location: create-account.php?error_message=Your Email  Account already register on System');
 
             exit;
         } else {
+
+            $sql_query = "SELECT studentsID FROM students WHERE studentId = $studentId;";
+
+            $stmt = $conn->prepare($sql_query);
+
+            $stmt->execute();
+
+            $stmt->store_result();
+            if(!$stmt->num_rows() > 0){
+
             $encrypted_password = password_hash($password, PASSWORD_DEFAULT);
-            // echo $encrypted_password;
-            // echo '<br>';
-            // echo ' 364a5330969e96933cec7c9e29fdcfd3';
-            // echo '<br>';
-            // echo $password;
-            // exit;
 
             $insert_query = "INSERT INTO users (FULL_NAME,USER_NAME,USER_TYPE,PASSWORD_S,EMAIL,IMAGE,FACEBOOK,WHATSAPP,BIO,FALLOWERS,FALLOWING,POSTS, studentId) VALUES
 
@@ -125,9 +129,9 @@ if (isset($_POST['signup_btn'])) {
                 $_SESSION['temp_password'] = $password;
 
                 mailer($email_address, $password, $user_name, $full_name);
-                
-                
-
+            }else{
+                header('location: create-account.php?error_message=Your Email  Account already register on System');
+            }
             } else {
 
                 header("location: create-account.php?error_message=error occurred #008");
@@ -152,7 +156,7 @@ function userName()
 }
 
 function full_name($email)
-{   
+{
     $username = strstr($email, '@', true);
 
     return $username;
