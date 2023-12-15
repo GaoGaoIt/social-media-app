@@ -40,7 +40,7 @@
 <!-- Nav Bar Design -->
 
 <?php
-    require 'component/header.php';
+    require 'component/noSearchHeader.php';
 ?>
 <!-- design photo gallery -->
 

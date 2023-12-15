@@ -9,10 +9,8 @@
 
             <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>
             
-            <i class="icon fas fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#search-model"></i>
-
                 
-             <div class="dropdown">
+            <div class="dropdown">
                 <i class="icon fas fa-plus-square fa-lg"></i>
                 <div class="dropdown-menu custom-dropdown" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="post-uploader.php">Add Post</a>
