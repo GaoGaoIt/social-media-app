@@ -72,7 +72,7 @@
 
             $search_input = $_POST['find'];
 
-            $SQL = "SELECT * FROM posts WHERE Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
+            $SQL = "SELECT * FROM pivot_content_data WHERE Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
 
             $stmt = $conn->prepare($SQL);
 
@@ -82,7 +82,7 @@
         } else {
             $search_input = "car";
 
-            $stmt = $conn->prepare("SELECT * FROM posts WHERE Caption like ? OR HashTags like ? limit 12");
+            $stmt = $conn->prepare("SELECT * FROM pivot_content_data WHERE Caption like ? OR HashTags like ? limit 12");
 
             $stmt->bind_param("ss", strval("%" . $search_input . "%"), strval("%" . $search_input . "%"));
 
