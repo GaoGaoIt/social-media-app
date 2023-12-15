@@ -358,6 +358,7 @@ session_regenerate_id(true);
                                         <?php
 
                                         $id = $_SESSION['id'];
+                                        echo $id;
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
@@ -453,7 +454,7 @@ session_regenerate_id(true);
 
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Event_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post_identification ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="edit-comment">Edit Your Opinion</button>
                                 </form>
@@ -475,7 +476,7 @@ session_regenerate_id(true);
                                 <form action="Delete_Event_Comment.php" method="post">
 
                                     <input type="hidden" name="post_id" value="<?php echo $post_identification; ?>">
- ?>
+
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="drop_comments">Drop Comment</button>
