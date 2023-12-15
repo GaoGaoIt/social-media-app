@@ -75,7 +75,7 @@ if(isset($_POST['posting']))
 }
 else
 {
-    header("location: post-uploader.php?error_message=Error Occurred, try again2 - ERROR #009");
+    header("location: Event-Upload.php");
 
     exit;
 }

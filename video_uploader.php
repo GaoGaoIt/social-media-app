@@ -95,7 +95,7 @@ if(isset($_POST['posting']))
 }
 else
 {
-    header("location: video_upload.php?error_message=Error Occurred, try again2 - ERROR #009");
+    header("location: video_upload.php");
 
     exit;
 }
