@@ -1,3 +1,4 @@
+
 <?php  include('Results_Provider.php'); ?>
 
 <!DOCTYPE html>
@@ -123,7 +124,7 @@
                             <?php foreach ($posts as $post) { ?>
                             <div class="gallery-items">
 
-                                <img src="<?php echo "assets/images/posts/" . $post['Img_Path']; ?>" alt="post"
+                                <img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" alt="post"
                                      class="gallery-img">
 
                                 <div class="gallery-item-info">
