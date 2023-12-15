@@ -247,7 +247,7 @@ if (!isset($_SESSION['id'])) {
                                 echo '</button>';
                                 echo '</form>';
                             }
-                            echo '<a href="single-post.php?post_id=' . $post["content_id"] . '" style="color: #22262A;"><i class="icon fas fa-comment fa-lg"></i></a>';
+                            echo '<a href="Single-Event.php?post_id=' . $post["content_id"] . '" style="color: #22262A;"><i class="icon fas fa-comment fa-lg"></i></a>';
                             echo '</div>';
                             echo '<p class="reactions" id="reactions_' . $post['content_id'] . '">' . $post['Likes'] . 'Reactions</p>';
                             echo '<p class="description">';

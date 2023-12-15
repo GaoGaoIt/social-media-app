@@ -127,35 +127,11 @@ session_regenerate_id(true);
         exit;
     }
 
-    if (isset($_GET['page_no']) && $_GET['page_no'] != "") {
-        $page_no = $_GET['page_no'];
-    } else {
-        $page_no = 1;
-    }
 
-    $sql = "SELECT COUNT(*) as total_comments FROM comments_events WHERE Event_ID = $post_identification";
 
-    $stmt = $conn->prepare($sql);
 
-    $stmt->execute();
 
-    $total_comments = 0;
-
-    $stmt->bind_result($total_comments);
-
-    $stmt->store_result();
-
-    $stmt->fetch();
-
-    $total_comments_per_page = 20;
-
-    $offest = ($page_no - 1) * $total_comments_per_page;
-
-    // that php ceil function return rounded numbers
-
-    $total_number_pages = ceil($total_comments / $total_comments_per_page);
-
-    $stmt = $conn->prepare("SELECT * FROM comments_events WHERE Event_ID = $post_identification ORDER BY COMMENT_ID DESC LIMIT $offest, $total_comments_per_page;");
+    $stmt = $conn->prepare("SELECT * FROM comments_events WHERE Event_ID = $post_identification ORDER BY COMMENT_ID DESC;");
 
     $stmt->execute();
 
