@@ -534,7 +534,7 @@ session_regenerate_id(true);
 
         $.ajax({
             type: "post",
-            url: "comments_action.php",
+            url: "comments_action_event.php",
             data: {
                 'post_id': post_id,
                 'comment': comment,
