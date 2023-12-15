@@ -60,7 +60,7 @@ if (isset($_POST['signup_btn'])) {
     if (!$student_validator == '0') {
         // user availibility check in the system
 
-        $sql_query = "SELECT studentId FROM users WHERE studentId = $studentId;";
+        $sql_query = "SELECT studentId FROM students WHERE studentsID = $studentId;";
 
         $stmt = $conn->prepare($sql_query);
 
