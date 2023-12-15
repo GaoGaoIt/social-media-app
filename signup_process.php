@@ -139,9 +139,9 @@ function student_id_validator($studentId)
     $cleanedStudentId = preg_replace("/[^a-zA-Z0-9]/", "", $studentId);
     $pattern = '/^' . $acceptedPrefix . '-\d{4}-\d{4}$/';
     if (preg_match($pattern, $cleanedStudentId)) {
-        return 1; // Valid student ID
+        return 0; // Valid student ID
     } else {
-        return 0; // Invalid student ID
+        return 1; // Invalid student ID
     }
 }
 
