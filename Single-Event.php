@@ -315,7 +315,7 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-body">
 
-                                    <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit-comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
+                                    <i class="fa-solid fa-pen-to-square options" data-bs-toggle="modal" data-bs-target="#edit-comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
 
                                     <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Opinion</a>
                                 </div>
@@ -362,7 +362,7 @@ session_regenerate_id(true);
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"><?php $tagetComment = $comment['COMMENT_ID'] ?></i>
+                                            <i class="fas fa-ellipsis-v " data-bs-toggle="modal" data-bs-target="#Comment-Modal" data-comment-id="<?php echo $comment['COMMENT_ID']; ?>"></i>
 
                                         <?php } ?>
 
@@ -449,10 +449,10 @@ session_regenerate_id(true);
                                 <form method="post" action="Edit-Comment-Event.php">
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Your Opinion</label>
-                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $tagetComment; ?></textarea>
+                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment" required></textarea>
                                     </div>
 
-                                    <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
+                                    <input type="hidden" id="edit-comment-id" name="comment_id" value="">
 
                                     <input type="hidden" name="post_id" value="<?php echo $post_identification ?>">
 
@@ -472,7 +472,7 @@ session_regenerate_id(true);
                                 <p class="h6">
                                     Think twice before removing your comment from the section because it may be beneficial for planning the greatest events ☹️
                                 </p>
-                                
+
                                 <form action="Delete_Event_Comment.php" method="post">
 
                                     <input type="hidden" name="post_id" value="<?php echo $post_identification; ?>">
@@ -605,6 +605,16 @@ session_regenerate_id(true);
 
     $(document).bind("contextmenu", function(e) {
         return false;
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('.options').on('click', function () {
+            var commentId = $(this).data('comment-id');
+            $('#edit-comment-id').val(commentId);
+            $('#edit-comment').modal('show');
+        });
     });
 </script>
 

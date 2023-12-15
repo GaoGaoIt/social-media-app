@@ -12,10 +12,10 @@ if (isset($_POST['edit-comment'])) {
 
     $comment = $_POST['comment'];
 
-    echo  $comment_id ;
-    exit;
+    // echo  $comment_id ;
+    // exit;
 
-    // Update_Comment($post_id, $comment, $comment_id);
+    Update_Comment($post_id, $comment, $comment_id);
 } 
 function Update_Comment($post_id, $post_comment, $comment_id)
 {
