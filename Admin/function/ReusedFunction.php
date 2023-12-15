@@ -663,11 +663,11 @@ function fetchAllStudent()
         return null; // Return null in case of an error
     }
 }
-function findStudent($name)
+function findStudent($id)
 {
     global $conn;
 
-    $query = "SELECT * FROM students where name = '$name'";
+    $query = "SELECT * FROM students where id = $id";
     // Prepare the SQL statement
     $stmt = mysqli_prepare($conn, $query);
 

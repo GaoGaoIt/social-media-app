@@ -1,5 +1,13 @@
 <?php
-echo ini_get('post_max_size');
+require 'init.php';
+
+if($_SESSION['usertype'] == 0){
+  header("Location: Admin/index.php");
+}elseif($_SESSION['usertype'] == 1){
+  header("Location: home.php");
+}else{
+  header("Location: index.php");
+}
 
 ?>
 <html lang="en">

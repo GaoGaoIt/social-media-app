@@ -473,7 +473,7 @@ if ($result->num_rows > 0) {
 
                     <div class="container-fluid">
 
-                        <div class="row" class="rounded" id="specialEvent_1">
+                        <div class="row rounded" id="specialEvent_1">
                             <div class="eventBox" id="specialEventBox_1">
                                 <div id="specialEventBox_1-1"></div>
                                 <div id="specialEventBox_1-2"></div>
@@ -487,7 +487,7 @@ if ($result->num_rows > 0) {
                             </div>
                         </div>
 
-                        <div class="row" class="rounded" id="specialEvent_2">
+                        <div class="row rounded"  id="specialEvent_2">
                             <div class="eventBox" id="specialEventBox_2">
                                 <div id="specialEventBox_2-1"></div>
                                 <div id="specialEventBox_2-2"></div>
@@ -501,7 +501,7 @@ if ($result->num_rows > 0) {
                             </div>
                         </div>
 
-                        <div class="row" class="rounded" id="specialEvent_3">
+                        <div class="row rounded"  id="specialEvent_3">
                             <div class="eventBox" id="specialEventBox_3">
                                 <div id="specialEventBox_3-1"></div>
                                 <div id="specialEventBox_3-2"></div>
@@ -515,7 +515,7 @@ if ($result->num_rows > 0) {
                             </div>
                         </div>
 
-                        <div class="row" class="rounded" id="specialEvent_4">
+                        <div class="row rounded"  id="specialEvent_4">
                             <div class="eventBox" id="specialEventBox_4">
                                 <div id="specialEventBox_4-1"></div>
                                 <div id="specialEventBox_4-2"></div>
@@ -550,13 +550,14 @@ if ($result->num_rows > 0) {
         const nextday_4 = document.getElementById("nextdayEvent_4");
 
         const specialday_1 = document.getElementById("specialEvent_1");
-        const specialday_2 = document.getElementById("speciaElvent_2");
+        const specialday_2 = document.getElementById("specialEvent_2");
         const specialday_3 = document.getElementById("specialEvent_3");
         const specialday_4 = document.getElementById("specialEvent_4");
 
         var numberofEventsToday = '<?= $numberofEventsToday ?>';
         var numberofEventsNextday = '<?= $numberofEventsNextday ?>';
         var numberofSpecialEvents = '<?= $numberofSpecialEvents ?>';
+        console.log('<?= $numberofSpecialEvents ?>');
 
 
         //today events logic-------------------------------------------------------------------------------------
@@ -673,6 +674,7 @@ if ($result->num_rows > 0) {
             specialday_3.remove();
             specialday_4.remove();
         }
+
         if (numberofSpecialEvents == 1) {
             specialday_2.remove();
             specialday_3.remove();
