@@ -430,7 +430,7 @@ session_regenerate_id(true);
                                     Think twice before removing your comment from the section because it may be beneficial for planning the greatest events ☹️
                                 </p>
 
-                                <form action="Delete_Normal_Comment.php" method="post">
+                                <form action="Delete_Event_Comment.php" method="post">
 
                                     <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
 
