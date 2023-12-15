@@ -28,11 +28,12 @@ function Drop_Comment($comment_id, $post_id)
     $SQL = "DELETE FROM comments_events WHERE COMMENT_ID = $comment_id";
 
     $stmt = $conn->prepare($SQL);
+    echo $post_id;
+    exit;
 
     if ($stmt->execute())
     {
-        echo $post_id;
-        exit;
+        
 
         header("Location: Single-Event.php?post_id=$post_id&success_message=Opinion Successfully Dropped");
         exit;
