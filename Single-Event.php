@@ -358,11 +358,11 @@ session_regenerate_id(true);
                                         <?php
 
                                         $id = $_SESSION['id'];
-                                        echo 'useris'. $id;
+                                        // echo 'useris'. $id;
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"></i>
+                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"><?php echo $comment['COMMENT_ID'] ?></i>
 
                                         <?php } ?>
 
