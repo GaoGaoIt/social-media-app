@@ -139,11 +139,14 @@ function student_id_validator($studentId)
     $cleanedStudentId = preg_replace("/[^a-zA-Z0-9]/", "", $studentId);
     $pattern = '/^' . $acceptedPrefix . '-\d{4}-\d{4}$/';
     if (preg_match($pattern, $cleanedStudentId)) {
-        return 0;
+        return 1; // Valid student ID
     } else {
-        return 1;
+        return 0; // Invalid student ID
     }
 }
+
+
+
 
 function mailer($sending_address, $password, $user_name, $full_name)
 {
