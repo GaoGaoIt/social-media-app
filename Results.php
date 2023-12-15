@@ -122,7 +122,7 @@
                         <div class="gallery">
 
                             <?php foreach ($posts as $post) { ?>
-                            <div class="gallery-items">
+                            <div class="gallery-items pt-4">
 
                                 <img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" alt="post"
                                      class="gallery-img">
@@ -237,7 +237,7 @@
                         <div class="search-result-item-button">
 
                             <button class="btn btn-outline-primary" style="background: white none;">
-                                <a href="Single-Event.php?post_id=<?php echo $event['Event_ID']; ?>" style="text-decoration: none; font-weight: bold;" target="_blank">
+                                <a href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>" style="text-decoration: none; font-weight: bold;" target="_blank">
                                     View Event
                                 </a>
                             </button>
@@ -272,14 +272,14 @@
 
                     <li class="list-group-item search-result-item">
 
-                        <img src="<?php echo 'assets/videos/'. $video['Thumbnail_Path']; ?>" alt="profile-image">
+                        <img src="<?php echo 'assets/videos/'. $video['thumnail_path_name']; ?>" alt="profile-image">
 
                         <div class="profile_card" style="margin-left: 20px;">
 
                             <div>
                                 <p class="username"
 
-                                   <?php $vid_data = "Single-Video.php?post_id= ".$video['Video_ID'];?>
+                                   <?php $vid_data = "Single-Video.php?post_id= ".$video['content_id'];?>
 
                                     <?php $new_string =  mb_strimwidth($video['Caption'], 0, 200, "....<br><a href='$vid_data'> Read More</a>");?>
 
@@ -293,7 +293,7 @@
 
                             <button class="btn btn-outline-primary" style="background: white none;">
                                 <a style="font-weight: bold; text-decoration: none;"
-                                   href="Single-Video.php?post_id=<?php echo $video['Video_ID']; ?>"
+                                   href="Single-Video.php?post_id=<?php echo $video['content_id']; ?>"
                                    target="_blank">View Video</a></button>
                         </div>
 
