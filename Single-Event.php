@@ -362,7 +362,7 @@ session_regenerate_id(true);
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"><?php $tagetComment = $comment['COMMENT_ID'] ?></i>
+                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"><?php $tagetComment = $comment['COMMENT_ID']; echo $tagetComment; ?></i>
 
                                         <?php } ?>
 
