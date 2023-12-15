@@ -432,7 +432,7 @@ session_regenerate_id(true);
                                 </p>
 
                                 <form action="Delete_Event.php" method="post">
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Event_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post_identification ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="drop">Drop Post</button>
                                 </form>
@@ -474,7 +474,7 @@ session_regenerate_id(true);
                                 <?php echo $post['Event_ID'] ?>
                                 <form action="Delete_Event_Comment.php" method="post">
 
-                                    <input type="text" name="post_id" value="<?php echo $post['Event_ID']; ?>">
+                                    <input type="text" name="post_id" value="<?php echo $post_identification ?>">
  ?>
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
 
