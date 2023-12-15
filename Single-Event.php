@@ -358,7 +358,7 @@ session_regenerate_id(true);
                                         <?php
 
                                         $id = $_SESSION['id'];
-                                        echo $id;
+                                        echo 'useris'. $id;
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
@@ -449,7 +449,7 @@ session_regenerate_id(true);
                                 <form method="post" action="Edit-Comment-Event.php">
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Your Opinion</label>
-                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $comment['COMMENT']; ?></textarea>
+                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $comment['COMMENT_ID']; ?></textarea>
                                     </div>
 
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
