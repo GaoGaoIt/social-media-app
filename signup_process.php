@@ -131,6 +131,7 @@ if (isset($_POST['signup_btn'])) {
                 mailer($email_address, $password, $user_name, $full_name);
             }else{
                 header('location: create-account.php?error_message=Your Email  Account already register on System');
+                exit;
             }
             } else {
 
