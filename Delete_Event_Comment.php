@@ -6,11 +6,11 @@ if(isset($_POST['drop_comments']))
 
     $comment_id = $_POST['comment_id'];
 
-    // echo $post_id ;
-    // echo $comment_id ;
-    // exit;
+    echo $post_id;
+    echo $comment_id;
+    exit;
 
-    Drop_Comment($comment_id, $post_id);
+    // Drop_Comment($comment_id, $post_id);
 }
 else
 {
