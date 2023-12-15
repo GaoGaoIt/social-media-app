@@ -36,7 +36,7 @@ if (isset($_POST['signup_btn'])) {
             exit;
         }
     } else {
-        header("location: create-account.php?error_message=This system does not support external email addresses. Please use the SLTC Mail address that was provided to you");
+        header("location: create-account.php?error_message=Pls input your student id");
         exit;
     }
 } else {
