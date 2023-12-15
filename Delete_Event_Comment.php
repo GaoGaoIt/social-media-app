@@ -31,8 +31,8 @@ function Drop_Comment($comment_id, $post_id)
 
     if ($stmt->execute())
     {
-        $send = "Single-Event.php?post_id=$post_id&success_message=Opinion Successfully Dropped";
-
+        echo $post_id;
+        exit;
 
         header("Location: Single-Event.php?post_id=$post_id&success_message=Opinion Successfully Dropped");
         exit;
