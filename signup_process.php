@@ -60,7 +60,7 @@ if (isset($_POST['signup_btn'])) {
     if (!$student_validator == '0') {
         // user availibility check in the system
 
-        $sql_query = "SELECT studentId FROM users WHERE studentId = '$studentId';";
+        $sql_query = "SELECT studentId FROM users WHERE studentId = $studentId;";
 
         $stmt = $conn->prepare($sql_query);
 
@@ -125,7 +125,7 @@ if (isset($_POST['signup_btn'])) {
                 $_SESSION['temp_password'] = $password;
 
                 mailer($email_address, $password, $user_name, $full_name);
-                header("location: WelCome.php");
+                
                 
 
             } else {
@@ -259,6 +259,7 @@ function mailer($sending_address, $password, $user_name, $full_name)
 
     try {
         $mail->send();
+        header("location: WelCome.php");
 
         echo "Message has been sent successfully";
     } catch (Exception $e) {
