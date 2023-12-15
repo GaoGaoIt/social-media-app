@@ -362,7 +362,7 @@ session_regenerate_id(true);
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"><?php echo $comment['COMMENT_ID'] ?></i>
+                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"><?php $tagetComment = $comment['COMMENT_ID'] ?></i>
 
                                         <?php } ?>
 
@@ -449,7 +449,7 @@ session_regenerate_id(true);
                                 <form method="post" action="Edit-Comment-Event.php">
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Your Opinion</label>
-                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $comment['COMMENT_ID']; ?></textarea>
+                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $tagetComment; ?></textarea>
                                     </div>
 
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
