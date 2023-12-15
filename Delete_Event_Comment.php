@@ -6,7 +6,11 @@ if(isset($_POST['drop_comments']))
 
     $comment_id = $_POST['comment_id'];
 
-    Drop_Comment($comment_id, $post_id);
+    echo $post_id ;
+    echo $comment_id ;
+    exit;
+
+    // Drop_Comment($comment_id, $post_id);
 }
 else
 {
@@ -28,10 +32,11 @@ function Drop_Comment($comment_id, $post_id)
     if ($stmt->execute())
     {
         $send = "Single-Event.php?post_id=$post_id&success_message=Opinion Successfully Dropped";
+        
 
-        header("location: $send");
-
+        header("Location: Single-Event.php?post_id=$post_id&success_message=Opinion Successfully Dropped");
         exit;
+
 
     } else {
 
