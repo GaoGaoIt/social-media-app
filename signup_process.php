@@ -151,7 +151,7 @@ function student_id_validator($studentId)
 function mailer($sending_address, $password, $user_name, $full_name)
 {
     $mail = new PHPMailer(true);
-    $mail->SMTPDebug = 3;
+    $mail->SMTPDebug = 0;
     $mail->isSMTP();
     $mail->Host = "smtp.gmail.com";
     $mail->SMTPAuth = true;
