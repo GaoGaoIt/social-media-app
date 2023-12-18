@@ -116,7 +116,7 @@ session_regenerate_id(true);
     <!-- Nav Bar Design -->
 
     <?php
-    require 'component/createPageHeader.php'
+    require 'component/noSearchHeader.php'
 
     ?>
 
