@@ -237,7 +237,7 @@
                         <div class="search-result-item-button">
 
                             <button class="btn btn-outline-primary" style="background: white none;">
-                                <a href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>" style="text-decoration: none; font-weight: bold;" target="_blank">
+                                <a href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>" style="text-decoration: none; font-weight: bold;">
                                     View Event
                                 </a>
                             </button>
