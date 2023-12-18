@@ -5,7 +5,7 @@ function checkUserIsAdmin()
 {
     // Check if the user is logged in
     if (!isset($_SESSION['id'])) {
-        header('location: login.php');
+        header('location: ../login.php');
         exit;
     }
 
