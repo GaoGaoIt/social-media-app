@@ -9,21 +9,6 @@
 
             <a href="home.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-home fa-lg"></i></a>
             
-            <i class="icon fas fa-search fa-lg" data-bs-toggle="modal" data-bs-target="#search-model"></i>
-
-                
-            <div class="dropdown">
-                <i class="icon fas fa-plus-square fa-lg"></i>
-                <div class="dropdown-menu custom-dropdown" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="post-uploader.php">Add Post</a>
-                    <a class="dropdown-item" href="Event-Upload.php">Add Event</a>
-                    <a class="dropdown-item" href="video_upload.php">Add Short Video</a>
-                </div>
-            </div>
-
-
-            <a href="Event-Calander/index.php" style="text-decoration: none; color: #1c1f23"><i class="icon fas fa-calendar-alt fa-lg"></i></a>
-
             <div class="icon user-profile">
                 <a href="my_Profile.php"><i class="fas fa-user-circle fa-lg"></i></a>
             </div>

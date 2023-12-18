@@ -46,23 +46,11 @@
 
 <div class="container">
 
-    <nav class="navbar">
+    <!-- Nav Bar Design -->
+    <?php
+    require 'component/homeheader.php'
+    ?>
 
-        <div class="nav-wrapper">
-
-            <img src="assets/images/black_logo.png" class="brand-img" id="logo-img">
-
-            <div class="nav-items">
-
-                <div class="icon user-profile">
-
-                    <a href="my_Profile.php" style="text-transform: none; color: #1c1f23;"><i class="fas fa-user-circle fa-lg"></i></a>
-
-                </div>
-
-            </div>
-
-        </div>
 
         <?php
 
@@ -140,7 +128,7 @@
 
                                         <li class="gallery-items-likes"><span class="hide-gallery-elements">Opinions</span>
 
-                                            <a href="single-post.php?post_id=<?php echo $post['Post_ID'];?>" style="color: white" target="_blank"><i class="icon fas fa-comment"></i></a>
+                                            <a href="single-post.php?post_id=<?php echo $post['Post_ID'];?>" style="color: white"><i class="icon fas fa-comment"></i></a>
 
                                         </li>
                                     </ul>
@@ -237,7 +225,7 @@
                         <div class="search-result-item-button">
 
                             <button class="btn btn-outline-primary" style="background: white none;">
-                                <a href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>" style="text-decoration: none; font-weight: bold;" target="_blank">
+                                <a href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>" style="text-decoration: none; font-weight: bold;">
                                     View Event
                                 </a>
                             </button>
@@ -294,7 +282,7 @@
                             <button class="btn btn-outline-primary" style="background: white none;">
                                 <a style="font-weight: bold; text-decoration: none;"
                                    href="Single-Video.php?post_id=<?php echo $video['content_id']; ?>"
-                                   target="_blank">View Video</a></button>
+                                   >View Video</a></button>
                         </div>
 
                     </li>
