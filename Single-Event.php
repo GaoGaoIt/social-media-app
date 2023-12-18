@@ -5,6 +5,7 @@ require 'init.php';
 session_regenerate_id(true);
 
 ?>
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -18,10 +19,6 @@ session_regenerate_id(true);
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.rtl.min.css" integrity="sha384-+qdLaIRZfNu4cVPK/PxJJEy0B0f3Ugv8i482AKY7gwXwhaCroABd086ybrVKTa0q" crossorigin="anonymous">
 
-    <!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>-->
-
-    <title>Document</title>
-
     <link rel="stylesheet" href="assets/css/style.css">
 
     <link rel="stylesheet" href="assets/css/section.css">
@@ -32,7 +29,7 @@ session_regenerate_id(true);
 
     <link rel="stylesheet" href="assets/css/responsive.css">
 
-    <link rel="stylesheet" href="assets/css/Comment.css">
+    <!-- <link rel="stylesheet" href="assets/css/Comment.css"> -->
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
@@ -43,8 +40,6 @@ session_regenerate_id(true);
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/add-to-calendar-button@1/assets/css/atcb.min.css">
 
     <style>
         .style-wrapper {
@@ -75,6 +70,7 @@ session_regenerate_id(true);
 
 <body>
 
+
     <?php if (isset($_GET['error_message'])) { ?>
 
         <?php
@@ -103,7 +99,6 @@ session_regenerate_id(true);
     <!-- Nav Bar Design -->
     <?php
     require 'component/createPageHeader.php';
-
     ?>
 
     <!-- New Section -->
@@ -122,7 +117,7 @@ session_regenerate_id(true);
 
         $post_array = $stmt->get_result();
     } else {
-        header('location: Events.php');
+        header('location: home.php');
 
         exit;
     }
@@ -130,8 +125,7 @@ session_regenerate_id(true);
 
 
 
-
-    $stmt = $conn->prepare("SELECT * FROM comments_events WHERE Event_ID = $post_identification ORDER BY COMMENT_ID DESC;");
+    $stmt = $conn->prepare("SELECT * FROM comments_events WHERE Event_ID = $post_identification ORDER BY COMMENT_ID DESC ");
 
     $stmt->execute();
 
@@ -158,7 +152,7 @@ session_regenerate_id(true);
 
                     $profile_name = $data[0]; ?>
 
-                    <div class="post">
+                    <div class="post" id="post-id">
 
                         <div class="info">
 
@@ -174,9 +168,10 @@ session_regenerate_id(true);
 
                             $id = $_SESSION['id'];
 
+
                             if ($post['user_id'] == $id) { ?>
 
-                                <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+                                <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#postOptionsModal"></i>
 
                             <?php } ?>
 
@@ -184,58 +179,39 @@ session_regenerate_id(true);
 
                         <img src="<?php echo "assets/images/posts/" . $post['content_path_name']; ?>" class="post-img">
 
-                        <div id="post_info">
+                        <div id="data-contents">
 
-                            <div class="post-content">
+                            <div class="post-content" id="post-content">
 
-                                <div class="reactions-wrapper">
+                                <div class="reactions-wrapper" id="reaction-wrapper">
 
-                                    <div id="likes">
-                                        <?php
+                                    <?php include('check_like_status.php'); ?>
 
-                                        include('check_like_status_events.php'); ?>
+                                    <?php if ($reaction_status) { ?>
 
-                                        <?php if ($reaction_status) { ?>
+                                        <form>
+                                            <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_ids" id="post_ids">
+                                            <button style="background: none; border: none;" type="submit" name="reaction">
+                                                <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike();" id="unlike"></i>
+                                            </button>
+                                        </form>
 
-                                            <form">
-                                                <input type="hidden" value="<?php echo $post['content_id']; ?>" id="post_ids">
-                                                <button style="background: none; border: none;" type="submit" name="reaction">
-                                                    <i style="color: #fb3958;" class="icon fas fa-heart" onclick="return unlike();"></i>
-                                                </button>
-                                                </form>
+                                    <?php } else { ?>
 
-                                            <?php } else { ?>
+                                        <form>
+                                            <input type="hidden" value="<?php echo $post['content_id']; ?>" name="post_id" id="post_id">
+                                            <button style="background: none; border: none;" type="submit" name="reaction">
+                                                <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like();" id="like"></i>
+                                            </button>
+                                        </form>
 
-                                                <form">
-                                                    <input type="hidden" value="<?php echo $post['content_id']; ?>" id="post_id">
-                                                    <button style="background: none; border: none;" type="submit" name="reaction">
-                                                        <i style="color: #22262A;" class="icon fas fa-heart" onclick="return like();"></i>
-                                                    </button>
-                                                    </form>
-
-                                                <?php } ?>
-                                    </div>
-
-                                    <i class="icon fas fa-calendar-alt" style="color: #22262A;" id="default-button"></i>
-
-                                    <script type="application/javascript">
-                                        const timeZoneIANA = Intl.DateTimeFormat().resolvedOptions().timeZone;
-                                        const config = {
-                                            name: "<?php echo $profile_name . ' s Event'; ?>",
-                                            description: "<?php echo $post['Invite_Link']; ?>",
-                                            startDate: "<?php echo date("Y-m-d", strtotime($post['Event_Date'])); ?>",
-                                            options: ["Google", "Apple", "Microsoft365", "MicrosoftTeams", "Outlook.com", "iCal"],
-                                            timeZone: timeZoneIANA,
-                                            trigger: "click",
-                                            iCalFileName: "Reminder-Event",
-                                        };
-                                        const button = document.getElementById('default-button');
-                                        button.addEventListener('click', () => atcb_action(config, button));
-                                    </script>
+                                    <?php } ?>
 
                                 </div>
 
-                                <p class="reactions" id="reactions_count"><?php echo $post['Likes']; ?> Reactions</p>
+                                <input type="hidden" value="<?php echo $post['Likes']; ?>" id="reaction-counter">
+
+                                <p class="reactions" id="reaction-id"><?php echo $post['Likes']; ?> Reactions</p>
 
                                 <p class="description">
 
@@ -244,23 +220,21 @@ session_regenerate_id(true);
                                     <?php echo $post['Caption']; ?>
                                 </p>
 
-                                <p class="description">Event Will Be Held On : <span><?php echo $post['Event_Date']; ?></span> At : <span><span><?php echo $post['Event_Time']; ?></span></p>
-
-                                <p class="description"><span>Invite Link : <a href="<?php echo $post['Invite_Link']; ?>"><?php echo $post['Invite_Link']; ?></a></span></p>
-
                                 <p class="post-time"><?php echo date("M,Y,d", strtotime($post['Date_upload'])); ?></p>
 
                                 <p class="post-time" style="color: #0b5ed7"><?php echo $post['HashTags']; ?></p>
 
                             </div>
+
                         </div>
+
                     </div>
 
                 <?php } ?>
 
                 <div class="col-md-12 col-lg-10 col-xl-8 mt-2 mb-2" style="width: 100%; ">
 
-                    <div class="card" style="border-radius: 10px; background: #F5F5F5;">
+                    <div class="card" style="border-radius: 10px; background: #F5F5F5; border-color: white;">
 
                         <div class="card-body">
 
@@ -268,17 +242,16 @@ session_regenerate_id(true);
 
                                 <div class="comments-section">
 
-                                    <img src="<?php echo 'assets/images/profiles/' . $_SESSION['img_path'] ?>" class="icon" style="width: 40px; height: 40px;">
+                                    <img src="<?php echo 'assets/images/profiles/' . $_SESSION['img_path'] ?>" class="icon" style="width: 45px; height: 45px;">
 
-                                    <form class="comments-section">
+                                    <form class="comments-section" id="comments-section">
 
                                         <input type="text" class="comment-box" placeholder="Your Opinion" name="comment" id="comment">
 
                                         <input type="hidden" name="post_id" value="<?php echo $post['content_id'] ?>" id="post_identity">
 
-                                        <button class="comment-button" type="submit" name="submit">
-                                            <i class="fa-regular fa-paper-plane fa-lg" onclick="return comment();"></i>
-                                        </button>
+                                        <button class="comment-button" type="button" name="submit" onclick="return comment1()"><i class="fa-regular fa-paper-plane fa-lg"></i></button>
+
                                     </form>
 
                                 </div>
@@ -290,7 +263,7 @@ session_regenerate_id(true);
                     </div><br>
 
                     <!-- Modal For Post Options-->
-                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="postOptionsModal" tabindex="-1" aria-labelledby="postOptionsLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -298,16 +271,16 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-body">
 
-                                    <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Post</a><br><br>
+                                    <i class="fa-solid fa-pen-to-square"  data-bs-whatever="@mdo"><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#exampleModal2">Edit Post</a></i><br><br>
 
-                                    <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_model" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Post</a>
+                                    <i class="fa-solid fa-trash"  data-bs-whatever="@mdo"> <a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#delete_model">Delete Post</a></i>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Model For Opinion Options -->
-                    <div class="modal fade" id="Comment-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="commentOptionsModal" tabindex="-10" aria-labelledby="commentOptionsLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -315,9 +288,11 @@ session_regenerate_id(true);
                                 </div>
                                 <div class="modal-body">
 
-                                    <i class="fa-solid fa-pen-to-square options" data-bs-toggle="modal" data-bs-target="#edit-comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
+                                    <i class="fa-solid fa-pen-to-square"><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#edit-comment">Edit Comment</a></i><br><br>
 
-                                    <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Opinion</a>
+
+
+                                    <i class="fa-solid fa-trash"><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#delete_comment">Delete Opinion</a></i>
                                 </div>
                             </div>
                         </div>
@@ -325,7 +300,7 @@ session_regenerate_id(true);
 
                     <p><strong>College Community Community Opinion</strong></p>
 
-                    <div id="comments">
+                    <div id="here">
                         <?php
 
                         foreach ($comments as $comment) {
@@ -333,7 +308,7 @@ session_regenerate_id(true);
 
                         ?>
 
-                            <div class="card mb-2" style="border-radius: 10px; background: #F5F5F5;">
+                            <div class="card mb-2" style="border-radius: 10px; background: #F5F5F5; border-color: white;">
 
                                 <div class="card-body">
 
@@ -343,26 +318,21 @@ session_regenerate_id(true);
 
                                         <div class="d-flex flex-row align-items-center">
 
-                                            <img class="mr-3" src="<?php echo "assets/images/profiles/" . $data[2]; ?>" alt="avatar" width="30" height="30" style="border-radius: 50%;" />
+                                            <img class="mr-3" src="<?php echo "assets/images/profiles/" . $data[2]; ?>" alt="avatar" width="35" height="35" style="border-radius: 50%;" />
 
-                                            <p class="small mb-0 m-lg-2"> <?php echo "  " . $data[0]; ?></p>
+                                            <p class="small mb-0 m-lg-2"><?php echo "\t" . $data[0]; ?></p>
 
-                                        </div>
-
-                                        <div class="d-flex flex-row align-items-center text-primary">
-
-                                            <p class="text-muted small mb-0"><?php echo "Posted Date : " . $comment['DATE']; ?></p>
+                                            <p class="text-muted small mb-0 m-lg-1"><?php echo "Posted Date : " . $comment['DATE']; ?></p>
 
                                         </div>
 
                                         <?php
 
                                         $id = $_SESSION['id'];
-                                        // echo 'useris'. $id;
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v " data-bs-toggle="modal" data-bs-target="#Comment-Modal" data-comment-id="<?php echo $comment['COMMENT_ID']; ?>"></i>
+                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#commentOptionsModal"></i>
 
                                         <?php } ?>
 
@@ -376,37 +346,24 @@ session_regenerate_id(true);
 
                     </div>
 
+                    <!--Pagination bar-->
+
 
                 </div>
 
 
 
-                <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="exampleModal2" tabindex="1" aria-labelledby="editPostLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Post</h1>
                             </div>
                             <div class="modal-body">
-                                <form method="post" action="Edit-Post-Events.php">
+                                <form method="post" action="Edit-Post-1.php">
                                     <div class="mb-3">
                                         <label for="recipient-name" class="col-form-label">Hash Tags</label>
                                         <input type="text" class="form-control" id="recipient-name" name="hash-tag" value="<?php echo $post['HashTags']; ?>" maxlength="20">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Invite Link</label>
-                                        <input type="text" class="form-control" id="recipient-name" name="invite-link" value="<?php echo $post['Invite_Link']; ?>">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Event Time</label>
-                                        <input type="time" class="form-control" id="recipient-name" name="time" value="<?php echo $post['Event_Time']; ?>">
-                                    </div>
-
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label">Event Date</label>
-                                        <input type="date" class="form-control" id="recipient-name" name="event-date" value="<?php echo $post['Event_Date']; ?>">
                                     </div>
 
                                     <div class="mb-3">
@@ -414,7 +371,7 @@ session_regenerate_id(true);
                                         <textarea class="form-control" id="message-text" maxlength="500" name="caption"><?php echo $post['Caption']; ?></textarea>
                                     </div>
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Event_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
                                     <button type="submit" class="btn btn-outline-primary" name="edit">Edit Post</button>
                                 </form>
                             </div>
@@ -422,7 +379,7 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal fade" id="delete_model" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="delete_model" tabindex="1" aria-labelledby="deletePostLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -432,8 +389,8 @@ session_regenerate_id(true);
                                     You will lose any associated comments and reactions made in relation to that post if you take that step.
                                 </p>
 
-                                <form action="Delete_Event.php" method="post">
-                                    <input type="hidden" name="post_id" value="<?php echo $post_identification ?>">
+                                <form action="Delete_Normal_Posts.php" method="post">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="drop">Drop Post</button>
                                 </form>
@@ -442,19 +399,19 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal fade" id="edit-comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="edit-comment" tabindex="1" aria-labelledby="editCommentLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
                                 <form method="post" action="Edit-Comment-Event.php">
                                     <div class="mb-3">
                                         <label for="message-text" class="col-form-label">Your Opinion</label>
-                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment" required></textarea>
+                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $comment['COMMENT']; ?></textarea>
                                     </div>
 
-                                    <input type="hidden" id="edit-comment-id" name="comment_id" value="">
+                                    <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post_identification ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="edit-comment">Edit Your Opinion</button>
                                 </form>
@@ -463,7 +420,7 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal fade" id="delete_comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal fade" id="delete_comment" tabindex="1" aria-labelledby="deleteCommentLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -475,7 +432,7 @@ session_regenerate_id(true);
 
                                 <form action="Delete_Event_Comment.php" method="post">
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post_identification; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
 
                                     <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
 
@@ -514,7 +471,6 @@ session_regenerate_id(true);
                     </div>
 
                 </div>
-
             </div>
 
         </div>
@@ -522,6 +478,10 @@ session_regenerate_id(true);
     </section>
 
 </body>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
 <script src="notifast/notifast.min.js"></script>
 
@@ -534,15 +494,13 @@ session_regenerate_id(true);
 
         $.ajax({
             type: "post",
-            url: "like_events.php",
+            url: "like.php",
             data: {
                 'post_id': post_id,
             },
             cache: false,
             success: function(html) {
-                $("#likes").load(window.location.href + " #likes");
-
-                $("#reaction-counter").load(window.location.href + " #reaction-counter");
+                $("#data-contents").load(window.location.href + " #data-contents");
             }
         });
         return false;
@@ -554,32 +512,31 @@ session_regenerate_id(true);
 
         $.ajax({
             type: "post",
-            url: "unlike_event.php",
+            url: "unlike.php",
             data: {
                 'post_id': post_ids,
             },
             cache: false,
             success: function(html) {
-                $("#likes").load(window.location.href + " #likes");
-
-                $("#reaction-counter").load(window.location.href + " #reaction-counter");
+                $("#data-contents").load(window.location.href + " #data-contents");
             }
         });
         return false;
     }
 
-    function comment() {
+    function comment1() {
 
         const post_id = document.getElementById('post_identity').value;
 
         const comment = document.getElementById('comment').value;
+
+        console.log(post_id);
 
         $.ajax({
             type: "post",
             url: "comments_action_event.php",
             data: {
                 'post_id': post_id,
-
                 'comment': comment,
             },
             cache: false,
@@ -609,29 +566,18 @@ session_regenerate_id(true);
 </script>
 
 <script>
-    $(document).ready(function () {
-        $('.options').on('click', function () {
-            var commentId = $(this).data('comment-id');
-            $('#edit-comment-id').val(commentId);
-            $('#edit-comment').modal('show');
-        });
-    });
-</script>
-
-<script>
     $(document).ready(function() {
         setInterval(function() {
-            $("#comments").load(window.location.href + " #comments");
+            $("#here").load(window.location.href + " #here");
         }, 10000);
     });
 </script>
+
 
 <script type="text/javascript">
     document.getElementById("logo-img").onclick = function() {
         location.href = "home.php";
     };
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/add-to-calendar-button@1" async defer></script>
 
 </html>

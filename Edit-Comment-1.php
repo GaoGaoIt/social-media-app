@@ -13,8 +13,7 @@ if (isset($_POST['edit-comment'])) {
     $comment = $_POST['comment'];
 
     Update_Comment($post_id, $comment, $comment_id);
-} else {
-}
+} 
 
 function Update_Comment($post_id, $post_comment, $comment_id)
 {
