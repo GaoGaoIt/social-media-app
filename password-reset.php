@@ -30,7 +30,8 @@ if(isset($_POST['reset-pass']))
 
         $pass = randomPassword();
 
-        $secure_password = md5($pass);
+        $secure_password = password_hash($pass, PASSWORD_DEFAULT);
+
 
         $SQL_UPDATE = "UPDATE users SET PASSWORD_S = '$secure_password' WHERE EMAIL = '$email_address';";
 
