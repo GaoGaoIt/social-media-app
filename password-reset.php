@@ -16,7 +16,7 @@ if(isset($_POST['reset-pass']))
 
     echo $email_address;
 
-    $sql_query = "SELECT User_ID FROM users WHERE EMAIL = '$email_address';";
+    $sql_query = "SELECT User_ID FROM users WHERE EMAIL = '$email_addhress';";
 
     $stmt = $conn->prepare($sql_query);
 

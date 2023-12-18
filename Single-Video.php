@@ -136,16 +136,6 @@ session_regenerate_id(true);
 
         $post_array = $stmt->get_result();
 
-        // $post_identification = $_GET['post_id'];
-
-        // $stmt = $conn->prepare("SELECT * FROM pivot_content_data WHERE content_id = ?");
-        // $stmt->bind_param("i", $post_identification);
-        // $stmt->execute();
-
-        // $result = $stmt->get_result();
-        // $post_array = $result->fetch_assoc();
-
-        // $stmt->close();
     } else {
         header('location: shorts.php');
 
@@ -319,21 +309,7 @@ session_regenerate_id(true);
                     </div>
 
                     <!-- Model For Opinion Options -->
-                    <div class="modal fade" id="Comment-Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Opinion Options</h5>
-                                </div>
-                                <div class="modal-body">
 
-                                    <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit-comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
-
-                                    <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Opinion</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
 
                     <p><strong>College Community Community Opinion</strong></p>
 
@@ -369,7 +345,7 @@ session_regenerate_id(true);
 
                                         if ($comment['USER_ID'] == $id) { ?>
 
-                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal"></i>
+                                            <i class="fas fa-ellipsis-v options" data-bs-toggle="modal" data-bs-target="#Comment-Modal-<?php echo $comment['COMMENT_ID']; ?>"></i>
 
                                         <?php } ?>
 
@@ -377,6 +353,66 @@ session_regenerate_id(true);
 
                                 </div>
 
+                            </div>
+
+                            <div class="modal fade" id="Comment-Modal-<?php echo $comment['COMMENT_ID']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Opinion Options</h5>
+                                        </div>
+                                        <div class="modal-body">
+
+                                            <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit-comment-<?php echo $comment['COMMENT_ID']; ?>" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
+
+                                            <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment-<?php echo $comment['COMMENT_ID']; ?>" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Opinion</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="edit-comment-<?php echo $comment['COMMENT_ID']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <form method="post" action="Edit-Comment-Vid.php">
+                                                <div class="mb-3">
+                                                    <label for="message-text" class="col-form-label">Your Opinion</label>
+                                                    <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $comment['COMMENT']; ?></textarea>
+                                                </div>
+
+                                                <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
+
+                                                <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
+
+                                                <button type="submit" class="btn btn-outline-primary" name="edit-comment">Edit Your Opinion</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal fade" id="delete_comment-<?php echo $comment['COMMENT_ID']; ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-body">
+                                            <h5>Are You Really Want To Remove Your Opinion?</h5>
+
+                                            <p class="h6">
+                                                Think twice before removing your comment from the section because it may be beneficial for planning the greatest events ☹️
+                                            </p>
+
+                                            <form action="Delete_Video_Comment.php" method="post">
+
+                                                <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
+
+                                                <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
+
+                                                <button type="submit" class="btn btn-outline-primary" name="drop_comments">Drop Comment</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
 
                         <?php } ?>
@@ -433,49 +469,7 @@ session_regenerate_id(true);
                     </div>
                 </div>
 
-                <div class="modal fade" id="edit-comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <form method="post" action="Edit-Comment-Vid.php">
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label">Your Opinion</label>
-                                        <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $comment['COMMENT']; ?></textarea>
-                                    </div>
 
-                                    <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
-
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Video_ID']; ?>">
-
-                                    <button type="submit" class="btn btn-outline-primary" name="edit-comment">Edit Your Opinion</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="modal fade" id="delete_comment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                            <div class="modal-body">
-                                <h5>Are You Really Want To Remove Your Opinion?</h5>
-
-                                <p class="h6">
-                                    Think twice before removing your comment from the section because it may be beneficial for planning the greatest events ☹️
-                                </p>
-
-                                <form action="Delete_Video_Comment.php" method="post">
-
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Video_ID']; ?>">
-
-                                    <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
-
-                                    <button type="submit" class="btn btn-outline-primary" name="drop_comments">Drop Comment</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
 
             </div>
 
