@@ -393,13 +393,13 @@ session_regenerate_id(true);
                                         <div class="modal-body">
 
                                             <!-- Edit link includes comment ID -->
-                                            <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit-comment-<?php echo $comment['COMMENT_ID']; ?>">
-                                                <a href="" style="color: black; text-decoration: none;">Edit Comment</a>
+                                            <i class="fa-solid fa-pen-to-square">
+                                                <a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#edit-comment-<?php echo $comment['COMMENT_ID']; ?>">Edit Comment</a>
                                             </i><br><br>
 
                                             <!-- Delete link includes comment ID -->
-                                            <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment-<?php echo $comment['COMMENT_ID']; ?>">
-                                                <a href="" style=" color: black; text-decoration: none;">Delete Opinion</a>
+                                            <i class="fa-solid fa-trash">
+                                                <a href="" style=" color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#delete_comment-<?php echo $comment['COMMENT_ID']; ?>">Delete Opinion</a>
                                             </i>
 
                                         </div>
@@ -412,10 +412,10 @@ session_regenerate_id(true);
                                     <div class="modal-content">
                                         <div class="modal-body">
                                             <!-- Edit comment form -->
-                                            <form method="post" action="Edit-Comment-1.php">
+                                            <form method="post" action="Edit-Comment-post.php">
                                                 <div class="mb-3">
                                                     <label for="message-text" class="col-form-label">Your Opinion</label>
-                                                    <textarea class="form-control" id="message-text" maxlength="500" name="comment"><?php echo $comment['COMMENT']; ?></textarea>
+                                                    <textarea class="form-control" id="message-text" maxlength="500" name="comment" required><?php echo $comment['COMMENT']; ?></textarea>
                                                 </div>
 
                                                 <input type="hidden" name="comment_id" value="<?php echo $comment['COMMENT_ID']; ?>">
