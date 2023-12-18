@@ -135,7 +135,6 @@ session_regenerate_id(true);
         $stmt->execute();
 
         $post_array = $stmt->get_result();
-
     } else {
         header('location: shorts.php');
 
@@ -363,9 +362,9 @@ session_regenerate_id(true);
                                         </div>
                                         <div class="modal-body">
 
-                                            <i class="fa-solid fa-pen-to-square" data-bs-toggle="modal" data-bs-target="#edit-comment-<?php echo $comment['COMMENT_ID']; ?>" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Edit Comment</a><br><br>
+                                            <i class="fa-solid fa-pen-to-square"></i><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#edit-comment-<?php echo $comment['COMMENT_ID']; ?>" data-bs-whatever="@mdo">Edit Comment</a><br><br>
 
-                                            <i class="fa-solid fa-trash" data-bs-toggle="modal" data-bs-target="#delete_comment-<?php echo $comment['COMMENT_ID']; ?>" data-bs-whatever="@mdo"></i><a href="" style="color: black; text-decoration: none;">Delete Opinion</a>
+                                            <i class="fa-solid fa-trash" ></i><a href="" style="color: black; text-decoration: none;" data-bs-toggle="modal" data-bs-target="#delete_comment-<?php echo $comment['COMMENT_ID']; ?>" data-bs-whatever="@mdo">Delete Opinion</a>
                                         </div>
                                     </div>
                                 </div>

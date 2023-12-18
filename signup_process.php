@@ -47,9 +47,9 @@ if (isset($_POST['signup_btn'])) {
 function user_exists($studentId)
 {
     global $conn;
-    $sql_query = "SELECT studentId FROM users WHERE studentId = ?;";
+    $sql_query = "SELECT studentId FROM users WHERE (studentId = ? or EMAIL = ?);";
     $stmt = $conn->prepare($sql_query);
-    $stmt->bind_param('s', $studentId);
+    $stmt->bind_param('ss', $studentId, $studentId);
     $stmt->execute();
     $stmt->store_result();
     return $stmt->num_rows() > 0;
