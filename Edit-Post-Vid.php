@@ -21,7 +21,7 @@ function Update_Post($post_id, $post_caption, $post_hash)
 {
     include 'config.php';
 
-    $SQL = "UPDATE videos SET Caption = '$post_caption', HashTags = '$post_hash' WHERE Video_ID = $post_id;";
+    $SQL = "UPDATE pivot_content_data SET Caption = '$post_caption', HashTags = '$post_hash' WHERE content_id = $post_id;";
 
     $stmt = $conn->prepare($SQL);
 

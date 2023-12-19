@@ -27,7 +27,7 @@ function Update_Post($post_id, $post_caption, $post_hash, $invite_link, $event_d
 {
     include 'config.php';
 
-    $SQL = "UPDATE events SET Caption = '$post_caption', HashTags = '$post_hash', Event_Time = '$event_time', Invite_Link = '$invite_link', Event_Date = '$event_date' WHERE Event_ID = $post_id;";
+    $SQL = "UPDATE pivot_content_data SET Caption = '$post_caption', HashTags = '$post_hash', Event_Time = '$event_time', Invite_Link = '$invite_link', Event_Date = '$event_date' WHERE content_id = $post_id;";
 
     $stmt = $conn->prepare($SQL);
 
