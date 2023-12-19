@@ -174,7 +174,7 @@ if (!isset($_SESSION['id'])) {
 
                                         <li class="gallery-items-likes"><span class="hide-gallery-elements">Opinions</span>
 
-                                            <a href="single-post.php?post_id=<?php echo $post['content_id']; ?>" style="color: lightskyblue" target="_blank"><i class="icon fas fa-comment"></i></a>
+                                            <a href="single-post.php?post_id=<?php echo $post['content_id']; ?>" style="color: lightskyblue"><i class="icon fas fa-comment"></i></a>
 
                                         </li>
                                     </ul>
@@ -223,7 +223,7 @@ if (!isset($_SESSION['id'])) {
                             <div class="search-result-item-button">
 
                                 <button style="background: white none" class="btn btn-outline-primary">
-                                    <a style="font-weight: bold; text-decoration: none;" href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>" target="_blank">
+                                    <a style="font-weight: bold; text-decoration: none;" href="Single-Event.php?post_id=<?php echo $event['content_id']; ?>">
 
                                         View Event</a></button>
                             </div>
@@ -270,7 +270,7 @@ if (!isset($_SESSION['id'])) {
                             <div class="search-result-item-button">
 
                                 <button style="background: white none" class="btn btn-outline-primary">
-                                    <a style="text-decoration: none; font-weight: bold;" href="Single-Video.php?post_id=<?php echo $video['content_id']; ?>" target="_blank">
+                                    <a style="text-decoration: none; font-weight: bold;" href="Single-Video.php?post_id=<?php echo $video['content_id']; ?>">
                                         View Video
                                     </a>
                                 </button>
