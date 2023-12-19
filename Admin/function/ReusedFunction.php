@@ -242,9 +242,10 @@ function fetchEventsData()
 {
     global $conn;
 
-    $query = "SELECT * 
-            FROM pivot_content_data
-            WHERE type = 'events' OR type = 'special'";
+    $query = "SELECT *
+    FROM pivot_content_data
+    WHERE type = 'events' OR type = 'special'
+    ORDER BY Date_upload  DESC";
 
     $stmt = mysqli_prepare($conn, $query);
 
