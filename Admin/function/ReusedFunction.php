@@ -5,7 +5,7 @@ function checkUserIsAdmin()
 {
     // Check if the user is logged in
     if (!isset($_SESSION['id'])) {
-        header('location: login.php');
+        header('location: ../login.php');
         exit;
     }
 
@@ -242,9 +242,10 @@ function fetchEventsData()
 {
     global $conn;
 
-    $query = "SELECT * 
-            FROM pivot_content_data
-            WHERE type = 'events' OR type = 'special' AND user_type = 1";
+    $query = "SELECT *
+    FROM pivot_content_data
+    WHERE type = 'events' OR type = 'special'
+    ORDER BY Date_upload  DESC";
 
     $stmt = mysqli_prepare($conn, $query);
 
