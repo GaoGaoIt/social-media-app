@@ -222,6 +222,7 @@ if (!isset($_SESSION['id'])) {
                             break;
 
                         case 'events':
+                        case 'special':
                             echo '<div class="card mt-4 rounded border ">';
                             echo '<img src="assets/images/posts/' . $post['content_path_name'] . '" class="post-img">';
                             echo '<div id="post_info_data">';
