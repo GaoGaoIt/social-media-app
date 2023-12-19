@@ -440,7 +440,7 @@ session_regenerate_id(true);
                                         <textarea class="form-control" id="message-text" maxlength="500" name="caption"><?php echo $post['Caption']; ?></textarea>
                                     </div>
 
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Video_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['content_id']; ?>">
                                     <button type="submit" class="btn btn-outline-primary" name="edit">Edit Post</button>
                                 </form>
                             </div>
