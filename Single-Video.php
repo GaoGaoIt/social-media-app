@@ -459,7 +459,7 @@ session_regenerate_id(true);
                                 </p>
 
                                 <form action="Delete_Video.php" method="post">
-                                    <input type="hidden" name="post_id" value="<?php echo $post['Video_ID']; ?>">
+                                    <input type="hidden" name="post_id" value="<?php echo $post['Delete_Normal_Posts.php']; ?>">
 
                                     <button type="submit" class="btn btn-outline-primary" name="drop">Drop Post</button>
                                 </form>
