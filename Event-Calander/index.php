@@ -30,7 +30,7 @@ $specialEvent_4 = array("", "", "", "", "", "");
 
 // selecting events for today---------------------------------------------------------------------------------------
 
-$sql = "SELECT * FROM pivot_content_data WHERE DATE(Event_Date) = '$todayIs' AND type = 'events'";
+$sql = "SELECT * FROM pivot_content_data WHERE DATE(Event_Date) = '$todayIs' AND type = 'events' AND status = 'PUBLISH'";
 
 
 $result = $conn->query($sql);
@@ -84,7 +84,7 @@ $nextday = date("Y-m-d", strtotime('+1 day'));
 $nextYear = date("Y-m-d", strtotime('+1 year'));
 
 
-$sql = "SELECT * FROM pivot_content_data WHERE Event_Date BETWEEN '$nextday' AND '$nextYear'";
+$sql = "SELECT * FROM pivot_content_data WHERE Event_Date BETWEEN '$nextday' AND '$nextYear' AND status = 'PUBLISH'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
@@ -131,7 +131,7 @@ if ($result->num_rows > 0) {
 
 // selecting special events--------------------------------------------------------------------------------------
 
-$sql = "SELECT * FROM pivot_content_data  WHERE type = 'special' AND Event_Date BETWEEN '$todayIs' AND '$nextYear'";
+$sql = "SELECT * FROM pivot_content_data  WHERE type = 'special' AND Event_Date BETWEEN '$todayIs' AND '$nextYear' AND status = 'PUBLISH'";
 $result = $conn->query($sql);
 
 if ($result->num_rows > 0) {
