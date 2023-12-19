@@ -244,7 +244,7 @@ function fetchEventsData()
 
     $query = "SELECT * 
             FROM pivot_content_data
-            WHERE type = 'events' OR type = 'special' AND user_type = 1";
+            WHERE type = 'events' OR type = 'special'";
 
     $stmt = mysqli_prepare($conn, $query);
 
