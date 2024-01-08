@@ -174,12 +174,12 @@ $studentCount = studentCount();
               <div class="small-box bg-info">
                 <div class="inner">
                   <h3><?php echo $postCount ?></h3>
-                  <p>New Posts</p>
+                  <p>Posts</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-newspaper"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="postsManagement.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -187,12 +187,12 @@ $studentCount = studentCount();
               <div class="small-box bg-info">
                 <div class="inner">
                   <h3><?php echo $eventCount ?></h3>
-                  <p>New Events</p>
+                  <p>Events</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-calendar"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="evenstsManagement.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -200,12 +200,12 @@ $studentCount = studentCount();
               <div class="small-box bg-success">
                 <div class="inner">
                   <h3><?php echo $short_video ?></h3>
-                  <p>New Short Video</p>
+                  <p>Short Video</p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-video"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="VideosManagement.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
             <div class="col-lg-3 col-6">
@@ -219,7 +219,7 @@ $studentCount = studentCount();
                 <div class="icon">
                   <i class="ion ion-person-add"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="students.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
               </div>
             </div>
           </div>
