@@ -321,7 +321,17 @@ $result = fetchPostsData();
                           echo '<div class="card-body">';
                           echo '<h5 class="card-text">' . $row['Caption'] . '</h5>';
                           echo '<p class="card-text">Created By ' . fetchUserName($row['user_id']) . '</p>';
-                          echo '<a href="' . $row['Invite_Link'] . '"><button class="btn btn-primary">suppand</button></a>';
+                          echo '<div class="p-4">';
+                          if ($row['is_deleted'] == 1) {
+                            echo '<a class="btn btn-success mt-auto w-100" href="globalAction.php?delateData=' . $row['content_id'] . '">
+                                  <i class="fas fa-trash"></i> Restore
+                              </a>';
+                          } else {
+                            echo '<a class="btn btn-danger mt-auto w-100" href="globalAction.php?delateData=' . $row['content_id'] . '">
+                                  <i class="fas fa-trash"></i> Block
+                              </a>';
+                          }
+                          echo '</div>';
                           echo '</div>';
 
                           echo '</div>';
