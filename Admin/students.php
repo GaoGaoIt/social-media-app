@@ -28,7 +28,7 @@ if (isset($_POST['searchData']) && isset($_POST['search']) && !empty($_POST['sea
     $result = fetchAllStudent();
 }
 
-if(empty($_POST['searchData'])){
+if (empty($_POST['searchData'])) {
     $result = fetchAllStudent();
 }
 
@@ -84,21 +84,7 @@ if(empty($_POST['searchData'])){
                 <li class="nav-item">
                     <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
                 </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="index3.html" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Post</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Event</a>
-                </li>
-                <li class="nav-item d-none d-sm-inline-block">
-                    <a href="#" class="nav-link">Report </a>
-                </li>
             </ul>
-
-
         </nav>
         <!-- /.navbar -->
 
@@ -250,7 +236,7 @@ if(empty($_POST['searchData'])){
                                                                             <?php echo $row['intake_Date']; ?>
                                                                         </td>
                                                                         <td class="project-actions text-right fd">
-                                                                        <a href="studentEdit.php?stuID=<?php echo $row['id']; ?>"><button class="btn btn-success"> Edit</button></a>
+                                                                            <a href="studentEdit.php?stuID=<?php echo $row['id']; ?>"><button class="btn btn-success"> Edit</button></a>
                                                                         </td>
                                                                     </tr>
                                                                 <?php
