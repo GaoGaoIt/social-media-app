@@ -182,7 +182,7 @@ $result = fetchAllReportData();
                                                                             </td>
                                                                             <td>
                                                                                 <?php if ($row['type'] == 'videos') : ?>
-                                                                                    <a href="../assets/images/videos/<?php echo findPostIDImage($row['POST_ID']); ?>">
+                                                                                    <a href="../assets/videos/<?php echo findPostIDImage($row['POST_ID']); ?>">
                                                                                         <button class="btn btn-info">Video link</button>
                                                                                     </a>
                                                                                 <?php elseif ($row['type'] == 'posts') : ?>

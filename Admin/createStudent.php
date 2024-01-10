@@ -4,6 +4,7 @@
 
 require '../init.php';
 include('../config.php');
+
 include 'function/ReusedFunction.php';
 
 session_regenerate_id(true);
