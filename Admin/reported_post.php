@@ -182,15 +182,15 @@ $result = fetchAllReportData();
                                                                             </td>
                                                                             <td>
                                                                                 <?php if ($row['type'] == 'videos') : ?>
-                                                                                    <a href="../assets/videos/<?php echo findPostIDImage($row['POST_ID']); ?>">
+                                                                                    <a href="../assets/videos/<?php echo findPostIDImage($row['POST_ID']); ?>" target="_blank" >
                                                                                         <button class="btn btn-info">Video link</button>
                                                                                     </a>
                                                                                 <?php elseif ($row['type'] == 'posts') : ?>
-                                                                                    <a href="../assets/images/posts/<?php echo findPostIDImage($row['POST_ID']); ?>">
+                                                                                    <a href="../assets/images/posts/<?php echo findPostIDImage($row['POST_ID']); ?>" target="_blank">
                                                                                         <button class="btn btn-info">Image link</button>
                                                                                     </a>
                                                                                 <?php elseif ($row['type'] == 'events') : ?>
-                                                                                    <a href="../assets/images/posts/<?php echo findPostIDImage($row['POST_ID']); ?>">
+                                                                                    <a href="../assets/images/posts/<?php echo findPostIDImage($row['POST_ID']); ?>" target="_blank">
                                                                                         <button class="btn btn-info">Image link</button>
                                                                                     </a>
                                                                                 <?php endif; ?>
