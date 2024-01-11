@@ -5,7 +5,7 @@ function PostLikesCount($ContentId)
 {
     global $conn;  // Assuming you have a global database connection object
 
-    $query = "SELECT COUNT(*)  FROM likes where Post_ID  = $ContentId";
+    $query = "SELECT COUNT(*) as count  FROM likes where Post_ID  = $ContentId";
 
 
     $stmt = mysqli_prepare($conn, $query);
