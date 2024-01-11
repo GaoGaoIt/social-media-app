@@ -134,7 +134,7 @@ if (!isset($_SESSION['id'])) {
     </nav>
     <br><br><br>
 
-    <h3 class="title">All Posts<small></small></h3><br>
+    <h3 class="title" style="padding-left: 30px">All Posts<small></small></h3><br>
 
 
     <ul class="nav nav-pills" style="padding-left: 30px">
