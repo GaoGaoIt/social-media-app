@@ -1,7 +1,7 @@
 <?php
 include 'config.php';
 
-function PostLikesCount($ContentId)
+function PostLikesCount()
 {
     global $conn;  // Assuming you have a global database connection object
 
