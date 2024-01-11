@@ -573,6 +573,8 @@ function generateStudentID($intake_date, $ic)
     return $studentID;
 }
 
+
+
 function createStudentProfile($name, $course, $teacherId, $studentIc, $gender, $intake_Date)
 {
     global $conn;
@@ -635,8 +637,6 @@ function updateStudentProfile($name, $course, $teacherId, $studentIc, $gender, $
     $stmt->close();
     $conn->close();
 }
-
-
 
 function fetchAllStudent()
 {
