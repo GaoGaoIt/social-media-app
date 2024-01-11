@@ -137,7 +137,7 @@ if (!isset($_SESSION['id'])) {
     <h3 class="title">All Posts<small></small></h3><br>
 
 
-    <ul class="nav nav-pills">
+    <ul class="nav nav-pills" style="padding-left: 30px">
 
         <li class="active"><a data-toggle="pill" href="#home"><i class="icon fas fa-vote-yea fa-lg"></i>Posts</a></li>
 
