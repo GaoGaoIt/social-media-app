@@ -234,8 +234,7 @@
 
                                             <li class="gallery-items-likes"><span class="hide-gallery-elements">Reactions : 
                                             </span>
-                                                :id <?php echo $post['content_id'] ?>
-                                                :likes count <?php echo PostLikesCount() ?>
+                                            <?php echo PostLikesCount($post['content_id']) ?>
                                                 <i class="icon fas fa-thumbs-up"></i>
                                             </li>
 

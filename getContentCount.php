@@ -1,11 +1,11 @@
 <?php
 include 'config.php';
 
-function PostLikesCount()
+function PostLikesCount($ContentId)
 {
     global $conn;  // Assuming you have a global database connection object
 
-    $query = "SELECT COUNT(*) as count FROM likes where Post_ID  = 43";
+    $query = "SELECT COUNT(*)  FROM likes where Post_ID  = $ContentId";
 
 
     $stmt = mysqli_prepare($conn, $query);
