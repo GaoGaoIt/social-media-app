@@ -7,6 +7,9 @@ function PostLikesCount($ContentId)
 
     $query = "select count(*) from likes where Post_ID  = $ContentId";
 
+    echo $query ;
+    exit();
+
     $stmt = mysqli_prepare($conn, $query);
 
 
