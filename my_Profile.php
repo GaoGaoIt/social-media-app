@@ -218,7 +218,7 @@
 
 
                             <?php include("get-posts.php"); ?>
-
+                            <?php include("getContentCount.php") ?>
                             <!--loop over the results-->
 
                             <?php foreach ($posts as $post) { ?>
@@ -234,8 +234,8 @@
 
                                             <li class="gallery-items-likes"><span class="hide-gallery-elements">Reactions : 
                                             </span>
+                                                <?php echo PostLikesCount($post['content_id']) ?>
                                                 <i class="icon fas fa-thumbs-up"></i>
-
                                             </li>
 
                                             <li class="gallery-items-likes"><span class="hide-gallery-elements">Opinions</span>
