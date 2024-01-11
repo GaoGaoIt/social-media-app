@@ -61,7 +61,7 @@
 
             $search_input = $_POST['find'];
 
-            $SQL = "SELECT * FROM pivot_content_data WHERE type = 'posts' (Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%');";
+            $SQL = "SELECT * FROM pivot_content_data WHERE type = 'posts' AND (Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%');";
 
             $stmt = $conn->prepare($SQL);
 
