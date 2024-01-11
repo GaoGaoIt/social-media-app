@@ -90,7 +90,7 @@ if (!isset($_SESSION['id'])) {
         }
 
         .gallery-items {
-            height: 100px;
+            height: auto;
             width: 100px;
         }
     </style>
