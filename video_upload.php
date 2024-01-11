@@ -223,7 +223,7 @@ if (!isset($_SESSION['id'])) {
       const max = document.getElementById("max_id").value;
 
       if (upl.files[0].size > max) {
-        alert("File too big, Your File Must Be Under 20MB");
+        alert("File to biog, Your File Must Be Under 20MB");
 
         upl.value = "";
       } else {
