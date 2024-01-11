@@ -21,7 +21,9 @@ function find_Events($search_input)
 {
     include "config.php";
 
-    $SQL = "SELECT * FROM pivot_content_data WHERE type = 'events' AND Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%';";
+    $SQL = "SELECT *
+    FROM pivot_content_data
+    WHERE type = 'events' AND (Caption LIKE '%$search_input%' OR HashTags LIKE '%$search_input%');";
 
     $stmt = $conn->prepare($SQL);
 
